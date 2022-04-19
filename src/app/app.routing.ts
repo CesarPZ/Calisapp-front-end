@@ -8,13 +8,15 @@ import { ProfileComponent } from './profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { LoginComponent } from './login/login.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
     { path: 'user-profile',     component: ProfileComponent },
-    { path: 'register',           component: SignupComponent },
-    { path: 'statistics',          component: StatisticsComponent },
-    { path: 'login',          component: LoginComponent },
+    { path: 'register',         component: SignupComponent },
+    { path: 'statistics',       component: StatisticsComponent },
+    { path: 'login',            component: LoginComponent },
+    { path: 'calendar',         component: CalendarComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

@@ -47,6 +47,18 @@
       <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
         <li class="nav-item dropdown">
           <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i class="ni ni-collection d-lg-none"></i>
+            <span class="nav-link-inner--text">Actividades Usuario
+            </span>
+          </a>
+          <div class="dropdown-menu">
+            <a [routerLink]="['/statistics']" class="dropdown-item">Rutinas</a>
+            <a [routerLink]="['/user-profile']" class="dropdown-item">Perfil</a>
+            <a [routerLink]="['/calendar']" class="dropdown-item">Calendario</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
             <i class="ni ni-ui-04 d-lg-none"></i>
             <span class="nav-link-inner--text">Ingresar</span>
           </a>
@@ -70,17 +82,6 @@
                 </div>
               </a>
             </div>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
-            <i class="ni ni-collection d-lg-none"></i>
-            <span class="nav-link-inner--text">Ejemplos de vista de usuario
-            </span>
-          </a>
-          <div class="dropdown-menu">
-            <a [routerLink]="['/statistics']" class="dropdown-item">Otra vista</a>
-            <a [routerLink]="['/user-profile']" class="dropdown-item">Perfil</a>
           </div>
         </li>
       </ul>

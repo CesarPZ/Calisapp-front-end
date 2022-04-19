@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
   focus;
   focus1;
+  title = 'appBootstrap';
+  
+  model;
   constructor() { }
 
   ngOnInit() {
