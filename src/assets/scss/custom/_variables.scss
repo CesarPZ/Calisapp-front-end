@@ -68,8 +68,8 @@ $colors: map-merge((
 ), $colors);
 
 //Iniciar sesion y registrarse
-$default:       #474213 !default;
-$primary:       #c49515 !default;
+$default:       #ff00aa !default;
+$primary:       #4415c4 !default;
 $secondary:     #f4f5f7 !default;
 $success:       $green !default;
 $info:          $teal !default;
@@ -127,12 +127,12 @@ $shape-colors: map-merge((
 
 ), $shape-colors);
 
-//HOME
+//Home y Perfil
 $shapes-primary-colors: () !default;
 $shapes-primary-colors: map-merge((
-  "step-1-gradient-bg":         #474213,
-  "step-2-gradient-bg":         #c49515,
-  "step-3-gradient-bg":         #070707,
+  "step-1-gradient-bg":         #7700ff,
+  "step-2-gradient-bg":         #ff0000,
+  "step-3-gradient-bg":         #ff00aa,
   "span-1-bg":                  rgb(255, 51, 51),
   "span-2-bg":                  #ff4b45,
   "span-3-bg":                  #ff4640,
@@ -140,11 +140,12 @@ $shapes-primary-colors: map-merge((
   "span-5-bg":                  #ff4c1f
 ), $shapes-primary-colors);
 
+// Rutina
 $shapes-default-colors: () !default;
 $shapes-default-colors: map-merge((
-  "step-1-gradient-bg":         #7795f8,
-  "step-2-gradient-bg":         #6772e5,
-  "step-3-gradient-bg":         #555abf,
+  "step-1-gradient-bg":         #7700ff,
+  "step-2-gradient-bg":         #ff0000,
+  "step-3-gradient-bg":         #ff00aa,
   "span-1-bg":                  #7795f8,
   "span-2-bg":                  #7b9aff,
   "span-3-bg":                  #6f8ff8,
