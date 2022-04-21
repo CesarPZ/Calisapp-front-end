@@ -1,0 +1,54 @@
+<main>
+    <div class="position-relative">
+      <!-- Hero for FREE version -->
+        <section class="section section-lg section-hero section-shaped">
+            <!-- Background circles -->
+            <div class="shape shape-style-1 shape-primary">
+                <span class="span-150"></span>
+                <span class="span-50"></span>
+                <span class="span-50"></span>
+                <span class="span-75"></span>
+                <span class="span-100"></span>
+                <span class="span-75"></span>
+                <span class="span-50"></span>
+                <span class="span-100"></span>
+                <span class="span-50"></span>
+                <span class="span-100"></span>
+            </div>
+            <div class="container">
+                <div class="px-4">
+                    <div class="main-content">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="card">
+                                <div class="card-header">
+                                    <h5 class="title">Calendario de rutina</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="row">
+
+                                            <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"></ngb-datepicker>
+
+                                            <hr/>
+
+                                            <button class="btn btn-sm btn-outline-primary me-2" (click)="selectToday()">Select Today</button>
+                                            <button class="btn btn-sm btn-outline-primary me-2" (click)="dp.navigateTo()">To current month</button>
+                                            <button class="btn btn-sm btn-outline-primary me-2" (click)="dp.navigateTo({year: 2013, month: 2})">To Feb 2013</button>
+
+                                            <hr/>
+
+                                            <pre>Month: {{ date.month }}.{{ date.year }}</pre>
+                                            <pre>Model: {{ model | json }}</pre>
+                                        </div>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
