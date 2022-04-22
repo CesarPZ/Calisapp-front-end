@@ -16,6 +16,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RoutineService } from './service/routine.service';
 
 @NgModule({
   declarations: [
@@ -34,9 +36,13 @@ import { CalendarComponent } from './calendar/calendar.component';
     FormsModule,
     RouterModule,
     AppRoutingModule,
-    HomeModule
+    HomeModule,
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [RoutineService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
