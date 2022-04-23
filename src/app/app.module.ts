@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
-import { StatisticsComponent } from './statistics/statistics.component';
+import { RoutineComponent } from './routine/routine.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -23,7 +23,7 @@ import { RoutineService } from './service/routine.service';
   declarations: [
     AppComponent,
     SignupComponent,
-    StatisticsComponent,
+    RoutineComponent,
     ProfileComponent,
     NavbarComponent,
     FooterComponent,

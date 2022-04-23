@@ -1,10 +1,9 @@
-import { ProcessExercise } from "./process-exercise";
+import { Exercise } from "./exercise";
 
 export class Routine {
     id:number;
-    repetitions:number;
-    levelExcercise:String;
-    exerciseTime:number;
-    breakTime:number;
-    processExercise:ProcessExercise;
+    nameRoutine:string;
+    generatedBy:String;
+    level:string;
+    exercises:Array<Exercise>;
 }
