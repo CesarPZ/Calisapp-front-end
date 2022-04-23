@@ -20,10 +20,6 @@ export class RoutineComponent implements OnInit {
   routine:Routine;
 
   ngOnInit():void{
-    this.service.getRoutines()
-      .subscribe(data => {
-        this.routines = data;
-      });
   }
 
   getRoutinesWithLevel(level:String):void{
