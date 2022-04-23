@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
-import { StatisticsComponent } from './statistics/statistics.component';
+import { RoutineComponent } from './routine/routine.component';
 import { LoginComponent } from './login/login.component';
 import { CalendarComponent } from './calendar/calendar.component';
 
@@ -14,7 +14,7 @@ const routes: Routes =[
     { path: 'home',             component: HomeComponent },
     { path: 'user-profile',     component: ProfileComponent },
     { path: 'register',         component: SignupComponent },
-    { path: 'statistics',       component: StatisticsComponent },
+    { path: 'routine',          component: RoutineComponent },
     { path: 'login',            component: LoginComponent },
     { path: 'calendar',         component: CalendarComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' }

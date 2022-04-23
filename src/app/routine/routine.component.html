@@ -35,12 +35,7 @@
                   </div>
                   <h6 class="text-primary">Nivel Principiante</h6>
                   <p class="description mt-3">Para persona que inicien este sistema de entrenamiento. Rutinas con ejercicios simples donde trabajaras tus musculos principales.</p>
-                  <div>
-                    <span class="badge badge-pill badge-primary">angular</span>
-                    <span class="badge badge-pill badge-primary">ng-bootstrap</span>
-                    <span class="badge badge-pill badge-primary">creative</span>
-                  </div>
-                  <a href="javascript:void(0)" class="btn btn-primary mt-4">Learn more</a>
+                  <a href="javascript:void(0)" (click)="getRoutinesWithLevel('1')" class="btn btn-primary mt-4">Ver Rutinas</a>
                 </div>
               </div>
             </div>
@@ -52,12 +47,7 @@
                   </div>
                   <h6 class="text-success">Nivel Intermedio</h6>
                   <p class="description mt-3">Para persona con una experiencia en entranmiento de calistenia. Debes tener una base de fuerza de peso corporal para este nivel.</p>
-                  <div>
-                    <span class="badge badge-pill badge-success">business</span>
-                    <span class="badge badge-pill badge-success">vision</span>
-                    <span class="badge badge-pill badge-success">success</span>
-                  </div>
-                  <a href="javascript:void(0)" class="btn btn-success mt-4">Learn more</a>
+                  <a href="javascript:void(0)" (click)="getRoutinesWithLevel('2')" class="btn btn-success mt-4">Ver Rutinas</a>
                 </div>
               </div>
             </div>
@@ -68,13 +58,8 @@
                     <i class="ni ni-hat-3"></i>
                   </div>
                   <h6 class="text-warning">Nivel Avanzado</h6>
-                  <p class="description mt-3">Rutinas con ejercicos complejos,donde potenciaras tus grupos musculares. Para personas con gran experiencia, fuerza y control corporal.</p>
-                  <div>
-                    <span class="badge badge-pill badge-warning">marketing</span>
-                    <span class="badge badge-pill badge-warning">product</span>
-                    <span class="badge badge-pill badge-warning">launch</span>
-                  </div>
-                  <a href="javascript:void(0)" class="btn btn-warning mt-4">Learn more</a>
+                  <p class="description mt-3">Rutinas con ejercicos complejos, donde potenciaras tus grupos musculares. Para personas con gran experiencia, fuerza y control corporal.</p>
+                  <a href="javascript:void(0)" (click)="getRoutinesWithLevel('3')" class="btn btn-warning mt-4">Ver Rutinas</a>
                 </div>
               </div>
             </div>
@@ -83,4 +68,25 @@
       </div>
     </div>
   </section>
+  <ul class="code-editor-options-menu" *ngFor="let rou of routinesForLevel">
+    <div class="col-lg-4">
+      <div class="card card-lift--hover shadow border-0">
+        <div class="card-body py-5">
+          <td>{{routine.nameRoutine}}
+          <ul class="code-editor-options-menu" *ngFor="let dat of rou.exercises">
+            <li>
+              <span>Ejercicio: {{dat.processExercise.nameExercise}}</span> <br> 
+              <span>Repeticiones: {{dat.repetitions}}</span> <br>
+              <span>Nivel: {{dat.levelExcercise}}</span> <br>
+              <span>Duracion: {{dat.exerciseTimes}} minutos</span> <br>
+              <span>Descanso entre series: {{dat.breakTime}} minutos</span> <br>
+              <span>Descripcion: {{dat.processExercise.description}}</span> <br>
+              <span>video: {{dat.processExercise.urlVideo}}</span> <br>
+              <span>Musculo Prinsipal: {{dat.processExercise.mainMuscle}}</span> <br>
+            </li><br>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </ul>
 </main>
