@@ -10,6 +10,7 @@ import { RoutineComponent } from './routine/routine.component';
 import { LoginComponent } from './login/login.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { RoutineGeneratedComponent } from './routine-generated/routine-generated.component';
+import { MyRoutineComponent } from './my-routine/my-routine.component';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes =[
     { path: 'register',         component: SignupComponent },
     { path: 'routine',          component: RoutineComponent },
     { path: 'routineGenerated', component: RoutineGeneratedComponent },
+    { path: 'myRoutine',        component: MyRoutineComponent },
     { path: 'login',            component: LoginComponent },
     { path: 'calendar',         component: CalendarComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' }

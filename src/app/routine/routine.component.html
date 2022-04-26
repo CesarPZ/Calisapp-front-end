@@ -13,6 +13,11 @@
         <span></span>
         <span></span>
       </div>
+      <div class="col-sm-9">
+        <h2 class="display-3 mb-0"  style="color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder;">
+          Elige una rutina según tu nivel:
+        </h2>
+      </div>
       <!-- SVG separator -->
       <div class="separator separator-bottom separator-skew">
         <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +25,6 @@
         </svg>
       </div>
     </section>
-    <!-- 1st Hero Variation -->
   </div>
   <section class="section section-lg pt-lg-0 mt--200">
     <div class="container">
@@ -74,32 +78,33 @@
         <div class="container container rounded">
           <div class="section section-cp section-shaped">
             <div class="shape shape-default container rounded"></div>
-            <p style=" color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder; text-transform:uppercase;">
+            <p style=" color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder;">
               {{rou.nameRoutine}}
             </p>
             <div class="row row-grid justify-content-center">
               <ul class="code-editor-options-menu" *ngFor="let dat of rou.exercises">
-                <div class="card text-black bg-dark font-weight-bold mb-2" style="max-width: 12rem;">
+                <div class="card text-black bg-dark font-weight-bold mb-2" style="width:17rem; height:15rem;">
                   <div class="card">
                     <div class="card-content">
                       <div class="card-header justify-content-center" style="text-transform:uppercase; height:5rem; text-align: center;">
                         {{dat.processExercise.nameExercise}}
                       </div>
                       <p>
-                        * {{dat.repetitions}} series <br>
+                        * {{dat.series}} series <br>
                         * {{dat.repetitions}} repeticiones <br>
+                        * Musculo Principal: {{dat.processExercise.mainMuscle}}<br>
+                        * Descripción: {{dat.processExercise.description}} <br>
+                        * Video: {{dat.processExercise.urlVideo}} <br>
                       </p>
-                    </div>
-                    <div class="card-read-more">
-                      <a href="javascript:void(0)" class="btn btn-link btn-block">
-                        Más Información
-                      </a>
                     </div>
                   </div>
                 </div>
               </ul>
             </div>
-          </div>
+            <div style="text-transform:uppercase; height:5rem; text-align: center;">
+              <a href="javascript:void(0)" (click)="initRoutine(rou)" class="btn btn-warning mt-4">Iniciar Rutina</a>
+            </div>
+            </div>
         </div>
       </div>
     </ul>
