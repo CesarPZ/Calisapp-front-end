@@ -68,7 +68,7 @@ $colors: map-merge((
 ), $colors);
 
 //Iniciar sesion y registrarse
-$default:       #ff00aa !default;
+$default:       #562cee !default;
 $primary:       #4415c4 !default;
 $secondary:     #f4f5f7 !default;
 $success:       $green !default;
@@ -127,7 +127,7 @@ $shape-colors: map-merge((
 
 ), $shape-colors);
 
-//Home y Perfil
+//Home, Perfil y Rutina
 $shapes-primary-colors: () !default;
 $shapes-primary-colors: map-merge((
   "step-1-gradient-bg":         #7700ff,
@@ -140,12 +140,12 @@ $shapes-primary-colors: map-merge((
   "span-5-bg":                  #ff4c1f
 ), $shapes-primary-colors);
 
-// Rutina
+// Cuadro ejercicios
 $shapes-default-colors: () !default;
 $shapes-default-colors: map-merge((
-  "step-1-gradient-bg":         #7700ff,
-  "step-2-gradient-bg":         #ff0000,
-  "step-3-gradient-bg":         #ff00aa,
+  "step-1-gradient-bg":         #1215aca9,
+  "step-2-gradient-bg":         #400094a2,
+  "step-3-gradient-bg":         #ff0000a9,
   "span-1-bg":                  #7795f8,
   "span-2-bg":                  #7b9aff,
   "span-3-bg":                  #6f8ff8,
