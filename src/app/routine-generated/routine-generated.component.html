@@ -1,0 +1,47 @@
+<main>
+    <div class="position-relative">
+      <!-- shape Hero -->
+      <section class="section section-lg section-shaped pb-250">
+        <div class="shape shape-style-1 shape-primary">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <!-- SVG separator -->
+        <div class="separator separator-bottom separator-skew">
+          <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+          </svg>
+        </div>
+        <div class="row row-grid justify-content-center">
+          <ul class="code-editor-options-menu" *ngFor="let dat of allExercise">
+            <div class="card text-black bg-dark font-weight-bold mb-2" style="max-width: 12rem;">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-header justify-content-center" style="text-transform:uppercase; height:5rem; text-align: center;">
+                    {{dat.processExercise.nameExercise}}
+                  </div>
+                  <p>
+                    * {{dat.repetitions}} series <br>
+                    * {{dat.repetitions}} repeticiones <br>
+                  </p>
+                </div>
+                <div class="card-read-more">
+                  <a href="javascript:void(0)" class="btn btn-link btn-block">
+                    Agregar a Rutina
+                  </a>
+                </div>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </section>
+      <!-- 1st Hero Variation -->
+    </div>
+  </main>
