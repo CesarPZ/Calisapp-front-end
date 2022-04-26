@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Exercise } from '../model/exercise';
 import { Routine } from '../model/routine';
 import { RoutineService } from '../service/routine.service';
 
@@ -13,7 +14,8 @@ export class RoutineComponent implements OnInit {
   focus: any;
   focus1: any;
 
-  constructor(private service: RoutineService) { }
+  constructor(private router:Router, 
+              private service: RoutineService) { }
   
   routinesForLevel:Routine[];
 
@@ -25,6 +27,20 @@ export class RoutineComponent implements OnInit {
       .subscribe(data => {
         this.routinesForLevel = data;
       });
+  }
+  
+  initRoutine(rutina:Routine){
+    var idExercises:number[] = []; 
+    for(var e of rutina.exercises){
+      console.log(e.id);
+      idExercises.push(e.id);
+    }
+
+    let resp = this.service.addRoutine(1, rutina.nameRoutine, idExercises);
+    resp.subscribe((response) => {
+      console.log(response);
+      this.router.navigate(['myRoutine']);
+    });
   }
 
 }

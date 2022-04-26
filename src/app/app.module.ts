@@ -19,6 +19,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RoutineService } from './service/routine.service';
 import { RoutineGeneratedComponent } from './routine-generated/routine-generated.component';
+import { MyRoutineComponent } from './my-routine/my-routine.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { RoutineGeneratedComponent } from './routine-generated/routine-generated
     FooterComponent,
     LoginComponent,
     CalendarComponent,
-    RoutineGeneratedComponent
+    RoutineGeneratedComponent,
+    MyRoutineComponent
   ],
   imports: [
     BrowserModule,
