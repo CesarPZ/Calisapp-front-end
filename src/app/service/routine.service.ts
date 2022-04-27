@@ -26,7 +26,7 @@ export class RoutineService {
 
   addRoutine(idUser:number, nameRoutine:string, exercises:number[]) {
 
-    return this.http.post<any>(this.Url+"api/createRoutine"+ "?"+
+    return this.http.post<any>(this.Url+"api/createRoutine"+"?"+
                                 "userId="+idUser+
                                 "&nameRoutine="+nameRoutine+
                                 "&excersices="+exercises, 
@@ -35,5 +35,11 @@ export class RoutineService {
 
   getARoutineOfUser(idUser: number) {
     return this.http.get<any>(this.Url+"api/routineUser/"+idUser);
+  }
+
+  deleteRoutine(idRoutine: number, idUser:number) {
+    return this.http.get<any>(this.Url+"api/deleteRoutine/"+idRoutine+"?"+
+                                "&idUser="+idUser, 
+                                this.httpOptions);
   }
 }
