@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Exercise } from '../model/exercise';
 import { ExerciseService } from '../service/exercise.service';
 import { RoutineService } from '../service/routine.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-routine-generated',
@@ -10,10 +11,13 @@ import { RoutineService } from '../service/routine.service';
   styleUrls: ['./routine-generated.component.css']
 })
 export class RoutineGeneratedComponent implements OnInit {
+  
+  closeResult: string;
 
   constructor(private router:Router, 
               private serviceExercise: ExerciseService,
-              private serviceRoutine: RoutineService) { }
+              private serviceRoutine: RoutineService,
+              private modalService: NgbModal) { }
 
   allExercise:Exercise[];
   exerciseSelected:Exercise[] = [];
@@ -41,7 +45,13 @@ export class RoutineGeneratedComponent implements OnInit {
     return !this.exerciseSelected.includes(ejercicio);
   }
 
-  createRoutine(){
+  isVisible(){
+    return this.nameNewRoutine!= null && 
+          this.nameNewRoutine != '' && 
+          this.exerciseSelected.length > 0;
+  }
+
+  createRoutine(content){
     var idExercises:number[] = []; 
     for(var e of this.exerciseSelected){
       console.log(e.id);
@@ -51,7 +61,43 @@ export class RoutineGeneratedComponent implements OnInit {
     let resp = this.serviceRoutine.addRoutine(1, this.nameNewRoutine, idExercises);
     resp.subscribe((response) => {
       console.log(response);
-      this.router.navigate(['myRoutine']);
+
+      this.open(content, 'Notification', '');
+      //this.router.navigate(['myRoutine']);
     });
+  }
+  navigateMyRoutine(content){
+    this.router.navigate(['myRoutine']);
+  }
+
+  open(content, type, modalDimension) {
+    if (modalDimension === 'sm' && type === 'modal_mini') {
+        this.modalService.open(content, { windowClass: 'modal-mini', size: 'sm', centered: true }).result.then((result) => {
+            this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+    } else if (modalDimension === '' && type === 'Notification') {
+      this.modalService.open(content, { windowClass: 'modal-danger', centered: true }).result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    } else {
+        this.modalService.open(content,{ centered: true }).result.then((result) => {
+            this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+    } 
+}
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+    } else {
+        return  `with: ${reason}`;
+    }
   }
 }

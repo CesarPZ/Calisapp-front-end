@@ -42,7 +42,7 @@
                   Agregar a Rutina
                 </a>
               </div>
-              <div class="card-read-more" *ngIf="!isSelected(dat)" >
+              <div class="card-read-more" *ngIf="!isSelected(dat)">
                 <a href="javascript:void(0)" (click)="removeExerciseToRoutine(dat)" class="btn btn-link btn-block">
                   Quitar de Rutina
                 </a>
@@ -53,11 +53,37 @@
       </div> 
       <div style="text-transform:uppercase; height:5rem; text-align: center; color:rgb(255, 255, 255);">
         <label for="name">Ingrese el nombre de la rutina: </label> <br>
-        <input type="text"  [(ngModel)]="nameNewRoutine" name="nameNewRoutine" required size="50"><br>
-        <a href="javascript:void(0)" (click)="createRoutine()" class="btn btn-warning mt-4">
-          Crear Rutina
+        <input type="text" [(ngModel)]="nameNewRoutine" name="nameNewRoutine" required size="50">
+      </div>
+      <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="isVisible()">
+        <a href="javascript:void(0)" (click)="createRoutine(classic3)" class="btn btn-warning mt-4">
+          Iniciar Rutina
         </a>
       </div>
+      <div style="color:rgb(255, 255, 255); text-transform:uppercase; height:5rem; text-align: center;" *ngIf="!isVisible()">
+        Debe ingresar el nombre de la rutina y seleccionar al menos un ejercicio.
+      </div>
+      <ng-template #classic3 let-c="close" let-d="dismiss">
+        <div class="modal-content bg-gradient-danger">
+          <div class="modal-header">
+            <h6 class="modal-title" id="modal-title-notification"></h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="py-3 text-center">
+              <i class="ni ni-like-2 ni-3x"></i>
+              <h4 class="heading mt-4">Se genero la rutina correctamente!</h4>
+              <p>Usted a iniciado la rutina: {{nameNewRoutine}}, puede acceder a ella desde Ver mis rutinas.</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-white" href="javascript:void(0)" (click)="c('Close click'); navigateMyRoutine()">Ver mis rutinas</button>
+            <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" (click)="c('Close click')">Cerrar</button>
+          </div>
+        </div>
+      </ng-template>
     </section>
   </div>
 </main>
