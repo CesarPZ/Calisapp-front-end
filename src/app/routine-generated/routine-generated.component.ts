@@ -13,15 +13,14 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 export class RoutineGeneratedComponent implements OnInit {
   
   closeResult: string;
+  allExercise:Exercise[];
+  exerciseSelected:Exercise[] = [];
+  nameNewRoutine: string;
 
   constructor(private router:Router, 
               private serviceExercise: ExerciseService,
               private serviceRoutine: RoutineService,
               private modalService: NgbModal) { }
-
-  allExercise:Exercise[];
-  exerciseSelected:Exercise[] = [];
-  nameNewRoutine: string;
 
   ngOnInit(): void {
     this.serviceExercise.getAllExercise()
@@ -45,6 +44,13 @@ export class RoutineGeneratedComponent implements OnInit {
     return !this.exerciseSelected.includes(ejercicio);
   }
 
+  exerciseIsSelected(ejercicio:Exercise){
+    if(this.exerciseSelected.includes(ejercicio)){
+      return 'card-success'
+    }
+    return 'card-transparent';
+  }
+
   isVisible(){
     return this.nameNewRoutine!= null && 
           this.nameNewRoutine != '' && 
@@ -61,11 +67,12 @@ export class RoutineGeneratedComponent implements OnInit {
     let resp = this.serviceRoutine.addRoutine(1, this.nameNewRoutine, idExercises);
     resp.subscribe((response) => {
       console.log(response);
-
+      this.exerciseSelected = [];
+      this.nameNewRoutine = null;
       this.open(content, 'Notification', '');
-      //this.router.navigate(['myRoutine']);
     });
   }
+
   navigateMyRoutine(content){
     this.router.navigate(['myRoutine']);
   }
