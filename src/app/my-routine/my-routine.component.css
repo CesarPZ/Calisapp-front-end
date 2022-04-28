@@ -1,0 +1,14 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.card-transparent{
+    background:transparent;
+    border:4px solid rgb(255, 255, 255) !important;
+    width:15rem; 
+    height:15rem;
+}
+
+.content-transparent{
+    background:transparent;
+    border:1px solid rgb(214, 214, 214) !important;
+    font-weight: bolder;
+}

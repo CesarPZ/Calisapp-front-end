@@ -3,19 +3,10 @@
     <!-- shape Hero -->
     <section class="section section-lg section-shaped pb-250">
       <div class="shape shape-style-1 shape-primary">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
       </div>
-      <div class="col-sm-9">
-        <h2 class="display-3 mb-0"  style="color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder;">
-          Elige ejercicios y crea tu rutina personalizada:
+      <div class="col-sm-9"><br>
+        <h2 class="display-3 mb-0" style="color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder;">
+          Selecciona ejercicios y crea tu rutina personalizada:
         </h2>
       </div><br>
       <!-- SVG separator -->
@@ -24,36 +15,9 @@
           <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
         </svg>
       </div>
-      <div class="row row-grid justify-content-center">
-        <ul class="code-editor-options-menu" *ngFor="let dat of allExercise">
-          <div class="card text-black bg-dark font-weight-bold mb-2" style="max-width: 12rem;">
-            <div class="card">
-              <div class="card-content">
-                <div class="card-header justify-content-center" style="text-transform:uppercase; height:5rem; text-align: center;">
-                  {{dat.processExercise.nameExercise}}
-                </div>
-                <p>
-                  * {{dat.series}} series <br>
-                  * {{dat.repetitions}} repeticiones <br>
-                </p>
-              </div>
-              <div class="card-read-more" *ngIf="isSelected(dat)" >
-                <a href="javascript:void(0)" (click)="addExerciseToRoutine(dat)" class="btn btn-link btn-block">
-                  Agregar a Rutina
-                </a>
-              </div>
-              <div class="card-read-more" *ngIf="!isSelected(dat)">
-                <a href="javascript:void(0)" (click)="removeExerciseToRoutine(dat)" class="btn btn-link btn-block">
-                  Quitar de Rutina
-                </a>
-              </div>
-            </div>
-          </div>
-        </ul>
-      </div> 
       <div style="text-transform:uppercase; height:5rem; text-align: center; color:rgb(255, 255, 255);">
-        <label for="name">Ingrese el nombre de la rutina: </label> <br>
-        <input type="text" [(ngModel)]="nameNewRoutine" name="nameNewRoutine" required size="50">
+        <label for="name">Nombre de su nueva rutina: </label> <br>
+        <input type="text" placeholder="Ingrese un nombre" [(ngModel)]="nameNewRoutine" name="nameNewRoutine" required size="60">
       </div>
       <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="isVisible()">
         <a href="javascript:void(0)" (click)="createRoutine(classic3)" class="btn btn-warning mt-4">
@@ -84,6 +48,57 @@
           </div>
         </div>
       </ng-template>
+      <div class="row row-grid justify-content-center">
+        <ul class="code-editor-options-menu" *ngFor="let dat of allExercise">
+          <div class="card border-light mb-10" [ngClass]="exerciseIsSelected(dat)">
+            <div class="card-header bg-transparent justify-content-center border-0" 
+                  style="text-transform:uppercase; height:3.5rem; text-align: center; color:rgb(255, 255, 255);font-weight: bolder; font-size:17px;">
+              {{dat.processExercise.nameExercise}}
+            </div>
+            <div class="card-body text-white">
+              <p class="card-text" style="font-weight:bolder; font-size:15px; text-shadow: 2px 2px 5px rgb(110, 109, 109); height:6rem;">
+                <i class="ni ni-user-run"></i> <i> 
+                  {{dat.repetitions}} repeticiones 
+                </i> <br>
+                <i class="bi bi-arrow-clockwise"> 
+                  {{dat.series}} series 
+                </i> <br>
+                <i class="bi bi-trophy"> 
+                {{dat.processExercise.mainMuscle}}
+                </i> <br>
+                <a href="https://www.youtube.com/watch?v=aKHar4U2Iys" style="color:rgb(0, 30, 128)"> 
+                  <i class="bi bi-youtube"> 
+                    Video explicativo
+                  </i>
+                </a><br>
+                <i class="bi bi-info-circle"> 
+                  {{dat.processExercise.description}}
+                </i> 
+              </p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <div *ngIf="isSelected(dat)" >
+                <a href="javascript:void(0)" (click)="addExerciseToRoutine(dat)"  class="btn btn-link btn-block">
+                  <div style="text-align: center; color:rgb(2, 0, 134);font-weight: bolder; font-size:18px;">
+                    <i class="bi bi-folder-plus">
+                      Agregar
+                    </i>
+                  </div>
+                </a>
+              </div>
+              <div *ngIf="!isSelected(dat)">
+                <a href="javascript:void(0)" (click)="removeExerciseToRoutine(dat)" class="btn btn-link btn-block">
+                  <div style="text-align: center; color:rgb(53, 18, 18);font-weight: bolder; font-size:18px;">
+                    <i class="bi bi-folder-minus">
+                      Quitar
+                    </i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </div>
     </section>
   </div>
 </main>

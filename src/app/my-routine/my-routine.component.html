@@ -15,45 +15,61 @@
         </div>
         <div class="col-sm-9">
         <h2 class="display-3 mb-0"  style="color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder;">
-          Tus rutinas
+          Tus rutinas:
         </h2>
+        <br>
       </div>
       <ul class="code-editor-options-menu" *ngFor="let rou of routinesUser">
-          <div class="container container rounded">
-            <div class="section section-cp section-shaped">
-              <div class="shape shape-primary container rounded"></div>
-              <div class="content">
-                <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="currentRoutineIsUpdate(rou)">
-                  <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
-                  <span class="alert-inner--text"><strong>Actualizado correctamente!</strong> Los ejercicios han sido actualizados de manera correcta!</span>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertIsUpdated(rou)">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-              <p style=" color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder;">
+        <div class="text-center">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <div class="container container rounded">
+          <div [ngClass]="'content-transparent'">
+            <div class="content">
+              <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="currentRoutineIsUpdate(rou)">
+                <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-inner--text"><strong>Actualizado correctamente!</strong> Los ejercicios han sido actualizados de manera correcta!</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertIsUpdated(rou)">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <p style=" color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder; text-transform:uppercase;">
                 {{rou.nameRoutine}}
               </p>
               <div class="row row-grid justify-content-center">
                 <ul class="code-editor-options-menu" *ngFor="let dat of rou.exercises">
-                  <div class="card text-black bg-dark font-weight-bold mb-2" style="width:17rem; height:15rem;">
-                    <div class="card">
-                      <div class="card-content">
-                        <div class="card-header justify-content-center" style="text-transform:uppercase; height:5rem; text-align: center;">
-                          {{dat.processExercise.nameExercise}}
-                        </div>
-                        <p>
-                          * {{dat.series}} series <br>
-                          * {{dat.repetitions}} repeticiones <br>
-                          * Musculo Principal: {{dat.processExercise.mainMuscle}}<br>
-                          * Descripción: {{dat.processExercise.description}} <br>
-                          * Video: {{dat.processExercise.urlVideo}}
-                        </p>
-                      </div>
+                  <div class="card border-light mb-10" [ngClass]="'card-transparent'">
+                    <div class="card-header bg-transparent justify-content-center border-0" 
+                          style="text-transform:uppercase; height:3.5rem; text-align: center; color:rgb(255, 255, 255);font-weight: bolder; font-size:17px;">
+                      {{dat.processExercise.nameExercise}}
+                    </div>
+                    <div class="card-body text-white">
+                      <p class="card-text" style="font-weight:bolder; font-size:15px; text-shadow: 2px 2px 5px rgb(110, 109, 109); height:6rem;">
+                        <i class="ni ni-user-run"></i> <i> 
+                          {{dat.repetitions}} repeticiones 
+                        </i> <br>
+                        <i class="bi bi-arrow-clockwise"> 
+                          {{dat.series}} series 
+                        </i> <br>
+                        <i class="bi bi-trophy"> 
+                        {{dat.processExercise.mainMuscle}}
+                        </i> <br>
+                        <a href="https://www.youtube.com/watch?v=aKHar4U2Iys" style="color:rgb(0, 30, 128)"> 
+                          <i class="bi bi-youtube"> 
+                            Video explicativo
+                          </i>
+                        </a><br>
+                        <i class="bi bi-info-circle"> 
+                          {{dat.processExercise.description}}
+                        </i> 
+                      </p>
                     </div>
                   </div>
                   <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="getPermissionToModify(rou)">
                     <a href="javascript:void(0)" class="btn btn-primary mt-4" (click)="modifiedExercise(classic, dat)">
-                      Modificar Ejercicio
+                      <i class="bi bi-pencil"></i> Modificar Ejercicio
                     </a>
                   </div>
                   <ng-template #classic let-c="close" let-d="dismiss">
@@ -70,21 +86,21 @@
                       </div>
                       <div class="modal-body">
                         <div>
-                          Series:
-                          <div class="form-group has-success" *ngIf="validationValueSeries()">
-                            <input type="text" [(ngModel)]="seriesExercise" name="seriesExercise" class="form-control" />
-                          </div>
-                          <div class="form-group has-danger" *ngIf="!validationValueSeries()">
-                            <input type="text" placeholder="Ingrese un valor mayor a 0 para las series" [(ngModel)]="seriesExercise" name="seriesExercise" class="form-control is-invalid" />
-                          </div>
-                        </div>
-                        <div>
                           Repeticiones:
                           <div class="form-group has-success" *ngIf="validationValueRepetitions()">
                             <input type="text" [(ngModel)]="repetitionsExercise" name="repetitionsExercise" class="form-control" />
                           </div>
                           <div class="form-group has-danger" *ngIf="!validationValueRepetitions()">
                             <input type="text" placeholder="Ingrese un valor mayor a 0 para las repeticiones" [(ngModel)]="repetitionsExercise" name="repetitionsExercise" class="form-control is-invalid"/>
+                          </div>
+                        </div>
+                        <div>
+                          Series:
+                          <div class="form-group has-success" *ngIf="validationValueSeries()">
+                            <input type="text" [(ngModel)]="seriesExercise" name="seriesExercise" class="form-control" />
+                          </div>
+                          <div class="form-group has-danger" *ngIf="!validationValueSeries()">
+                            <input type="text" placeholder="Ingrese un valor mayor a 0 para las series" [(ngModel)]="seriesExercise" name="seriesExercise" class="form-control is-invalid" />
                           </div>
                         </div>
                       </div>
@@ -96,19 +112,20 @@
                       </div>
                     </div>
                   </ng-template>
+                  <br>
                 </ul>
               </div>
               <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="getPermissionToModify(rou)">
                 <a href="javascript:void(0)" class="btn btn-warning mt-4" (click)="discardChanges(rou)">
-                  Descartar todos los cambios
-                 </a>
+                  <i class="bi bi-trash3"></i> Descartar todos los cambios
+                  </a>
                 <a href="javascript:void(0)" class="btn btn-success mt-4" (click)="saveRoutine(rou)">
-                  Guardar todos los cambios
+                  Guardar todos los cambios <i class="bi bi-save"></i> 
                 </a>
               </div>
               <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="!getPermissionToModify(rou)">
                 <a href="javascript:void(0)" class="btn btn-primary mt-4" (click)="enableModification(rou)">
-                  Modificar Ejercicios
+                  <i class="bi bi-pencil-square"></i> Modificar Ejercicios
                 </a>
                 <!-- Boton borrar rutina 
                 <a href="javascript:void(0)" class="btn btn-warning mt-4" (click)="deleteRoutine(classic2)">

@@ -16,7 +16,7 @@ export class ExerciseService {
   Url='https://calisapp-backend.herokuapp.com/';
 
   getAllExercise(){  
-    return this.http.get<any>(this.Url+"api/exercises");
+    return this.http.get<any>(this.Url+"api/exercisesApp");
   }
 
   getAllExerciseToRoutine(idRoutine: number){  
