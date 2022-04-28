@@ -28,8 +28,8 @@ export class ExerciseService {
     var series = ejercicio.series;
     var repetitions = ejercicio.repetitions;
     
-    return this.http.get<any>(this.Url+"api/editExercise/"+idExercises+"?"+
-                                  "&series="+series+
+    return this.http.post<any>(this.Url+"api/editExercise/"+idExercises+"?"+
+                                  "series="+series+
                                   "&repetitions="+repetitions, 
                                   this.httpOptions);
   }

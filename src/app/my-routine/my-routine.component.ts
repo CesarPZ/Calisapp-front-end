@@ -17,6 +17,7 @@ export class MyRoutineComponent implements OnInit {
   repetitionsExercise:number;
   routinesUser:Routine[]=[];
   routinePermissionToModify:number[]=[];
+  routineIsUpdate:number[]=[];
 
   constructor(private serviceRoutine: RoutineService,
               private serviceExercise: ExerciseService,
@@ -32,7 +33,6 @@ export class MyRoutineComponent implements OnInit {
   
   enableModification(routine:Routine):void{
     this.routinePermissionToModify.push(routine.id);
-
   }
 
   getPermissionToModify(routine:Routine){
@@ -73,15 +73,16 @@ export class MyRoutineComponent implements OnInit {
     this.closeEdition(routine);
   }
 
-  saveRoutine(routines:Routine){
-    for(let i=0; i<routines.exercises.length; i++){
-      this.serviceExercise.editExercise(routines.exercises[i])
+  saveRoutine(routineCurrent:Routine){
+    this.closeEdition(routineCurrent);
+
+    for(let i=0; i<routineCurrent.exercises.length; i++){
+      this.serviceExercise.editExercise(routineCurrent.exercises[i])
       .subscribe(data => {
-        routines.exercises = data;
+        routineCurrent.exercises[i] = data;
+        this.routineIsUpdate.push(routineCurrent.id);
       });
     }
-
-    this.closeEdition(routines);
   }
 
   closeEdition(routine:Routine){
@@ -91,6 +92,19 @@ export class MyRoutineComponent implements OnInit {
         this.routinePermissionToModify.splice(index, 1);
     }
   }
+
+  currentRoutineIsUpdate(routine:Routine){
+    return this.routineIsUpdate.includes(routine.id);
+  }
+
+  closeAlertIsUpdated(routine:Routine){
+    const index: number = this.routineIsUpdate.indexOf(routine.id);
+
+    if (index !== -1) {
+        this.routineIsUpdate.splice(index, 1);
+    }
+  }
+
 
   deleteRoutineSelect(routine:Routine){
     this.serviceRoutine.deleteRoutine(routine.id, 1)
