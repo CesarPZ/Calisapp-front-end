@@ -19,10 +19,17 @@
         </h2>
       </div>
       <ul class="code-editor-options-menu" *ngFor="let rou of routinesUser">
-        <div class="content">
           <div class="container container rounded">
             <div class="section section-cp section-shaped">
               <div class="shape shape-primary container rounded"></div>
+              <div class="content">
+                <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="currentRoutineIsUpdate(rou)">
+                  <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+                  <span class="alert-inner--text"><strong>Actualizado correctamente!</strong> Los ejercicios han sido actualizados de manera correcta!</span>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertIsUpdated(rou)">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
               <p style=" color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder;">
                 {{rou.nameRoutine}}
               </p>
@@ -45,7 +52,7 @@
                     </div>
                   </div>
                   <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="getPermissionToModify(rou)">
-                    <a href="javascript:void(0)" class="btn btn-success mt-4" (click)="modifiedExercise(classic, dat)">
+                    <a href="javascript:void(0)" class="btn btn-primary mt-4" (click)="modifiedExercise(classic, dat)">
                       Modificar Ejercicio
                     </a>
                   </div>
@@ -77,7 +84,7 @@
                             <input type="text" [(ngModel)]="repetitionsExercise" name="repetitionsExercise" class="form-control" />
                           </div>
                           <div class="form-group has-danger" *ngIf="!validationValueRepetitions()">
-                            <input type="text" placeholder="Ingrese un valor mayor a 0 para las repeticiones" [(ngModel)]="repetitionsExercise" name="repetitionsExercise" class="form-control is-invalid" />
+                            <input type="text" placeholder="Ingrese un valor mayor a 0 para las repeticiones" [(ngModel)]="repetitionsExercise" name="repetitionsExercise" class="form-control is-invalid"/>
                           </div>
                         </div>
                       </div>
@@ -92,15 +99,15 @@
                 </ul>
               </div>
               <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="getPermissionToModify(rou)">
-                <a href="javascript:void(0)" class="btn btn-primary mt-4" (click)="saveRoutine(rou)">
+                <a href="javascript:void(0)" class="btn btn-warning mt-4" (click)="discardChanges(rou)">
+                  Descartar todos los cambios
+                 </a>
+                <a href="javascript:void(0)" class="btn btn-success mt-4" (click)="saveRoutine(rou)">
                   Guardar todos los cambios
-                </a>
-                <a href="javascript:void(0)" class="btn btn-primary mt-4" (click)="discardChanges(rou)">
-                 Descartar todos los cambios
                 </a>
               </div>
               <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="!getPermissionToModify(rou)">
-                <a href="javascript:void(0)" class="btn btn-success mt-4" (click)="enableModification(rou)">
+                <a href="javascript:void(0)" class="btn btn-primary mt-4" (click)="enableModification(rou)">
                   Modificar Ejercicios
                 </a>
                 <!-- Boton borrar rutina 
