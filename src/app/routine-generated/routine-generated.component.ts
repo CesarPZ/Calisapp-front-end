@@ -4,6 +4,7 @@ import { Exercise } from '../model/exercise';
 import { ExerciseService } from '../service/exercise.service';
 import { RoutineService } from '../service/routine.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-routine-generated',
@@ -20,12 +21,15 @@ export class RoutineGeneratedComponent implements OnInit {
   constructor(private router:Router, 
               private serviceExercise: ExerciseService,
               private serviceRoutine: RoutineService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.serviceExercise.getAllExercise()
       .subscribe(data => {
         this.allExercise = data;
+        this.spinner.hide();
       });
   }
 
@@ -58,7 +62,9 @@ export class RoutineGeneratedComponent implements OnInit {
   }
 
   createRoutine(content){
+    this.spinner.show();
     var idExercises:number[] = []; 
+    
     for(var e of this.exerciseSelected){
       console.log(e.id);
       idExercises.push(e.id);
@@ -67,9 +73,9 @@ export class RoutineGeneratedComponent implements OnInit {
     let resp = this.serviceRoutine.addRoutine(1, this.nameNewRoutine, idExercises);
     resp.subscribe((response) => {
       console.log(response);
-      this.exerciseSelected = [];
-      this.nameNewRoutine = null;
       this.open(content, 'Notification', '');
+      this.exerciseSelected = [];
+      this.spinner.hide();
     });
   }
 
@@ -96,8 +102,8 @@ export class RoutineGeneratedComponent implements OnInit {
         }, (reason) => {
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
-    } 
-}
+    }
+  }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
         return 'by pressing ESC';

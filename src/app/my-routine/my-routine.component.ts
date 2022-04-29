@@ -4,6 +4,7 @@ import { RoutineService } from '../service/routine.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Exercise } from '../model/exercise';
 import { ExerciseService } from '../service/exercise.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-my-routine',
@@ -21,16 +22,23 @@ export class MyRoutineComponent implements OnInit {
 
   constructor(private serviceRoutine: RoutineService,
               private serviceExercise: ExerciseService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private spinner: NgxSpinnerService) { }
 
 
   ngOnInit(): void {
+    this.spinner.show();
     this.serviceRoutine.getARoutineOfUser(1)
       .subscribe(data => {
         this.routinesUser = data;
+        this.spinner.hide();
       });
   }
   
+  haveRoutine(){
+    return this.routinesUser.length > 0;
+  }
+
   enableModification(routine:Routine):void{
     this.routinePermissionToModify.push(routine.id);
   }
