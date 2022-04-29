@@ -1,4 +1,7 @@
 <main>
+  <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+      <p style="font-size: 20px; color: white">Loading...</p>
+  </ngx-spinner>
   <div class="position-relative">
     <!-- shape Hero -->
     <section class="section section-lg section-shaped pb-250">
@@ -38,8 +41,8 @@
                     <i class="ni ni-user-run"></i>
                   </div>
                   <h6 class="text-primary">Nivel Principiante</h6>
-                  <p class="description mt-3">Para persona que inicien este sistema de entrenamiento. Rutinas con ejercicios simples donde trabajaras tus musculos principales.</p>
-                  <a href="javascript:void(0)" (click)="getRoutinesWithLevel('1')" class="btn btn-primary mt-4">Ver Rutinas</a>
+                  <p class="description mt-3">Para personas que inician este sistema de entrenamiento. Rutinas con ejercicios simples donde trabajaras tus músculos principales.</p>
+                  <a href="javascript:void(0)" (click)="getRoutinesWithLevel('1','Rutinas de Nivel Principiante:')" class="btn btn-primary mt-4">Ver Rutinas</a>
                 </div>
               </div>
             </div>
@@ -50,8 +53,8 @@
                     <i class="ni ni-diamond"></i>
                   </div>
                   <h6 class="text-success">Nivel Intermedio</h6>
-                  <p class="description mt-3">Para persona con una experiencia en entranmiento de calistenia. Debes tener una base de fuerza de peso corporal para este nivel.</p>
-                  <a href="javascript:void(0)" (click)="getRoutinesWithLevel('2')" class="btn btn-success mt-4">Ver Rutinas</a>
+                  <p class="description mt-3">Para personas con una experiencia en entrenamiento de calistenia. Debes tener una base de fuerza y control de peso corporal para este nivel.</p>
+                  <a href="javascript:void(0)" (click)="getRoutinesWithLevel('2', 'Rutinas de Nivel Intermedio:')" class="btn btn-success mt-4">Ver Rutinas</a>
                 </div>
               </div>
             </div>
@@ -59,11 +62,11 @@
               <div class="card card-lift--hover shadow border-0">
                 <div class="card-body py-5">
                   <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">
-                    <i class="ni ni-hat-3"></i>
+                    <i class="bi bi-award-fill"></i>
                   </div>
                   <h6 class="text-warning">Nivel Avanzado</h6>
-                  <p class="description mt-3">Rutinas con ejercicos complejos, donde potenciaras tus grupos musculares. Para personas con gran experiencia, fuerza y control corporal.</p>
-                  <a href="javascript:void(0)" (click)="getRoutinesWithLevel('3')" class="btn btn-warning mt-4">Ver Rutinas</a>
+                  <p class="description mt-3">Rutinas con ejercicios complejos, donde potenciaras tus grupos musculares. Para personas con gran experiencia en calistenia, fuerza y control corporal.</p>
+                  <a href="javascript:void(0)" (click)="getRoutinesWithLevel('3', 'Rutinas de Nivel Intermedio:')" class="btn btn-warning mt-4">Ver Rutinas</a>
                 </div>
               </div>
             </div>
@@ -73,32 +76,46 @@
     </div>
   </section>
   <section class="wrapper">
+    <div style="text-transform:uppercase; height:3.5rem; text-align: center; color:rgb(0, 4, 255);font-weight: bolder; font-size:30px;">
+      {{levelRoutines}}
+    </div>
     <ul class="code-editor-options-menu" *ngFor="let rou of routinesForLevel">
-      <div class="content">
-        <div class="container container rounded">
-          <div class="section section-cp section-shaped">
-            <div class="shape shape-default container rounded"></div>
-            <p style=" color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder;">
+      <div class="container container rounded">
+        <div [ngClass]="'content-transparent-avanzado'">
+            <p style=" color:rgb(0, 11, 41); font-size:25px; text-align:center; font-weight: bolder;">
               {{rou.nameRoutine}}
             </p>
             <div class="row row-grid justify-content-center">
               <ul class="code-editor-options-menu" *ngFor="let dat of rou.exercises">
-                <div class="card text-black bg-dark font-weight-bold mb-2" style="width:17rem; height:15rem;">
-                  <div class="card">
+                <div class="card border-light mb-10" [ngClass]="'card-transparent'">
                     <div class="card-content">
-                      <div class="card-header justify-content-center" style="text-transform:uppercase; height:5rem; text-align: center;">
+                      <div class="card-header bg-transparent justify-content-center border-0" 
+                            style="text-transform:uppercase; height:3.5rem; text-align: center; color:rgb(0, 0, 0);font-weight: bolder; font-size:17px;">
                         {{dat.processExercise.nameExercise}}
                       </div>
-                      <p>
-                        * {{dat.series}} series <br>
-                        * {{dat.repetitions}} repeticiones <br>
-                        * Musculo Principal: {{dat.processExercise.mainMuscle}}<br>
-                        * Descripción: {{dat.processExercise.description}} <br>
-                        * Video: {{dat.processExercise.urlVideo}} <br>
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                      <div class="card-body text-align">
+                        <p class="card-text" style="font-weight:bolder; font-size:15px; text-shadow: 2px 2px 5px rgb(110, 109, 109); height:6rem;">
+                          <i class="ni ni-user-run"></i> <i> 
+                            {{dat.repetitions}} repeticiones 
+                          </i> <br>
+                          <i class="bi bi-arrow-clockwise"> 
+                            {{dat.series}} series 
+                          </i> <br>
+                          <i class="bi bi-trophy"> 
+                          {{dat.processExercise.mainMuscle}}
+                          </i> <br>
+                          <a href="https://www.youtube.com/watch?v=aKHar4U2Iys" target="_blank" style="color:rgb(0, 30, 128)"> 
+                            <i class="bi bi-youtube"> 
+                              Video explicativo
+                            </i>
+                          </a><br>
+                          <i class="bi bi-info-circle"> 
+                            {{dat.processExercise.description}}
+                          </i> 
+                        </p>
+                      </div>
+                    </div> 
+                </div><br>
               </ul>
             </div>
             <div style="text-transform:uppercase; height:5rem; text-align: center;">
@@ -127,7 +144,6 @@
             </ng-template> 
           </div>
         </div>
-      </div>
     </ul>
   </section>
 </main>

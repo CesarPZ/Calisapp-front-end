@@ -3,45 +3,51 @@ import { Router } from '@angular/router';
 import { Routine } from '../model/routine';
 import { RoutineService } from '../service/routine.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
     selector: 'app-routine',
     templateUrl: './routine.component.html',
-    styleUrls: ['./routine.component.scss']
+    styleUrls: ['./routine.component.css']
 })
 
 export class RoutineComponent implements OnInit {
   focus: any;
   focus1: any;
   closeResult: string;
+  levelRoutines: string;
   
   constructor(private router:Router, 
               private service: RoutineService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private spinner: NgxSpinnerService) { }
   
   routinesForLevel:Routine[];
 
-  ngOnInit():void{
-  }
+  ngOnInit():void {}
 
-  getRoutinesWithLevel(level:String):void{
+  getRoutinesWithLevel(level:String, levelString:string):void{
+    this.spinner.show();
     this.service.getRoutinesWithLevel(level)
       .subscribe(data => {
         this.routinesForLevel = data;
+        this.levelRoutines = levelString;
+        this.spinner.hide();
       });
   }
   
   initRoutine(rutina:Routine, content){
     var idExercises:number[] = []; 
+    this.spinner.show();
+
     for(var e of rutina.exercises){
-      console.log(e.id);
       idExercises.push(e.id);
     }
-
     let resp = this.service.addRoutine(1, rutina.nameRoutine, idExercises);
     resp.subscribe((response) => {
-      console.log(response);
       this.routinesForLevel = [];
+      this.spinner.hide();
+      this.levelRoutines = '';
       this.open(content, 'Notification', '');
     });
   }
