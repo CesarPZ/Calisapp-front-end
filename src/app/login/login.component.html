@@ -13,7 +13,23 @@
     <div class="container pt-lg-md">
       <div class="row justify-content-center">
         <div class="col-lg-5">
+          <!--
+          <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorMessage">
+            <span class="alert-inner--text"><strong>{{ errorMessage }}</strong></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="close(alert)">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          -->
+
+          <ngb-alert class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorMessage">
+            <span class="alert-inner--text"><strong>{{ errorMessage }}</strong></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="close(alert)">
+             <!-- <span aria-hidden="true">&times;</span> -->
+            </button>
+          </ngb-alert>
           <div class="card bg-secondary shadow border-0">
+            <!--
             <div class="card-header bg-white pb-5">
               <div class="text-muted text-center mb-3">
                 <small>Sign in with</small>
@@ -33,27 +49,32 @@
                 </a>
               </div>
             </div>
+            -->
             <div class="card-body px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
-                <small>Or sign in with credentials</small>
+                <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
               </div>
-              <form role="form">
-                <div class="form-group mb-3" [ngClass]="{'focused':focus===true}">
-                  <div class="input-group input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                    </div>
-                    <input class="form-control" placeholder="Email" type="email" (focus)="focus=true" (blur)="focus=false">
-                  </div>
-                </div>
-                <div class="form-group" [ngClass]="{'focused':focus1===true}">
-                  <div class="input-group input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                    </div>
-                    <input class="form-control" placeholder="Password" type="password" (focus)="focus1=true" (blur)="focus1=false">
-                  </div>
-                </div>
+              <hr>
+              <form [formGroup]="loginForm.baseForm" class="form">
+                <mat-form-field class="full-width-input">
+                  <input class="form-control" text="text" formControlName="mail" matInput placeholder="Email"
+                    required />
+                  <mat-error *ngIf="checkField('mail')">
+                    {{ loginForm.errorMessage }}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="full-width-input">
+                  <input class="form-control" [type]="hide ? 'password' : 'text'" formControlName="password" matInput
+                    placeholder="Password" required />
+                  <button mat-icon-button matSuffix (click)="hide = !hide">
+                    <mat-icon>
+                      {{ hide ? "visibility_off" : "visibility" }}
+                    </mat-icon>
+                  </button>
+                  <span class="error" *ngIf="checkField('password')">
+                    {{ loginForm.errorMessage }}
+                  </span>
+                </mat-form-field>
                 <div class="custom-control custom-control-alternative custom-checkbox">
                   <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
                   <label class="custom-control-label" for=" customCheckLogin">
@@ -61,11 +82,16 @@
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary my-4">Sign in</button>
+                  <button [disabled]="loginForm.baseForm.invalid" type="button"
+                    class="btn btn-primary my-4 form-control" (click)="onLogin()">Iniciar sesión</button>
                 </div>
               </form>
+              <div class="form-group mb-3 text-center">
+                <a routerLink="/register">¿Aún no tienes una cuenta? Regístrate</a>
+              </div>
             </div>
           </div>
+          <!-- 
           <div class="row mt-3">
             <div class="col-6">
               <a href="javascript:void(0)" class="text-light">
@@ -78,6 +104,7 @@
               </a>
             </div>
           </div>
+          -->
         </div>
       </div>
     </div>

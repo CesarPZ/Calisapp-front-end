@@ -1,16 +1,16 @@
-<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom headroom--top headroom--pinned">
+<nav id="navbar-main"
+  class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom headroom--top headroom--pinned">
   <div class="container">
     <a class="navbar-brand mr-lg-5" [routerLink]="['/home']">
-      <img src="./assets/img/brand/calisapp2.png">
-    </a>
+      <img src="./assets/img/brand/calisapp2.png"></a>
     <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+      [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-collapse collapse" id="navbar_global" [ngbCollapse]="isCollapsed">
       <ul class="navbar-nav align-items-lg-center ml-lg-auto"></ul>
       <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf="user.visible">
           <a class="nav-link no-caret" data-toggle="dropdown" role="button">
             <i class="ni ni-collection d-lg-none"></i>
             <span class="nav-link-inner--text">Actividades Usuario
@@ -24,12 +24,12 @@
             <a [routerLink]="['/calendar']" class="dropdown-item">Calendario</a>
           </div>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf="!user.visible">
           <a class="nav-link no-caret" data-toggle="dropdown" role="button">
             <i class="ni ni-ui-04 d-lg-none"></i>
             <span class="nav-link-inner--text">Ingresar</span>
           </a>
-          <div class="dropdown-menu-xl dropdown-menu" >
+          <div class="dropdown-menu-xl dropdown-menu">
             <div class="dropdown-menu-inner">
               <a routerLinkActive="active" [routerLink]="['/login']" class="media d-flex align-items-center">
                 <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="media-body ml-3">
                   <h6 class="heading text-primary mb-md-1">Iniciar sesión</h6>
-                  <!-- <p class="description d-none d-md-inline-block mb-0">Learn how to use Argon compiling Scss, change brand colors and more.</p> --> 
+                  <!-- <p class="description d-none d-md-inline-block mb-0">Learn how to use Argon compiling Scss, change brand colors and more.</p> -->
                 </div>
               </a>
               <a routerLinkActive="active" [routerLink]="['/register']" class="media d-flex align-items-center">
@@ -46,6 +46,25 @@
                 </div>
                 <div class="media-body ml-3">
                   <h6 class="heading text-primary mb-md-1">Registrarse</h6>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown" *ngIf="user.visible">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link-inner--text">Salir</span>
+          </a>
+          <div class="dropdown-menu-xl dropdown-menu">
+            <div class="dropdown-menu-inner">
+              <a routerLinkActive="active" [routerLink]="['/login']" class="media d-flex align-items-center"
+                (click)="logout()">
+                <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
+                  <i class="ni ni-lock-circle-open"></i>
+                </div>
+                <div class="media-body ml-3">
+                  <h6 class="heading text-primary mb-md-1">Salir</h6>
                 </div>
               </a>
             </div>
