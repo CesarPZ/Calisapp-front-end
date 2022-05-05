@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
@@ -22,6 +22,8 @@ import { RoutineGeneratedComponent } from './routine-generated/routine-generated
 import { MyRoutineComponent } from './my-routine/my-routine.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { IgxCalendarModule,	IgxDialogModule } from "igniteui-angular";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { IgxCalendarModule,	IgxDialogModule } from "igniteui-angular";
     BrowserModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     AppRoutingModule,
     HomeModule,
@@ -49,7 +52,9 @@ import { IgxCalendarModule,	IgxDialogModule } from "igniteui-angular";
     HttpClientModule,
     NgxSpinnerModule,
     IgxCalendarModule,
-    IgxDialogModule
+    IgxDialogModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [RoutineService],
   bootstrap: [AppComponent],
