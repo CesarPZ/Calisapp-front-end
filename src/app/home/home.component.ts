@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../service/user.service'
 
 @Component({
     selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
 
     focus;
     focus1;
-    constructor() { }
+    constructor(public user: UserService,) { }
 
     ngOnInit() {}
 }
