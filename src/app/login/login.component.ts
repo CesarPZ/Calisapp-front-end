@@ -30,12 +30,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     ){}
 
   user: User=new User();
-  message:any;
-  isLoggedIn = false;
-  isLoginFailed = false;
   errorMessage = ""
 
   ngOnInit(){
+    this.loginForm.baseForm.get('name').setValidators(null);
     this.service.hide();
   }
 

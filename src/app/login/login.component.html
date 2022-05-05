@@ -21,11 +21,10 @@
             </button>
           </div>
           -->
-
           <ngb-alert class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorMessage">
             <span class="alert-inner--text"><strong>{{ errorMessage }}</strong></span>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="close(alert)">
-             <!-- <span aria-hidden="true">&times;</span> -->
+              <!-- <span aria-hidden="true">&times;</span> -->
             </button>
           </ngb-alert>
           <div class="card bg-secondary shadow border-0">
@@ -71,9 +70,9 @@
                       {{ hide ? "visibility_off" : "visibility" }}
                     </mat-icon>
                   </button>
-                  <span class="error" *ngIf="checkField('password')">
+                  <mat-error *ngIf="checkField('password')">
                     {{ loginForm.errorMessage }}
-                  </span>
+                  </mat-error>
                 </mat-form-field>
                 <div class="custom-control custom-control-alternative custom-checkbox">
                   <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
