@@ -21,6 +21,7 @@ import { RoutineService } from './service/routine.service';
 import { RoutineGeneratedComponent } from './routine-generated/routine-generated.component';
 import { MyRoutineComponent } from './my-routine/my-routine.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { IgxCalendarModule,	IgxDialogModule } from "igniteui-angular";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    IgxCalendarModule,
+    IgxDialogModule
   ],
   providers: [RoutineService],
   bootstrap: [AppComponent],

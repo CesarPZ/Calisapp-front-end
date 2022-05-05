@@ -19,6 +19,7 @@ export class MyRoutineComponent implements OnInit {
   routinesUser:Routine[]=[];
   routinePermissionToModify:number[]=[];
   routineIsUpdate:number[]=[];
+  routinesOpenDetail:number[]=[];
 
   constructor(private serviceRoutine: RoutineService,
               private serviceExercise: ExerciseService,
@@ -111,6 +112,22 @@ export class MyRoutineComponent implements OnInit {
     if (index !== -1) {
         this.routineIsUpdate.splice(index, 1);
     }
+  }
+
+  setOpenDetail(routine:Routine, status:number){
+    if(status == 1){
+      this.routinesOpenDetail.push(routine.id);
+    }else{
+      const index:number = this.routinesOpenDetail.indexOf(routine.id);
+
+      if (index !== -1) {
+          this.routinesOpenDetail.splice(index, 1);
+      }
+    }
+  }
+
+  getOpenDetail(routine:Routine){
+    return this.routinesOpenDetail.includes(routine.id);
   }
 
 
