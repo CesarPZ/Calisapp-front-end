@@ -9,6 +9,7 @@ export class BaseFormUser {
   constructor(private fb: FormBuilder) {}
 
   baseForm = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(4)]],
     mail: ['',[Validators.required, Validators.pattern(this.isValidEmail)],],
     password: ['', [Validators.required, Validators.minLength(4)]],
   });
