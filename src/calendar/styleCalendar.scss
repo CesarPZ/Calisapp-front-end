@@ -1,0 +1,17 @@
+@use 'igniteui-angular/theming' as *;
+@use 'variables' as *;
+@use 'app-layout';
+
+/* autoprefixer grid: on */
+html,
+body {}
+
+@include core();
+@include theme(
+    $palette: $palette,
+    $schema: $schema
+);
+
+:root {
+    @include palette-vars($palette);
+}

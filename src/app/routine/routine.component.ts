@@ -16,15 +16,29 @@ export class RoutineComponent implements OnInit {
   focus1: any;
   closeResult: string;
   levelRoutines: string;
-  
+  routinesForLevel:Routine[];
+  weekdays: Map<any,any>= new Map();
+  daySelectedInRoutine: Map<any,any>= new Map();
+  weeksRoutine: Map<any,any>= new Map();
+
   constructor(private router:Router, 
               private service: RoutineService,
               private modalService: NgbModal,
               private spinner: NgxSpinnerService) { }
   
-  routinesForLevel:Routine[];
+  ngOnInit():void { 
+    this.weekdays.set(1, "Lunes");
+    this.weekdays.set(2, "Martes");
+    this.weekdays.set(3, "Miercoles");
+    this.weekdays.set(4, "Jueves");
+    this.weekdays.set(5, "Viernes");
+    this.weekdays.set(6, "Sabado");
+    this.weekdays.set(7, "Domingo");
+  }
 
-  ngOnInit():void {}
+  getValues(map){
+    return Array.from(map.values());
+  }
 
   getRoutinesWithLevel(level:String, levelString:string):void{
     this.spinner.show();
@@ -36,14 +50,45 @@ export class RoutineComponent implements OnInit {
       });
   }
   
+  selectValue(dia:string, routine:Routine){
+    this.daySelectedInRoutine.set(routine.id, dia);
+  }
+
+  getValuesdaySelectedInRoutine(routine:Routine){
+    return (this.daySelectedInRoutine.get(routine.id) != null) ? 
+            this.daySelectedInRoutine.get(routine.id):
+            "Seleccione un dia";
+  }
+
+  existValueWeeksRoutine(weeks, routine:Routine){
+    this.weeksRoutine.set(routine.id, weeks.target.value)
+    return weeks.target.value;
+  }
+
+  validationValueWeeks(routine:Routine){
+    return this.weeksRoutine.get(routine.id) != null && this.weeksRoutine.get(routine.id) > 0;
+  }
+
+  validationDayAndNameWeeks(routine:Routine){
+    return this.validationValueWeeks(routine) && this.daySelectedInRoutine.get(routine.id) != null  ;
+  }
+
   initRoutine(rutina:Routine, content){
-    var idExercises:number[] = []; 
     this.spinner.show();
 
+    var idExercises:number[] = [];
+    var weeksRoutine = this.weeksRoutine.get(rutina.id);
+    var dayRoutine = 0;
+    this.weekdays.forEach((value:string, key: number) => {
+      if(value === this.daySelectedInRoutine.get(rutina.id)){
+        dayRoutine = key;
+      }
+    });
+    
     for(var e of rutina.exercises){
       idExercises.push(e.id);
     }
-    let resp = this.service.addRoutine(1, rutina.nameRoutine, idExercises);
+    let resp = this.service.addRoutine(1, rutina.nameRoutine, idExercises, dayRoutine, weeksRoutine);
     resp.subscribe((response) => {
       this.routinesForLevel = [];
       this.spinner.hide();

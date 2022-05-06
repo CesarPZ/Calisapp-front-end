@@ -21,6 +21,7 @@ import { RoutineService } from './service/routine.service';
 import { RoutineGeneratedComponent } from './routine-generated/routine-generated.component';
 import { MyRoutineComponent } from './my-routine/my-routine.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { IgxCalendarModule,	IgxDialogModule } from "igniteui-angular";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 
@@ -50,6 +51,8 @@ import { MaterialModule } from './material.module';
     AppRoutingModule,
     HttpClientModule,
     NgxSpinnerModule,
+    IgxCalendarModule,
+    IgxDialogModule,
     BrowserAnimationsModule,
     MaterialModule
   ],

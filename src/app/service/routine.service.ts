@@ -13,7 +13,7 @@ export class RoutineService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-
+  
   Url='https://calisapp-backend.herokuapp.com/';
 
   getRoutines(){  
@@ -24,12 +24,14 @@ export class RoutineService {
     return this.http.get<any>(this.Url+"api/routine/"+level);
   }
 
-  addRoutine(idUser:number, nameRoutine:string, exercises:number[]) {
+  addRoutine(idUser:number, nameRoutine:string, exercises:number[], dayRoutine:number, weeksRoutine:number) {
 
     return this.http.post<any>(this.Url+"api/createRoutine"+"?"+
                                 "userId="+idUser+
                                 "&nameRoutine="+nameRoutine+
-                                "&excersices="+exercises, 
+                                "&excersices="+exercises+
+                                "&dayRoutine="+dayRoutine+
+                                "&weeksRoutine="+weeksRoutine, 
                                 this.httpOptions);
   }
 

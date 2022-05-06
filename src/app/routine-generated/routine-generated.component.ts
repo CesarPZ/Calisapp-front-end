@@ -70,7 +70,7 @@ export class RoutineGeneratedComponent implements OnInit {
       idExercises.push(e.id);
     }
 
-    let resp = this.serviceRoutine.addRoutine(1, this.nameNewRoutine, idExercises);
+    let resp = this.serviceRoutine.addRoutine(1, this.nameNewRoutine, idExercises, 1, 1);
     resp.subscribe((response) => {
       console.log(response);
       this.open(content, 'Notification', '');
