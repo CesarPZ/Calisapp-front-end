@@ -12,8 +12,7 @@ export class CalendarUserService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  //Url='https://calisapp-backend.herokuapp.com/';
-  Url='http://localhost:8080/';
+  Url='https://calisapp-backend.herokuapp.com/';
   
   getAllExerciseToUser(idUser: number){  
     return this.http.get<any>(this.Url+"api/calendarUser/"+idUser);

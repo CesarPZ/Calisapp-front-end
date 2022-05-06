@@ -130,7 +130,6 @@ export class MyRoutineComponent implements OnInit {
     return this.routinesOpenDetail.includes(routine.id);
   }
 
-
   deleteRoutineSelect(routine:Routine){
     this.serviceRoutine.deleteRoutine(routine.id, 1)
     .subscribe(data => {
