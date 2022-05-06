@@ -1,26 +1,26 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Exercise } from '../model/exercise';
+import { StaticDataService } from './static-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExerciseService {
 
-  constructor(private http:HttpClient) { }
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-
-  Url='https://calisapp-backend.herokuapp.com/';
+  
+  constructor(private http:HttpClient,
+              private staticData: StaticDataService) { }
 
   getAllExercise(){  
-    return this.http.get<any>(this.Url+"api/exercisesApp");
+    return this.http.get<any>(this.staticData.getUrlBase()+"api/exercisesApp");
   }
 
-  getAllExerciseToRoutine(idRoutine: number){  
-    return this.http.get<any>(this.Url+"api/exercisesRoutine/"+idRoutine);
+  getAllExerciseToRoutine(idRoutine: number){
+    return this.http.get<any>(this.staticData.getUrlBase()+"api/exercisesRoutine/"+idRoutine);
   }
 
   editExercise(ejercicio:Exercise) {
@@ -28,9 +28,10 @@ export class ExerciseService {
     var series = ejercicio.series;
     var repetitions = ejercicio.repetitions;
     
-    return this.http.post<any>(this.Url+"api/editExercise/"+idExercises+"?"+
-                                  "series="+series+
-                                  "&repetitions="+repetitions, 
-                                  this.httpOptions);
+    return this.http.post<any>(this.staticData.getUrlBase()+
+                                    "api/editExercise/"+idExercises+"?"+
+                                    "series="+series+
+                                    "&repetitions="+repetitions, 
+                                    this.httpOptions);
   }
 }

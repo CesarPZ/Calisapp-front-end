@@ -7,12 +7,6 @@ import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable} from 'rxjs';
 
-/*
-interface Alert {
-  type: string;
-  message: string;
-}*/
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,7 +16,6 @@ interface Alert {
 export class LoginComponent implements OnInit, OnDestroy {
   hide = true;
   private subscription: Subscription = new Subscription();
-  //alerts: Alert[];
 
   constructor(private router:Router,
     private service:UserService,
@@ -48,20 +41,21 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     const formValue = this.loginForm.baseForm.value;
-    this.subscription.add(
-      this.service.login(formValue).subscribe((response) => {
+    this.subscription.add(this.service.login(formValue).subscribe(
+      (response) => {
         if (response) {
           console.log(response);
-          localStorage.setItem("id",response.id.toString()); 
-//          localStorage.setItem("role",response.role.toString()); 
+          localStorage.setItem("id",response.id.toString());
           this.service.show();
           this.router.navigate(['home']);
         }
       },
-        (error: HttpErrorResponse) => {
-          this.errorMessage = "Ingresó mal los datos"
-      })
-    );
+      (error: HttpErrorResponse) => {
+        this.errorMessage = "Ingresó mal los datos"
+      }
+    ));
+
+    this.errorMessage = "";
   }   
 
   checkField(field: string): boolean {
@@ -71,10 +65,4 @@ export class LoginComponent implements OnInit, OnDestroy {
   Register(){
     this.router.navigate(["register"]);
   }
-
-  /*
-  close(alert: Alert) {
-    this.alerts.splice(this.alerts.indexOf(alert), 1);
-  }
-  */
 }

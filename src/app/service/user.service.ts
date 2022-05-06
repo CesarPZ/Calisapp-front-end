@@ -2,53 +2,58 @@ import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders} from '@angular/common/http';
 import { User } from '../model/user'
 import { Observable} from 'rxjs';
+import { StaticDataService } from './static-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-  constructor(private http:HttpClient) { }
-    httpOptions = {
+  
+  httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  Url='https://calisapp-backend.herokuapp.com/';
+
+  constructor(private http:HttpClient,
+              private staticData: StaticDataService) { }
 
   getUsers(){
-    return this.http.get<User[]>(this.Url+'/api/users');
+    return this.http.get<User[]>(this.staticData.getUrlBase()+'/api/users');
   }
 
   createUser(user:User): Observable<any>{
-    return this.http.post<any>(this.Url+'/api/users/register?name='+user.name+
-                                                            '&mail='+user.mail+
-                                                            '&password='+user.password,
-                                                            this.httpOptions);
+    return this.http.post<any>(this.staticData.getUrlBase()+
+                                    '/api/users/register?name='+user.name+
+                                    '&mail='+user.mail+
+                                    '&password='+user.password,
+                                    this.httpOptions);
   }
 
   login(user:User): Observable<any>{
-    return this.http.post<any>(this.Url+'/api/users/login?mail='+user.mail+
-                                                 '&password='+user.password, 
-                                                 this.httpOptions);
+    return this.http.post<any>(this.staticData.getUrlBase()+
+                                    '/api/users/login?mail='+user.mail+
+                                    '&password='+user.password, 
+                                    this.httpOptions);
   }
   
-  getUserId(id:number){
-    return this.http.get<User>(this.Url+'/api/users/'+id);
+  getUserId(){
+    let userLogged = this.staticData.getUserLogged();
+    return this.http.get<User>(this.staticData.getUrlBase()+'/api/users/'+userLogged);
   }
 
   updateUser(user:User){
-    return this.http.put<User>(this.Url+'/api/users/'+user.id+
-                                        '?name='+user.name+
-                                        '&password='+user.password
-                                        ,user);
-  }
+    return this.http.put<User>(this.staticData.getUrlBase()+'/api/users/'+user.id+
+                                                          '?name='+user.name+
+                                                          '&password='+user.password
+                                                          ,user);
+    }
 
   deleteUser(user:User){
-    return this.http.delete<User>(this.Url+'/api/users/'+user.id, this.httpOptions);
+    return this.http.delete<User>(this.staticData.getUrlBase()+
+                                      '/api/users/'+user.id, 
+                                      this.httpOptions);
   }
 
   visible: boolean = true;
-
   hide() { this.visible = false }
-
   show() { this.visible = true }
 }

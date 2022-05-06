@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { RoutineComponent } from './routine/routine.component';
 import { ProfileComponent } from './profile/profile.component';
-import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
@@ -24,6 +23,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { IgxCalendarModule,	IgxDialogModule } from "igniteui-angular";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -46,15 +46,13 @@ import { MaterialModule } from './material.module';
     RouterModule,
     AppRoutingModule,
     HomeModule,
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
     HttpClientModule,
     NgxSpinnerModule,
     IgxCalendarModule,
     IgxDialogModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    CommonModule
   ],
   providers: [RoutineService],
   bootstrap: [AppComponent],

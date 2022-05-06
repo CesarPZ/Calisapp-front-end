@@ -66,7 +66,9 @@ export class RoutineComponent implements OnInit {
   }
 
   validationValueWeeks(routine:Routine){
-    return this.weeksRoutine.get(routine.id) != null && this.weeksRoutine.get(routine.id) > 0;
+    return this.weeksRoutine.get(routine.id) != null && 
+            this.weeksRoutine.get(routine.id) > 0 &&
+            this.weeksRoutine.get(routine.id) <= 20;
   }
 
   validationDayAndNameWeeks(routine:Routine){
@@ -75,7 +77,6 @@ export class RoutineComponent implements OnInit {
 
   initRoutine(rutina:Routine, content){
     this.spinner.show();
-
     var idExercises:number[] = [];
     var weeksRoutine = this.weeksRoutine.get(rutina.id);
     var dayRoutine = 0;
@@ -88,7 +89,7 @@ export class RoutineComponent implements OnInit {
     for(var e of rutina.exercises){
       idExercises.push(e.id);
     }
-    let resp = this.service.addRoutine(1, rutina.nameRoutine, idExercises, dayRoutine, weeksRoutine);
+    let resp = this.service.addRoutine(rutina.nameRoutine, idExercises, dayRoutine, weeksRoutine);
     resp.subscribe((response) => {
       this.routinesForLevel = [];
       this.spinner.hide();

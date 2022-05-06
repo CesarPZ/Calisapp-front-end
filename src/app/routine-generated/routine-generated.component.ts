@@ -16,7 +16,10 @@ export class RoutineGeneratedComponent implements OnInit {
   closeResult: string;
   allExercise:Exercise[];
   exerciseSelected:Exercise[] = [];
-  nameNewRoutine: string;
+  nameNewRoutine:string;
+  weekdays: Map<any,any>= new Map();
+  weeksRoutine:number;
+  daySelectedInRoutine:string;
 
   constructor(private router:Router, 
               private serviceExercise: ExerciseService,
@@ -26,11 +29,23 @@ export class RoutineGeneratedComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
+    this.weekdays.set(1, "Lunes");
+    this.weekdays.set(2, "Martes");
+    this.weekdays.set(3, "Miercoles");
+    this.weekdays.set(4, "Jueves");
+    this.weekdays.set(5, "Viernes");
+    this.weekdays.set(6, "Sabado");
+    this.weekdays.set(7, "Domingo");
+    
     this.serviceExercise.getAllExercise()
       .subscribe(data => {
         this.allExercise = data;
         this.spinner.hide();
       });
+  }
+
+  getValues(map){
+    return Array.from(map.values());
   }
 
   addExerciseToRoutine(ejercicio:Exercise){
@@ -57,26 +72,53 @@ export class RoutineGeneratedComponent implements OnInit {
 
   isVisible(){
     return this.nameNewRoutine!= null && 
-          this.nameNewRoutine != '' && 
-          this.exerciseSelected.length > 0;
+            this.nameNewRoutine != '' && 
+            this.daySelectedInRoutine != null &&
+            this.validationValueWeeks() &&
+            this.exerciseSelected.length > 0;
   }
 
   createRoutine(content){
     this.spinner.show();
-    var idExercises:number[] = []; 
-    
+    let idExercises:number[]=[];
+    let dayNumberSelectedInRoutine;
+    this.weekdays.forEach((value:string, key: number) => {
+      if(value === this.daySelectedInRoutine){
+        dayNumberSelectedInRoutine = key;
+      }
+    });
+
     for(var e of this.exerciseSelected){
-      console.log(e.id);
       idExercises.push(e.id);
     }
 
-    let resp = this.serviceRoutine.addRoutine(1, this.nameNewRoutine, idExercises, 1, 1);
+    let resp = this.serviceRoutine.addRoutine(this.nameNewRoutine, idExercises, 
+                                  dayNumberSelectedInRoutine, this.weeksRoutine);
     resp.subscribe((response) => {
       console.log(response);
       this.open(content, 'Notification', '');
       this.exerciseSelected = [];
       this.spinner.hide();
     });
+  }
+  getValuesdaySelectedInRoutine(){
+    return (this.daySelectedInRoutine != null) ? 
+            this.daySelectedInRoutine:
+            "Seleccione un dia";
+  }
+
+  selectValue(dia:string){
+    this.daySelectedInRoutine = dia;
+  }
+
+  validationValueWeeks(){
+    return this.weeksRoutine != null && 
+            this.weeksRoutine > 0 &&
+            this.weeksRoutine <= 20;
+  }
+
+  validationDayAndNameWeeks(){
+    return this.validationValueWeeks() && this.daySelectedInRoutine != null  ;
   }
 
   navigateMyRoutine(content){

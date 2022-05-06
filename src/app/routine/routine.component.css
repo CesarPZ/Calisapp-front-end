@@ -13,18 +13,6 @@
     font-weight: bolder;
 }
 
-.content-transparent-principiante{
-    background:transparent;
-    background-color: rgba(0, 4, 255, 0.2);
-    font-weight: bolder;
-}
-
-.content-transparent-intermedio{
-    background:transparent;
-    background-color: rgba(94, 255, 0, 0.548);
-    font-weight: bolder;
-}
-
 .content-transparent-avanzado{
     background:transparent;
     background-color: rgb(252, 252, 252);

@@ -29,7 +29,7 @@ export class MyRoutineComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.serviceRoutine.getARoutineOfUser(1)
+    this.serviceRoutine.getARoutineOfUser()
       .subscribe(data => {
         this.routinesUser = data;
         this.spinner.hide();
@@ -131,7 +131,7 @@ export class MyRoutineComponent implements OnInit {
   }
 
   deleteRoutineSelect(routine:Routine){
-    this.serviceRoutine.deleteRoutine(routine.id, 1)
+    this.serviceRoutine.deleteRoutine(routine.id)
     .subscribe(data => {
       //this.routinesUser = data;
     });
