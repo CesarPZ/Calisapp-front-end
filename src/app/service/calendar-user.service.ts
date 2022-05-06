@@ -1,20 +1,21 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { StaticDataService } from './static-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalendarUserService {
 
-  constructor(private http:HttpClient) { }
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-
-  Url='https://calisapp-backend.herokuapp.com/';
   
-  getAllExerciseToUser(idUser: number){  
-    return this.http.get<any>(this.Url+"api/calendarUser/"+idUser);
+  constructor(private http:HttpClient,
+              private staticData: StaticDataService) { }
+  
+  getAllCalendarToUser(){
+    let userLogged = this.staticData.getUserLogged();
+    return this.http.get<any>(this.staticData.getUrlBase()+"api/calendarUser/"+userLogged);
   }
 }

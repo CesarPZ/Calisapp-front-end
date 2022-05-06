@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Location, PopStateEvent } from '@angular/common';
 import { UserService } from '../../service/user.service'
+import { StaticDataService } from 'src/app/service/static-data.service';
 
 @Component({
     selector: 'app-navbar',
@@ -13,7 +14,10 @@ export class NavbarComponent implements OnInit {
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
 
-    constructor(public user: UserService, public location: Location, private router: Router) {
+    constructor(public user: UserService,
+                public location: Location,
+                private router: Router,
+                private staticData: StaticDataService,) {
     }
 
     ngOnInit() {
@@ -51,6 +55,10 @@ export class NavbarComponent implements OnInit {
         this.user.hide();
         
         localStorage.removeItem('id');    
-        this.router.navigate(['login']);
-      } 
+        this.router.navigate(['home']);
+    } 
+
+    userLogued(){
+     return this.staticData.getUserLogged();   
+    }
 }

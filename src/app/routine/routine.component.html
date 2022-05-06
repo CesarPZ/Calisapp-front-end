@@ -120,10 +120,19 @@
             </div>
             <div class="row">
               <div class="col" style="text-align:center">
-                <h1>Seleccione el dia de la semana en el que quiera realizar su rutina y su duración: </h1>
                 <div ngbDropdown class="d-inline-block">
-                  <div class="row">
-                    <button type="button" class="btn btn-success mt-5.2" id="dropdownBasic1" ngbDropdownToggle> {{ getValuesdaySelectedInRoutine(rou) }} </button>
+                  <h2 class="display-3 " style="color:rgb(9, 0, 104); font-size:15px; text-align:center;">
+                    Ingrese la cantidad de semanas que quiere realizar la rutina:
+                    <div class="form-group has-success mt-2" *ngIf="validationValueWeeks(rou)">
+                      <input type="number" id="validationValueWeeks" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control" />
+                    </div>
+                    <div class="form-group has-danger"  *ngIf="!validationValueWeeks(rou)">
+                      <input type="number"  placeholder="Ingrese la cantidad de semanas entre 1 y 20" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control">
+                    </div>
+                    Seleccione el dia de la semana que quiere realizar esta rutina: 
+                    <button type="button" style="vertical-align: middle" class="btn btn-success mt-5.2" id="dropdownBasic1" ngbDropdownToggle> 
+                      {{ getValuesdaySelectedInRoutine(rou) }} 
+                    </button>
                     <div ngbDropdownMenu aria-labelledby="dropdownConfig">
                       <ul class="code-editor-options-menu">
                         <li *ngFor="let dia of getValues(weekdays)" (click)="selectValue(dia, rou)">
@@ -131,13 +140,7 @@
                         </li>
                       </ul>
                     </div>
-                    <div class="form-group has-success mt-2" *ngIf="validationValueWeeks(rou)">
-                      <input type="number" id="validationValueWeeks" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control" />
-                    </div>
-                    <div class="form-group has-danger" *ngIf="!validationValueWeeks(rou)">
-                      <input type="number" placeholder="Ingrese cant. de semanas" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control is-invalid" />
-                    </div>
-                  </div>
+                  </h2>
                 </div>
               </div>
             </div> <br>

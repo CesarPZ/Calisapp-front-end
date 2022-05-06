@@ -10,7 +10,7 @@
     <div class="navbar-collapse collapse" id="navbar_global" [ngbCollapse]="isCollapsed">
       <ul class="navbar-nav align-items-lg-center ml-lg-auto"></ul>
       <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-        <li class="nav-item dropdown" *ngIf="user.visible">
+        <li class="nav-item dropdown" *ngIf="userLogued()">
           <a class="nav-link no-caret" data-toggle="dropdown" role="button">
             <i class="ni ni-collection d-lg-none"></i>
             <span class="nav-link-inner--text">Actividades Usuario
@@ -24,7 +24,7 @@
             <a [routerLink]="['/calendar']" class="dropdown-item">Calendario</a>
           </div>
         </li>
-        <li class="nav-item dropdown" *ngIf="!user.visible">
+        <li class="nav-item dropdown" *ngIf="!userLogued()">
           <a class="nav-link no-caret" data-toggle="dropdown" role="button">
             <i class="ni ni-ui-04 d-lg-none"></i>
             <span class="nav-link-inner--text">Ingresar</span>
@@ -36,8 +36,8 @@
                   <i class="ni ni-lock-circle-open"></i>
                 </div>
                 <div class="media-body ml-3">
-                  <h6 class="heading text-primary mb-md-1">Iniciar sesión</h6>
-                  <!-- <p class="description d-none d-md-inline-block mb-0">Learn how to use Argon compiling Scss, change brand colors and more.</p> -->
+                  <h6 class="heading text-primary mb-md-1" style="font-size:100%; text-transform: initial;">Iniciar sesión</h6>
+                  
                 </div>
               </a>
               <a routerLinkActive="active" [routerLink]="['/register']" class="media d-flex align-items-center">
@@ -45,13 +45,13 @@
                   <i class="ni ni-single-02"></i>
                 </div>
                 <div class="media-body ml-3">
-                  <h6 class="heading text-primary mb-md-1">Registrarse</h6>
+                  <h6 class="heading text-primary mb-md-1" style="font-size:100%; text-transform: initial;">Registrarse</h6>
                 </div>
               </a>
             </div>
           </div>
         </li>
-        <li class="nav-item dropdown" *ngIf="user.visible">
+        <li class="nav-item dropdown" *ngIf="userLogued()">
           <a class="nav-link no-caret" data-toggle="dropdown" role="button">
             <i class="ni ni-ui-04 d-lg-none"></i>
             <span class="nav-link-inner--text">Salir</span>

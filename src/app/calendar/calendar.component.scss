@@ -1,4 +1,16 @@
 @use '../../calendar/variables' as *;
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+$custom-calendar-theme: calendar-theme(
+    $date-selected-text-color: #020202,
+    $date-selected-background: #ff7300,
+    $date-special-background: #ff0077,
+    $date-special-text-color: #000000,
+);
+
+:host ::ng-deep {
+    @include calendar($custom-calendar-theme);
+}
 
 .calendar-wrapper {
     max-width: 600px;
@@ -10,54 +22,15 @@
     box-shadow: elevation($elevation: 4);
 }
 
-@import "~bootstrap-icons/font/bootstrap-icons.css";
-
 .card-transparent{
     background:transparent;
     border:3px solid rgb(23, 0, 107) !important;
-    width:10rem; 
-    height:13rem;
+    width:12rem; 
+    height:15rem;
 }
 
 .content-transparent{
     background:transparent;
     background-color: rgba(255,255,255,0.2);
     font-weight: bolder;
-}
-
-
-
-
-$custom-calendar-theme: calendar-theme(
-   
-    $content-background: #fdfdfd,
-    $header-text-color: #ffffff,
-    $date-current-text-color: #2dabe8,
-    $picker-arrow-color: #2dabe8,
-
-    $date-current-bg-color: #fdfdfd,
-    $picker-arrow-hover-color: #345779,
-    $year-current-text-color: #2dabe8,
-    $year-hover-text-color: #2dabe8,
-    $month-current-text-color: #2dabe8,
-    $month-hover-text-color: #2dabe8,
-    $picker-text-color: #2dabe8,
-    $picker-text-hover-color: #000000,
-    $date-selected-text-color: #020202,
-    $date-selected-background: #00ff88,
-    $date-special-background: #51ff00,
-    $date-special-text-color: #000000,
-);
-
-// :host {
-//     @include css-vars($custom-calendar-theme);
-// }
-
-/* Using Theme Overrides to provide IE 11 support.
- * NOTE: Theming using this approach will greatly increase the size
- * of the output CSS. If you do not plan to target IE 11,
- * delete this section and use the `igx-css-vars` mixin as shown above.
-**/
-:host ::ng-deep {
-    @include calendar($custom-calendar-theme);
 }

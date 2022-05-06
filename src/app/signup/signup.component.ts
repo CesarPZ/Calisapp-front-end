@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private service: UserService, public loginForm: BaseFormUser) {}
 
   user: User = new User();
-  errorMessage = ""
+  errorMessage = "";
 
   ngOnInit() {
     this.service.hide();
@@ -39,6 +39,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     const formValue = this.loginForm.baseForm.value;
     this.subscription.add(
       this.service.createUser(formValue).subscribe((response) => {
+        console.log(response.status);
           if (response) {
             localStorage.setItem("id", response.id.toString());
             //localStorage.setItem("role", "ROLE_USER"); 
@@ -47,9 +48,13 @@ export class SignupComponent implements OnInit, OnDestroy {
           }
         },
         (error: HttpErrorResponse) => {
+          console.log('error');
+          console.log(this.errorMessage);
+          console.log(formValue.mail);
           this.errorMessage = "El usuario con el email: \n " + formValue.mail + " ya existe!!!"
         })
     );
+    this.errorMessage = "";
   }
 
   checkField(field: string): boolean {
