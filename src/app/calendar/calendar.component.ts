@@ -49,7 +49,7 @@ export class CalendarComponent implements OnInit{
     if(date.getTime() == todayOrSelect.getTime()){
       this.dateSelected ='Rutinas programadas para hoy:'
     }else{
-      this.dateSelected ='Rutinas programadas para el dia: ' +
+      this.dateSelected ='Rutinas programadas para el día: ' +
                           date.getDate().toString() + '/' +
                           date.getMonth().toString() + '/' + 
                           date.getFullYear().toString() ;

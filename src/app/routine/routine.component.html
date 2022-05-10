@@ -129,7 +129,7 @@
                     <div class="form-group has-danger"  *ngIf="!validationValueWeeks(rou)">
                       <input type="number"  placeholder="Ingrese la cantidad de semanas entre 1 y 20" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control">
                     </div>
-                    Seleccione el dia de la semana que quiere realizar esta rutina: 
+                    Seleccione el día de la semana que quiere realizar esta rutina: 
                     <button type="button" style="vertical-align: middle" class="btn btn-success mt-5.2" id="dropdownBasic1" ngbDropdownToggle> 
                       {{ getValuesdaySelectedInRoutine(rou) }} 
                     </button>
