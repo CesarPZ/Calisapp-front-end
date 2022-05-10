@@ -17,12 +17,12 @@ export class UserService {
               private staticData: StaticDataService) { }
 
   getUsers(){
-    return this.http.get<User[]>(this.staticData.getUrlBase()+'/api/users');
+    return this.http.get<User[]>(this.staticData.getUrlBase()+'api/users');
   }
 
   createUser(user:User): Observable<any>{
     return this.http.post<any>(this.staticData.getUrlBase()+
-                                    '/api/users/register?name='+user.name+
+                                    'api/users/register?name='+user.name+
                                     '&mail='+user.mail+
                                     '&password='+user.password,
                                     this.httpOptions);
@@ -30,18 +30,18 @@ export class UserService {
 
   login(user:User): Observable<any>{
     return this.http.post<any>(this.staticData.getUrlBase()+
-                                    '/api/users/login?mail='+user.mail+
+                                    'api/users/login?mail='+user.mail+
                                     '&password='+user.password, 
                                     this.httpOptions);
   }
   
   getUserId(){
     let userLogged = this.staticData.getUserLogged();
-    return this.http.get<User>(this.staticData.getUrlBase()+'/api/users/'+userLogged);
+    return this.http.get<User>(this.staticData.getUrlBase()+'api/users/'+userLogged);
   }
 
   updateUser(user:User){
-    return this.http.put<User>(this.staticData.getUrlBase()+'/api/users/'+user.id+
+    return this.http.put<User>(this.staticData.getUrlBase()+'api/users/'+user.id+
                                                           '?name='+user.name+
                                                           '&password='+user.password
                                                           ,user);
@@ -49,7 +49,7 @@ export class UserService {
 
   deleteUser(user:User){
     return this.http.delete<User>(this.staticData.getUrlBase()+
-                                      '/api/users/'+user.id, 
+                                      'api/users/'+user.id, 
                                       this.httpOptions);
   }
 
