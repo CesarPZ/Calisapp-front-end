@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DateRangeType, IgxCalendarComponent } from 'igniteui-angular';
 import { CalendarUser } from '../model/calendar-user';
+import { Exercise } from '../model/exercise';
 import { Routine } from '../model/routine';
 import { CalendarUserService } from '../service/calendar-user.service';
 
@@ -32,8 +33,8 @@ export class CalendarComponent implements OnInit{
       this.calendar.specialDates = [];
       for(var calendar of data){
         let range = [
-          new Date(calendar.dateRoutine),
-          new Date(calendar.dateRoutine)
+          new Date(calendar.dayRoutine),
+          new Date(calendar.dayRoutine)
         ];
         this.calendar.specialDates.push({ 
           type: DateRangeType.Between, dateRange: range });
@@ -57,8 +58,11 @@ export class CalendarComponent implements OnInit{
 
     this.routinesSelected = [];
     for(var calendar of this.calendarUser){
-      if(new Date(calendar.dateRoutine).getTime() == date.getTime()){
-        this.routinesSelected.push(calendar.routine);
+      if(new Date(calendar.dayRoutine).getTime() == date.getTime()){
+        let routine = new Routine();
+        routine.exercises = calendar.exercises;
+        routine.nameRoutine = calendar.routineName;
+        this.routinesSelected.push(routine);
       }
     }
   }

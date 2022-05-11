@@ -81,10 +81,10 @@ export class RoutineGeneratedComponent implements OnInit {
   createRoutine(content){
     this.spinner.show();
     let idExercises:number[]=[];
-    let dayNumberSelectedInRoutine;
+    let dayNumberSelectedInRoutine:number[] = [];
     this.weekdays.forEach((value:string, key: number) => {
       if(value === this.daySelectedInRoutine){
-        dayNumberSelectedInRoutine = key;
+        dayNumberSelectedInRoutine.push(key);
       }
     });
 
@@ -93,7 +93,7 @@ export class RoutineGeneratedComponent implements OnInit {
     }
 
     let resp = this.serviceRoutine.addRoutine(this.nameNewRoutine, idExercises, 
-                                  dayNumberSelectedInRoutine, this.weeksRoutine);
+                                  dayNumberSelectedInRoutine, this.weeksRoutine, false);
     resp.subscribe((response) => {
       console.log(response);
       this.open(content, 'Notification', '');

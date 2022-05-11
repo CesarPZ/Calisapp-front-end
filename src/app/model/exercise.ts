@@ -5,7 +5,8 @@ export class Exercise {
     repetitions:number;
     series:number;
     levelExcercise:String;
-    exerciseTimes:number;
+    exerciseTime:number;
     breakTime:number;
+    dayExercise:number;
     processExercise:ProcessExercise;
 }

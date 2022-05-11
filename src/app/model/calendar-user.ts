@@ -1,6 +1,9 @@
+import { Exercise } from "./exercise";
 import { Routine } from "./routine";
 
 export class CalendarUser {
-    dateRoutine:Date;
-    routine:Routine;
+    dayRoutine:Date;
+    routineName:string;
+    exerciseNumberDayRoutine:number;
+    exercises:Exercise[];
 }
