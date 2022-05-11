@@ -79,17 +79,17 @@ export class RoutineComponent implements OnInit {
     this.spinner.show();
     var idExercises:number[] = [];
     var weeksRoutine = this.weeksRoutine.get(rutina.id);
-    var dayRoutine = 0;
+    var daysRoutine:number[] = [];
     this.weekdays.forEach((value:string, key: number) => {
       if(value === this.daySelectedInRoutine.get(rutina.id)){
-        dayRoutine = key;
+        daysRoutine.push(key);
       }
     });
     
     for(var e of rutina.exercises){
       idExercises.push(e.id);
     }
-    let resp = this.service.addRoutine(rutina.nameRoutine, idExercises, dayRoutine, weeksRoutine);
+    let resp = this.service.addRoutine(rutina.nameRoutine, idExercises, daysRoutine, weeksRoutine, true);
     resp.subscribe((response) => {
       this.routinesForLevel = [];
       this.spinner.hide();

@@ -22,15 +22,16 @@ export class RoutineService {
     return this.http.get<any>(this.staticData.getUrlBase()+"api/routine/"+level);
   }
 
-  addRoutine(nameRoutine:string, exercises:number[], dayRoutine:number, weeksRoutine:number) {
+  addRoutine(nameRoutine:string, exercises:number[], daysRoutine:number[], weeksRoutine:number, routineByLevel:Boolean) {
     let userLogged = this.staticData.getUserLogged();
 
     return this.http.post<any>(this.staticData.getUrlBase()+"api/createRoutine"+"?"+
                                 "userId="+userLogged+
                                 "&nameRoutine="+nameRoutine+
                                 "&excersices="+exercises+
-                                "&dayRoutine="+dayRoutine+
-                                "&weeksRoutine="+weeksRoutine, 
+                                "&daysRoutine="+daysRoutine+
+                                "&weeksRoutine="+weeksRoutine+
+                                "&routineByLevel="+routineByLevel, 
                                 this.httpOptions);
   }
 
