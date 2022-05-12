@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../model/user';
-import { UserService } from '../service/user.service';
-import { BaseFormUser } from '../utils/base-form-user';
+import { User } from '../../model/user';
+import { UserService } from '../../service/user.service';
+import { BaseFormUser } from '../../utils/base-form-user';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -17,7 +17,9 @@ export class SignupComponent implements OnInit, OnDestroy {
   hide = true;
   private subscription: Subscription = new Subscription();
 
-  constructor(private router: Router, private service: UserService, public loginForm: BaseFormUser) {}
+  constructor(private router: Router, 
+              private service: UserService, 
+              public loginForm: BaseFormUser) {}
 
   user: User = new User();
   errorMessage = "";
@@ -42,15 +44,11 @@ export class SignupComponent implements OnInit, OnDestroy {
         console.log(response.status);
           if (response) {
             localStorage.setItem("id", response.id.toString());
-            //localStorage.setItem("role", "ROLE_USER"); 
             this.service.show();
             this.router.navigate(['home']);
           }
         },
         (error: HttpErrorResponse) => {
-          console.log('error');
-          console.log(this.errorMessage);
-          console.log(formValue.mail);
           this.errorMessage = "El usuario con el email: \n " + formValue.mail + " ya existe!!!"
         })
     );

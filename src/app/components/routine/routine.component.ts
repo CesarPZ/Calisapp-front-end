@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Routine } from '../model/routine';
-import { RoutineService } from '../service/routine.service';
+import { Routine } from '../../model/routine';
+import { RoutineService } from '../../service/routine.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from "ngx-spinner";
-import { Exercise } from '../model/exercise';
+import { Exercise } from '../../model/exercise';
 
 @Component({
     selector: 'app-routine',

@@ -3,14 +3,14 @@ import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './profile/profile.component';
-import { SignupComponent } from './signup/signup.component';
-import { RoutineComponent } from './routine/routine.component';
-import { LoginComponent } from './login/login.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { RoutineGeneratedComponent } from './routine-generated/routine-generated.component';
-import { MyRoutineComponent } from './my-routine/my-routine.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { RoutineComponent } from './components/routine/routine.component';
+import { LoginComponent } from './components/login/login.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { RoutineGeneratedComponent } from './components/routine-generated/routine-generated.component';
+import { MyRoutineComponent } from './components/my-routine/my-routine.component';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },

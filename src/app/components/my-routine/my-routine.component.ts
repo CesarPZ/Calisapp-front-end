@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Routine } from '../model/routine';
-import { RoutineService } from '../service/routine.service';
+import { Routine } from '../../model/routine';
+import { RoutineService } from '../../service/routine.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Exercise } from '../model/exercise';
-import { ExerciseService } from '../service/exercise.service';
+import { Exercise } from '../../model/exercise';
+import { ExerciseService } from '../../service/exercise.service';
 import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({

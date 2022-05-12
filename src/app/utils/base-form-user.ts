@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 export class BaseFormUser {
   private isValidEmail = /\S+@\S+\.\S+/;
   errorMessage = null;
+  errorMessageMail = null;
+  errorMessageName = null;
 
   constructor(private fb: FormBuilder) {}
 
@@ -28,13 +30,15 @@ export class BaseFormUser {
     if (errors) {
       const minlenght = errors?.minlength?.requiredLength;
       const messages = {
-        required: 'Debe ingresar un valor ', //'You must enter a value'
+        required: 'Debe ingresar un valor', //'You must enter a value'
         pattern: 'No es un email valido', //'Not a valid email'
-        minlength: `Este campo debe tener más de  ${minlenght} caracteres`, //`This field must be longer than ${minlenght} characters`
+        minlength: `Este campo debe tener más de ${minlenght} caracteres`, //`This field must be longer than ${minlenght} characters`
       }; 
 
       const errorKey = Object.keys(errors).find(Boolean);
       this.errorMessage = messages[errorKey];
+      this.errorMessageMail = 'No es un email valido';
+      this.errorMessageName = 'Debe ingresar un valor de al menos 4 caracteres';
     }
   }
 }
