@@ -19,7 +19,7 @@ export class RoutineGeneratedComponent implements OnInit {
   nameNewRoutine:string;
   weekdays: Map<any,any>= new Map();
   weeksRoutine:number;
-  daySelectedInRoutine:string;
+  daySelectedInRoutine:string[] = [];
 
   constructor(private router:Router, 
               private serviceExercise: ExerciseService,
@@ -71,9 +71,10 @@ export class RoutineGeneratedComponent implements OnInit {
   }
 
   isVisible(){
+    console.log(this.daySelectedInRoutine);
     return this.nameNewRoutine!= null && 
             this.nameNewRoutine != '' && 
-            this.daySelectedInRoutine != null &&
+            this.daySelectedInRoutine.length != 0 &&
             this.validationValueWeeks() &&
             this.exerciseSelected.length > 0;
   }
@@ -83,7 +84,7 @@ export class RoutineGeneratedComponent implements OnInit {
     let idExercises:number[]=[];
     let dayNumberSelectedInRoutine:number[] = [];
     this.weekdays.forEach((value:string, key: number) => {
-      if(value === this.daySelectedInRoutine){
+      if(this.daySelectedInRoutine.includes(value)){
         dayNumberSelectedInRoutine.push(key);
       }
     });
@@ -105,10 +106,6 @@ export class RoutineGeneratedComponent implements OnInit {
     return (this.daySelectedInRoutine != null) ? 
             this.daySelectedInRoutine:
             "Seleccione un dia";
-  }
-
-  selectValue(dia:string){
-    this.daySelectedInRoutine = dia;
   }
 
   validationValueWeeks(){
