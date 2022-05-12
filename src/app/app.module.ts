@@ -25,6 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
+import { LevelCardComponent } from './components/reusableComponent/level-card/level-card.component';
+import { ExerciseInformationCardComponent } from './components/reusableComponent/exercise-information-card/exercise-information-card.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     LoginComponent,
     CalendarComponent,
     RoutineGeneratedComponent,
-    MyRoutineComponent
+    MyRoutineComponent,
+    LevelCardComponent,
+    ExerciseInformationCardComponent
   ],
   imports: [
     BrowserModule,

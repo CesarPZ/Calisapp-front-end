@@ -42,7 +42,7 @@ export class RoutineComponent implements OnInit {
     return Array.from(map.values());
   }
 
-  getRoutinesWithLevel(level:String, levelString:string):void{
+  getRoutinesWithLevel(level:string, levelString:string):void{
     this.spinner.show();
     this.service.getRoutinesWithLevel(level)
       .subscribe(data => {

@@ -6,4 +6,5 @@ export class Routine {
     generatedBy:String;
     level:string;
     exercises:Array<Exercise>;
+    daySelected:number;
 }

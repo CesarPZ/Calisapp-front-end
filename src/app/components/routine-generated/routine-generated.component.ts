@@ -114,6 +114,11 @@ export class RoutineGeneratedComponent implements OnInit {
             this.weeksRoutine <= 20;
   }
 
+  validationNameRoutine(){
+    return this.nameNewRoutine != null &&
+            this.nameNewRoutine != '';
+  }
+  
   validationDayAndNameWeeks(){
     return this.validationValueWeeks() && this.daySelectedInRoutine != null  ;
   }
