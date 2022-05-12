@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DateRangeType, IgxCalendarComponent } from 'igniteui-angular';
-import { CalendarUser } from '../model/calendar-user';
-import { Exercise } from '../model/exercise';
-import { Routine } from '../model/routine';
-import { CalendarUserService } from '../service/calendar-user.service';
+import { CalendarUser } from '../../model/calendar-user';
+import { Exercise } from '../../model/exercise';
+import { Routine } from '../../model/routine';
+import { CalendarUserService } from '../../service/calendar-user.service';
 
 @Component({
   selector: 'app-calendar',

@@ -6,19 +6,19 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 
 import { AppComponent } from './app.component';
-import { SignupComponent } from './signup/signup.component';
-import { RoutineComponent } from './routine/routine.component';
-import { ProfileComponent } from './profile/profile.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { RoutineComponent } from './components/routine/routine.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
-import { HomeModule } from './home/home.module';
-import { LoginComponent } from './login/login.component';
-import { CalendarComponent } from './calendar/calendar.component';
+import { HomeModule } from './components/home/home.module';
+import { LoginComponent } from './components/login/login.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RoutineService } from './service/routine.service';
-import { RoutineGeneratedComponent } from './routine-generated/routine-generated.component';
-import { MyRoutineComponent } from './my-routine/my-routine.component';
+import { RoutineGeneratedComponent } from './components/routine-generated/routine-generated.component';
+import { MyRoutineComponent } from './components/my-routine/my-routine.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { IgxCalendarModule,	IgxDialogModule } from "igniteui-angular";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

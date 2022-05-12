@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../model/user';
-import { UserService } from '../service/user.service';
-import { BaseFormUser } from '../utils/base-form-user';
+import { User } from '../../model/user';
+import { UserService } from '../../service/user.service';
+import { BaseFormUser } from '../../utils/base-form-user';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable} from 'rxjs';
