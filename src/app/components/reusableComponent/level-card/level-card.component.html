@@ -1,0 +1,14 @@
+<div class="card card-lift--hover shadow border-0">
+  <div class="card-body py-5">
+    <div class="row row-grid">
+      <div class="icon icon-shape icon-shape-{{colorCard}} rounded-circle mb-2">
+        <i class="{{icon}}"></i>
+      </div> 
+      <div style="vertical-align: middle;  display: flex;  align-items: center;">
+        <h6 class="text-{{colorCard}}" style="font-size: 17px;"> &nbsp; &nbsp;{{ nivelName }} </h6>
+      </div> 
+    </div>
+    <p class="description mt-3"> {{ description }} </p>
+    <a href="javascript:void(0)" (click)="getRoutinesWithLevel()" class="btn btn-{{colorCard}} mt-4">Ver Rutinas</a>
+  </div>
+</div>

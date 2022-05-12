@@ -16,7 +16,7 @@ export class CalendarComponent implements OnInit{
   currentDate:CalendarUser= new CalendarUser();
   routinesSelected:Routine[]=[];
   routineIsUpdate:number[]=[];
-  routinesOpenDetail:number[]=[];
+  routinesOpenDetail:Routine[]=[];
   dateSelected:string='Rutinas programadas para hoy:';
 
   constructor( private calendarUserService: CalendarUserService) { }
@@ -62,6 +62,7 @@ export class CalendarComponent implements OnInit{
         let routine = new Routine();
         routine.exercises = calendar.exercises;
         routine.nameRoutine = calendar.routineName;
+        routine.daySelected = calendar.exerciseNumberDayRoutine;
         this.routinesSelected.push(routine);
       }
     }
@@ -71,20 +72,20 @@ export class CalendarComponent implements OnInit{
     return this.routineIsUpdate.includes(routine.id);
   }
 
-  getOpenDetail(routine:Routine){
-    return this.routinesOpenDetail.includes(routine.id);
-  }
-
   setOpenDetail(routine:Routine, status:number){
     if(status == 1){
-      this.routinesOpenDetail.push(routine.id);
+      this.routinesOpenDetail.push(routine);
     }else{
-      const index:number = this.routinesOpenDetail.indexOf(routine.id);
+      const index:number = this.routinesOpenDetail.indexOf(routine);
 
       if (index !== -1) {
           this.routinesOpenDetail.splice(index, 1);
       }
     }
+  }
+
+  getOpenDetail(routine:Routine){
+    return this.routinesOpenDetail.includes(routine);
   }
 
   closeAlertIsUpdated(routine:Routine){

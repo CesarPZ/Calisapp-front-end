@@ -18,7 +18,7 @@ export class RoutineService {
     return this.http.get<any>(this.staticData.getUrlBase()+"api/routines");
   }
 
-  getRoutinesWithLevel(level:String){  
+  getRoutinesWithLevel(level:string){  
     return this.http.get<any>(this.staticData.getUrlBase()+"api/routine/"+level);
   }
 
