@@ -4,6 +4,7 @@ import { Routine } from '../model/routine';
 import { RoutineService } from '../service/routine.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Exercise } from '../model/exercise';
 
 @Component({
     selector: 'app-routine',
@@ -20,6 +21,7 @@ export class RoutineComponent implements OnInit {
   weekdays: Map<any,any>= new Map();
   daySelectedInRoutine: Map<any,any>= new Map();
   weeksRoutine: Map<any,any>= new Map();
+  tabSelected: Map<any,any>= new Map();
 
   constructor(private router:Router, 
               private service: RoutineService,
@@ -48,10 +50,11 @@ export class RoutineComponent implements OnInit {
         this.levelRoutines = levelString;
         this.spinner.hide();
       });
+    
   }
-  
-  selectValue(dia:string, routine:Routine){
-    this.daySelectedInRoutine.set(routine.id, dia);
+
+  selectValue(selectedDays, routine:Routine){
+    this.daySelectedInRoutine.set(routine.id, selectedDays);
   }
 
   getValuesdaySelectedInRoutine(routine:Routine){
@@ -72,7 +75,37 @@ export class RoutineComponent implements OnInit {
   }
 
   validationDayAndNameWeeks(routine:Routine){
-    return this.validationValueWeeks(routine) && this.daySelectedInRoutine.get(routine.id) != null  ;
+    console.log(this.daySelectedInRoutine.get(routine.id) );
+    return this.validationValueWeeks(routine) && 
+            this.daySelectedInRoutine.get(routine.id) != null && 
+            this.daySelectedInRoutine.get(routine.id).length != 0;
+  }
+
+  daysRoutine(rutina:Routine){
+    let dias = new Set<number>();
+    for(var exercise of rutina.exercises){
+      dias.add(exercise.dayExercise);
+    }
+    let myArray: number[] = Array.from(dias).sort((n1,n2) => n1 - n2);
+    
+    return myArray;
+  }
+
+  exercisesRou(routine:Routine, day){
+    var exerciseDay:Exercise[] = [];
+    for(var ex of routine.exercises){
+      if(ex.dayExercise == day){
+        exerciseDay.push(ex);
+      }
+    }
+    return exerciseDay;
+  }
+
+  tabSelectedRoutine(rutina:Routine, dia){
+    console.log("dia");
+    console.log(dia);
+    this.tabSelected.set(rutina.id, dia);
+    console.log(this.tabSelected);
   }
 
   initRoutine(rutina:Routine, content){
@@ -80,8 +113,8 @@ export class RoutineComponent implements OnInit {
     var idExercises:number[] = [];
     var weeksRoutine = this.weeksRoutine.get(rutina.id);
     var daysRoutine:number[] = [];
-    this.weekdays.forEach((value:string, key: number) => {
-      if(value === this.daySelectedInRoutine.get(rutina.id)){
+    this.weekdays.forEach((value:string, key:number) => {
+      if(this.daySelectedInRoutine.get(rutina.id).includes(value)){
         daysRoutine.push(key);
       }
     });

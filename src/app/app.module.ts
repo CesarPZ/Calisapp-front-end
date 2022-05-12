@@ -24,6 +24,7 @@ import { IgxCalendarModule,	IgxDialogModule } from "igniteui-angular";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { CommonModule } from '@angular/common';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { CommonModule } from '@angular/common';
     IgxDialogModule,
     BrowserAnimationsModule,
     MaterialModule,
-    CommonModule
+    CommonModule,
+    MatTabsModule
   ],
   providers: [RoutineService],
   bootstrap: [AppComponent],

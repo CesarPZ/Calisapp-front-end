@@ -82,96 +82,98 @@
     <ul class="code-editor-options-menu" *ngFor="let rou of routinesForLevel">
       <div class="container container rounded">
         <div [ngClass]="'content-transparent-avanzado'">
-            <p style=" color:rgb(0, 11, 41); font-size:25px; text-align:center; font-weight: bolder;">
-              {{rou.nameRoutine}}
-            </p>
-            <div class="row row-grid justify-content-center">
-              <ul class="code-editor-options-menu" *ngFor="let dat of rou.exercises">
-                <div class="card border-light mb-10" [ngClass]="'card-transparent'">
-                    <div class="card-content">
-                      <div class="card-header bg-transparent justify-content-center border-0" 
-                            style="text-transform:uppercase; height:3.5rem; text-align: center; color:rgb(0, 0, 0);font-weight: bolder; font-size:17px;">
-                        {{dat.processExercise.nameExercise}}
-                      </div>
-                      <div class="card-body text-align">
-                        <p class="card-text" style="font-weight:bolder; font-size:15px; text-shadow: 2px 2px 5px rgb(110, 109, 109); height:6rem;">
-                          <i class="ni ni-user-run"></i> <i> 
-                            {{dat.repetitions}} repeticiones 
-                          </i> <br>
-                          <i class="bi bi-arrow-clockwise"> 
-                            {{dat.series}} series 
-                          </i> <br>
-                          <i class="bi bi-trophy"> 
-                          {{dat.processExercise.mainMuscle}}
-                          </i> <br>
-                          <a href="https://www.youtube.com/watch?v=aKHar4U2Iys" target="_blank" style="color:rgb(0, 30, 128)"> 
-                            <i class="bi bi-youtube"> 
-                              Video explicativo
-                            </i>
-                          </a><br>
-                          <i class="bi bi-info-circle"> 
-                            {{dat.processExercise.description}}
-                          </i> 
-                        </p>
-                      </div>
-                    </div> 
-                </div><br>
-              </ul>
-            </div>
-            <div class="row">
-              <div class="col" style="text-align:center">
-                <div ngbDropdown class="d-inline-block">
-                  <h2 class="display-3 " style="color:rgb(9, 0, 104); font-size:15px; text-align:center;">
-                    Ingrese la cantidad de semanas que quiere realizar la rutina:
-                    <div class="form-group has-success mt-2" *ngIf="validationValueWeeks(rou)">
-                      <input type="number" id="validationValueWeeks" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control" />
-                    </div>
-                    <div class="form-group has-danger"  *ngIf="!validationValueWeeks(rou)">
-                      <input type="number"  placeholder="Ingrese la cantidad de semanas entre 1 y 20" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control">
-                    </div>
-                    Seleccione el día de la semana que quiere realizar esta rutina: 
-                    <button type="button" style="vertical-align: middle" class="btn btn-success mt-5.2" id="dropdownBasic1" ngbDropdownToggle> 
-                      {{ getValuesdaySelectedInRoutine(rou) }} 
-                    </button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownConfig">
-                      <ul class="code-editor-options-menu">
-                        <li *ngFor="let dia of getValues(weekdays)" (click)="selectValue(dia, rou)">
-                          <button ngbDropdownItem>{{dia}}</button>
-                        </li>
-                      </ul>
-                    </div>
-                  </h2>
+          <p style=" color:rgb(0, 11, 41); font-size:25px; text-align:center; font-weight: bolder;">
+            {{rou.nameRoutine}}
+          </p>
+          <mat-tab-group #tabGroup (selectedTabChange)="tabSelectedRoutine(rou,$event)">
+            <ul *ngFor="let day of daysRoutine(rou)">
+              <mat-tab label="Dia {{day}}"> <br>
+                <div class="row row-grid justify-content-center">
+                  <ul class="code-editor-options-menu" *ngFor="let dat of exercisesRou(rou,day)">
+                    <div class="card border-light mb-10" [ngClass]="'card-transparent'">
+                      <div class="card-content">
+                        <div class="card-header bg-transparent justify-content-center border-0" 
+                              style="text-transform:uppercase; height:3.5rem; text-align: center; color:rgb(0, 0, 0);font-weight: bolder; font-size:17px;">
+                          {{dat.processExercise.nameExercise}}
+                        </div>
+                        <div class="card-body text-align">
+                          <p class="card-text" style="font-weight:bolder; font-size:15px; text-shadow: 2px 2px 5px rgb(110, 109, 109); height:6rem;">
+                            <i class="ni ni-user-run"></i> <i> 
+                              {{dat.repetitions}} repeticiones 
+                            </i> <br>
+                            <i class="bi bi-arrow-clockwise"> 
+                              {{dat.series}} series 
+                            </i> <br>
+                            <i class="bi bi-trophy"> 
+                            {{dat.processExercise.mainMuscle}}
+                            </i> <br>
+                            <a href="https://www.youtube.com/watch?v=aKHar4U2Iys" target="_blank" style="color:rgb(0, 30, 128)"> 
+                              <i class="bi bi-youtube"> 
+                                Video explicativo
+                              </i>
+                            </a><br>
+                            <i class="bi bi-info-circle"> 
+                              {{dat.processExercise.description}}
+                            </i> 
+                          </p>
+                        </div>
+                      </div> 
+                    </div><br>
+                  </ul>
                 </div>
-              </div>
-            </div> <br>
-            <div style="text-transform:uppercase; height:5rem; text-align:center;">
-              <button type="button" class="btn btn-primary" href="javascript:void(0)" (click)="initRoutine(rou, classic2)" [disabled]="!validationDayAndNameWeeks(rou)">
-                Iniciar Rutina
-              </button>
-            </div>
-            <ng-template #classic2 let-c="close" let-d="dismiss">
-              <div class="modal-content bg-gradient-danger">
-                <div class="modal-header">
-                  <h6 class="modal-title" id="modal-title-notification"></h6>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="py-3 text-center">
-                    <i class="ni ni-like-2 ni-3x"></i>
-                    <h4 class="heading mt-4">Su rutina se genero correctamente!</h4>
-                    <p>Usted a iniciado la rutina: {{rou.nameRoutine}}, puede acceder a ella desde Ver mis rutinas.</p>
+              </mat-tab>
+            </ul>
+          </mat-tab-group>
+          <div class="row">
+            <div class="col" style="text-align:center">
+              <div ngbDropdown class="d-inline-block">
+                <h2 class="display-3 " style="color:rgb(9, 0, 104); font-size:15px; text-align:center;">
+                  Ingrese la cantidad de semanas que quiere realizar la rutina:
+                  <div class="form-group has-success mt-2" *ngIf="validationValueWeeks(rou)">
+                    <input type="number" id="validationValueWeeks" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control" />
                   </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-white" href="javascript:void(0)" (click)="c('Close click'); navigateMyRoutine()">Ver mis rutinas</button>
-                  <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" (click)="c('Close click')">Cerrar</button>
+                  <div class="form-group has-danger"  *ngIf="!validationValueWeeks(rou)">
+                    <input type="number"  placeholder="Ingrese la cantidad de semanas entre 1 y 20" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control">
+                  </div>
+                  Seleccione el día de la semana que quiere realizar esta rutina: 
+                  <mat-form-field appearance="outline">
+                    <mat-label>Dias seleccionados</mat-label>
+                    <mat-select [(ngModel)]="selectedDays" (ngModelChange)="selectValue(selectedDays, rou)" name="selectedDays" multiple>
+                      <mat-option *ngFor="let dia of getValues(weekdays)" [value]="dia" >{{dia}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </h2>
+              </div>
+            </div>
+          </div> <br>
+          <div style="text-transform:uppercase; height:5rem; text-align:center;">
+            <button type="button" class="btn btn-primary" href="javascript:void(0)" (click)="initRoutine(rou, classic2)" [disabled]="!validationDayAndNameWeeks(rou)">
+              Iniciar Rutina
+            </button>
+          </div>
+          <ng-template #classic2 let-c="close" let-d="dismiss">
+            <div class="modal-content bg-gradient-danger">
+              <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-notification"></h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="py-3 text-center">
+                  <i class="ni ni-like-2 ni-3x"></i>
+                  <h4 class="heading mt-4">Su rutina se genero correctamente!</h4>
+                  <p>Usted a iniciado la rutina: {{rou.nameRoutine}}, puede acceder a ella desde Ver mis rutinas.</p>
                 </div>
               </div>
-            </ng-template> 
-          </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-white" href="javascript:void(0)" (click)="c('Close click'); navigateMyRoutine()">Ver mis rutinas</button>
+                <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" (click)="c('Close click')">Cerrar</button>
+              </div>
+            </div>
+          </ng-template> 
         </div>
+      </div>
     </ul>
   </section>
   <br><br><br><br><br><br><br><br><br>

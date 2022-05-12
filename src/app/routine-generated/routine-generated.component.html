@@ -29,20 +29,16 @@
                   <input type="number" placeholder="Ingrese la cantidad de semanas entre 1 y 20" [(ngModel)]="weeksRoutine" name="weeksRoutine" class="form-control">
                 </div>
                 Seleccione el día de la semana que quiere realizar esta rutina: 
-                <button type="button" style="vertical-align: middle" class="btn btn-success mt-5.2" id="dropdownBasic1" ngbDropdownToggle> 
-                  {{ getValuesdaySelectedInRoutine() }} 
-                </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownConfig">
-                  <ul class="code-editor-options-menu">
-                    <li *ngFor="let dia of getValues(weekdays)" (click)="selectValue(dia)">
-                      <button ngbDropdownItem>{{dia}}</button>
-                    </li>
-                  </ul>
-                </div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Dias seleccionados</mat-label>
+                  <mat-select [(ngModel)]="daySelectedInRoutine" name="selectedDays" multiple>
+                    <mat-option *ngFor="let dia of getValues(weekdays)" [value]="dia" >{{dia}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
               </h2>
             </div>
           </div>
-        </div> <br>
+        </div>
         <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="isVisible()">
           <a href="javascript:void(0)" (click)="createRoutine(classic3)" class="btn btn-success mt-0">
             Iniciar Rutina
