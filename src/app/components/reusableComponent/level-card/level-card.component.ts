@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { RoutineComponent } from '../../routine/routine.component';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-level-card',
@@ -13,13 +12,14 @@ export class LevelCardComponent implements OnInit {
   @Input() icon:        string  | undefined;
   @Input() colorCard:   string  | undefined;
   @Input() level:       string  | undefined;
-  
-  constructor(private routineComponent:RoutineComponent) { }
 
-  ngOnInit(): void {
-  }
+  @Output() levelSelected = new EventEmitter();
+  
+  constructor() { }
+
+  ngOnInit(): void { }
 
   getRoutinesWithLevel(){
-    this.routineComponent.getRoutinesWithLevel(this.level,'Rutinas de ' + this.nivelName + ':');
+    this.levelSelected.emit();
   }
 }

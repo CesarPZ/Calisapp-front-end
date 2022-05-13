@@ -22,6 +22,7 @@ export class RoutineComponent implements OnInit {
   daySelectedInRoutine: Map<any,any>= new Map();
   weeksRoutine: Map<any,any>= new Map();
   tabSelected: Map<any,any>= new Map();
+  routinesOpenDetail:number[]=[];
 
   constructor(private router:Router, 
               private service: RoutineService,
@@ -50,7 +51,6 @@ export class RoutineComponent implements OnInit {
         this.levelRoutines = levelString;
         this.spinner.hide();
       });
-    
   }
 
   selectValue(selectedDays, routine:Routine){
@@ -133,6 +133,22 @@ export class RoutineComponent implements OnInit {
 
   navigateMyRoutine(content){
     this.router.navigate(['myRoutine']);
+  }
+
+  setOpenDetail(routine:Routine, status:boolean){
+    if(status){
+      this.routinesOpenDetail.push(routine.id);
+    }else{
+      const index:number = this.routinesOpenDetail.indexOf(routine.id);
+
+      if (index !== -1) {
+          this.routinesOpenDetail.splice(index, 1);
+      }
+    }
+  } 
+
+  getOpenDetail(routine:Routine){
+    return this.routinesOpenDetail.includes(routine.id);
   }
 
   open(content, type, modalDimension) {

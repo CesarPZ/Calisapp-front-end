@@ -1,0 +1,10 @@
+<div style="text-align:center; 
+            text-transform:uppercase;font-size:170%;" 
+            [ngStyle]="{color: this.colorText}">
+  <a (click)="setOpenDetail(routine,true)" class="bdropdown-item" *ngIf="!getOpenDetail()">
+    {{ routine.nameRoutine }} <i class="bi bi-caret-down-fill"> </i>
+  </a>
+  <a (click)="setOpenDetail(routine,false)" class="bdropdown-item" *ngIf="getOpenDetail()">
+    {{ routine.nameRoutine }} <i class="bi bi-caret-up-fill"> </i>
+  </a>
+</div><br>

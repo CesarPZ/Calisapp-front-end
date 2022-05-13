@@ -27,6 +27,7 @@ import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { LevelCardComponent } from './components/reusableComponent/level-card/level-card.component';
 import { ExerciseInformationCardComponent } from './components/reusableComponent/exercise-information-card/exercise-information-card.component';
+import { TitleAccordionComponent } from './components/reusableComponent/title-accordion/title-accordion.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ExerciseInformationCardComponent } from './components/reusableComponent
     RoutineGeneratedComponent,
     MyRoutineComponent,
     LevelCardComponent,
-    ExerciseInformationCardComponent
+    ExerciseInformationCardComponent,
+    TitleAccordionComponent
   ],
   imports: [
     BrowserModule,
