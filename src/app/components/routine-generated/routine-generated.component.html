@@ -16,6 +16,9 @@
         <div class="row">
           <div class="col" style="text-align:center">
             <div ngbDropdown class="d-inline-block">
+              <div style="color:rgb(255, 255, 255); text-transform:uppercase; height:4rem; text-align: center;" *ngIf="!isVisible()">
+                <h3>Debe ingresar el nombre de la rutina, ingresar el dia de la semana, duracion y seleccionar al menos un ejercicio.</h3>
+              </div>
               <h2 class="display-3 " style="color:rgb(252, 252, 252); font-size:15px; text-align:center;">
                 Nombre de su nueva rutina:
                 <div class="form-group has-success mt-2" *ngIf="validationNameRoutine()">
@@ -42,15 +45,22 @@
                 </mat-form-field>
               </h2>
             </div>
+
+            <!-- Filtro-->
+            <h2 class="display-3 " style="color:rgb(252, 252, 252); font-size:15px;">
+              Filtrar ejercicios
+              <div class="form-group" >
+                <input type="text" class="form-control" placeholder="Buscar.." [(ngModel)]="filterpost" name="filterpost"/>
+              </div>
+            </h2>
+            <!--  -->
+
           </div>
         </div>
         <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="isVisible()">
           <a href="javascript:void(0)" (click)="createRoutine(classic3)" class="btn btn-success mt-0">
             Iniciar Rutina
           </a>
-        </div>
-        <div style="color:rgb(255, 255, 255); text-transform:uppercase; height:4rem; text-align: center;" *ngIf="!isVisible()">
-          Debe ingresar el nombre de la rutina, ingresar el dia de la semana, duracion y seleccionar al menos un ejercicio.
         </div>
         <ng-template #classic3 let-c="close" let-d="dismiss">
           <div class="modal-content bg-gradient-danger">
@@ -74,7 +84,8 @@
           </div>
         </ng-template>
         <div class="row row-grid justify-content-center">
-          <ul class="code-editor-options-menu" *ngFor="let dat of allExercise">
+          <!--  | filter: filterpost" -->
+          <ul class="code-editor-options-menu" *ngFor="let dat of allExercise"> 
             <div class="card border-light mb-10" [ngClass]="exerciseIsSelected(dat)">
               <app-exercise-information-card [exercise]="dat">
               </app-exercise-information-card>

@@ -28,6 +28,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { LevelCardComponent } from './components/reusableComponent/level-card/level-card.component';
 import { ExerciseInformationCardComponent } from './components/reusableComponent/exercise-information-card/exercise-information-card.component';
 import { TitleAccordionComponent } from './components/reusableComponent/title-accordion/title-accordion.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TitleAccordionComponent } from './components/reusableComponent/title-ac
     MyRoutineComponent,
     LevelCardComponent,
     ExerciseInformationCardComponent,
-    TitleAccordionComponent
+    TitleAccordionComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
