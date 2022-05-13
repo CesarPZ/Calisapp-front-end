@@ -53,14 +53,9 @@
                   <span aria-hidden="true">×</span>
                 </button>
               </div><br>
-              <div style="color:rgb(255, 255, 255); text-align:center; font-weight: bolder; text-transform:uppercase;">
-                <a (click)="setOpenDetail(rou,1)" class="bdropdown-item" style="color:rgb(255, 255, 255); font-size:170%; text-align:end; text-transform:uppercase;" *ngIf="!getOpenDetail(rou)">
-                  {{rou.nameRoutine}} - Dia  {{rou.daySelected}} <i class="bi bi-caret-down-fill"> </i>
-                </a>
-                <a (click)="setOpenDetail(rou,0)" class="bdropdown-item" style="color:rgb(255, 255, 255); font-size:170%; text-align:end; text-transform:uppercase;" *ngIf="getOpenDetail(rou)">
-                  {{rou.nameRoutine}} - Dia  {{rou.daySelected}} <i class="bi bi-caret-up-fill"></i>
-                </a>
-              </div><br>
+              <app-title-accordion  [routine]="rou"
+                                    (openDetails)="setOpenDetail(rou, $event)">
+              </app-title-accordion>
               <div *ngIf="getOpenDetail(rou)">
                 <div class="row justify-content-center" >
                   <ul class="code-editor-options-menu" *ngFor="let dat of rou.exercises">

@@ -41,7 +41,8 @@
                                 tus músculos principales.'"
                               [icon]="'ni ni-user-run'"
                               [colorCard]="'primary'"
-                              [level]="'1'">
+                              [level]="'1'"
+                              (levelSelected)="getRoutinesWithLevel('1','Rutinas de Nivel Principiante:')">
               </app-level-card>
             </div>
             <div class="col-lg-4">
@@ -51,7 +52,8 @@
                                 y control de peso corporal para este nivel.'"
                               [icon]="'ni ni-diamond'"
                               [colorCard]="'success'"
-                              [level]="'2'">
+                              [level]="'2'"
+                              (levelSelected)="getRoutinesWithLevel('2','Rutinas de Nivel Intermedio:')">
               </app-level-card>
             </div>
             <div class="col-lg-4">
@@ -61,7 +63,8 @@
                                 experiencia en calistenia, fuerza y control corporal.'"
                               [icon]="'bi bi-award-fill'"
                               [colorCard]="'warning'"
-                              [level]="'3'">
+                              [level]="'3'"
+                              (levelSelected)="getRoutinesWithLevel('3','Rutinas de Nivel Avanzado:')">
               </app-level-card>
             </div>
           </div>
@@ -76,74 +79,77 @@
     <ul class="code-editor-options-menu" *ngFor="let rou of routinesForLevel">
       <div class="container container rounded">
         <div [ngClass]="'content-transparent-avanzado'"> <br>
-          <p style=" color:rgb(0, 11, 41); font-size:25px; text-align:center; font-weight: bolder;">
-            {{rou.nameRoutine}}
-          </p>
-          <mat-tab-group dynamicHeight #tabGroup (selectedTabChange)="tabSelectedRoutine(rou,$event)">
-            <ul *ngFor="let day of daysRoutine(rou)">
-              <mat-tab label="Dia {{day}}"> <br>
-                <div class="row row-grid justify-content-center">
-                  <ul class="code-editor-options-menu" *ngFor="let dat of exercisesRou(rou,day)">
-                    <div class="card border-light mb-10" [ngClass]="'card-transparent'">
-                      <div class="card-content">
-                        <app-exercise-information-card  [exercise]="dat" 
-                                                        [colorStyle]="'black'">
-                        </app-exercise-information-card>
-                      </div> 
-                    </div><br>
-                  </ul>
+          <app-title-accordion  [routine]="rou"
+                                [colorText]="'black'"
+                                (openDetails)="setOpenDetail(rou, $event)">
+          </app-title-accordion>
+          <div *ngIf="getOpenDetail(rou)">
+            <mat-tab-group dynamicHeight #tabGroup (selectedTabChange)="tabSelectedRoutine(rou,$event)">
+              <ul *ngFor="let day of daysRoutine(rou)">
+                <mat-tab label="Dia {{day}}"> <br>
+                  <div class="row row-grid justify-content-center">
+                    <ul class="code-editor-options-menu" *ngFor="let dat of exercisesRou(rou,day)">
+                      <div class="card border-light mb-10" [ngClass]="'card-transparent'">
+                        <div class="card-content">
+                          <app-exercise-information-card  [exercise]="dat" 
+                                                          [colorStyle]="'black'">
+                          </app-exercise-information-card>
+                        </div> 
+                      </div><br>
+                    </ul>
+                  </div>
+                </mat-tab>
+              </ul>
+            </mat-tab-group>
+            <div class="row">
+              <div class="col" style="text-align:center">
+                <div ngbDropdown class="d-inline-block">
+                  <h2 class="display-3 " style="color:rgb(9, 0, 104); font-size:15px; text-align:center;">
+                    Ingrese la cantidad de semanas que quiere realizar la rutina:
+                    <div class="form-group has-success mt-2" *ngIf="validationValueWeeks(rou)">
+                      <input type="number" id="validationValueWeeks" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control" />
+                    </div>
+                    <div class="form-group has-danger"  *ngIf="!validationValueWeeks(rou)">
+                      <input type="number"  placeholder="Ingrese la cantidad de semanas entre 1 y 20" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control">
+                    </div>
+                    Seleccione el día de la semana que quiere realizar esta rutina: 
+                    <mat-form-field appearance="outline">
+                      <mat-label>Dias seleccionados</mat-label>
+                      <mat-select [(ngModel)]="selectedDays" (ngModelChange)="selectValue(selectedDays, rou)" name="selectedDays" multiple>
+                        <mat-option *ngFor="let dia of getValues(weekdays)" [value]="dia" >{{dia}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </h2>
                 </div>
-              </mat-tab>
-            </ul>
-          </mat-tab-group>
-          <div class="row">
-            <div class="col" style="text-align:center">
-              <div ngbDropdown class="d-inline-block">
-                <h2 class="display-3 " style="color:rgb(9, 0, 104); font-size:15px; text-align:center;">
-                  Ingrese la cantidad de semanas que quiere realizar la rutina:
-                  <div class="form-group has-success mt-2" *ngIf="validationValueWeeks(rou)">
-                    <input type="number" id="validationValueWeeks" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control" />
-                  </div>
-                  <div class="form-group has-danger"  *ngIf="!validationValueWeeks(rou)">
-                    <input type="number"  placeholder="Ingrese la cantidad de semanas entre 1 y 20" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control">
-                  </div>
-                  Seleccione el día de la semana que quiere realizar esta rutina: 
-                  <mat-form-field appearance="outline">
-                    <mat-label>Dias seleccionados</mat-label>
-                    <mat-select [(ngModel)]="selectedDays" (ngModelChange)="selectValue(selectedDays, rou)" name="selectedDays" multiple>
-                      <mat-option *ngFor="let dia of getValues(weekdays)" [value]="dia" >{{dia}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </h2>
               </div>
+            </div> <br>
+            <div style="text-transform:uppercase; height:5rem; text-align:center;">
+              <button type="button" class="btn btn-primary" href="javascript:void(0)" (click)="initRoutine(rou, classic2)" [disabled]="!validationDayAndNameWeeks(rou)">
+                Iniciar Rutina
+              </button>
             </div>
-          </div> <br>
-          <div style="text-transform:uppercase; height:5rem; text-align:center;">
-            <button type="button" class="btn btn-primary" href="javascript:void(0)" (click)="initRoutine(rou, classic2)" [disabled]="!validationDayAndNameWeeks(rou)">
-              Iniciar Rutina
-            </button>
+            <ng-template #classic2 let-c="close" let-d="dismiss">
+              <div class="modal-content bg-gradient-danger">
+                <div class="modal-header">
+                  <h6 class="modal-title" id="modal-title-notification"></h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="py-3 text-center">
+                    <i class="ni ni-like-2 ni-3x"></i>
+                    <h4 class="heading mt-4">Su rutina se genero correctamente!</h4>
+                    <p>Usted a iniciado la rutina: {{rou.nameRoutine}}, puede acceder a ella desde Ver mis rutinas.</p>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-white" href="javascript:void(0)" (click)="c('Close click'); navigateMyRoutine()">Ver mis rutinas</button>
+                  <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" (click)="c('Close click')">Cerrar</button>
+                </div>
+              </div>
+            </ng-template>
           </div>
-          <ng-template #classic2 let-c="close" let-d="dismiss">
-            <div class="modal-content bg-gradient-danger">
-              <div class="modal-header">
-                <h6 class="modal-title" id="modal-title-notification"></h6>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="py-3 text-center">
-                  <i class="ni ni-like-2 ni-3x"></i>
-                  <h4 class="heading mt-4">Su rutina se genero correctamente!</h4>
-                  <p>Usted a iniciado la rutina: {{rou.nameRoutine}}, puede acceder a ella desde Ver mis rutinas.</p>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-white" href="javascript:void(0)" (click)="c('Close click'); navigateMyRoutine()">Ver mis rutinas</button>
-                <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" (click)="c('Close click')">Cerrar</button>
-              </div>
-            </div>
-          </ng-template> 
         </div>
       </div>
     </ul>

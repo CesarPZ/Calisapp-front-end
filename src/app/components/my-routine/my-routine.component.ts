@@ -114,8 +114,8 @@ export class MyRoutineComponent implements OnInit {
     }
   }
 
-  setOpenDetail(routine:Routine, status:number){
-    if(status == 1){
+  setOpenDetail(routine:Routine, status:boolean){
+    if(status){
       this.routinesOpenDetail.push(routine.id);
     }else{
       const index:number = this.routinesOpenDetail.indexOf(routine.id);
@@ -124,7 +124,7 @@ export class MyRoutineComponent implements OnInit {
           this.routinesOpenDetail.splice(index, 1);
       }
     }
-  }
+  } 
 
   getOpenDetail(routine:Routine){
     return this.routinesOpenDetail.includes(routine.id);

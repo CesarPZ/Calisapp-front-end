@@ -72,8 +72,8 @@ export class CalendarComponent implements OnInit{
     return this.routineIsUpdate.includes(routine.id);
   }
 
-  setOpenDetail(routine:Routine, status:number){
-    if(status == 1){
+  setOpenDetail(routine:Routine, status:boolean){
+    if(status){
       this.routinesOpenDetail.push(routine);
     }else{
       const index:number = this.routinesOpenDetail.indexOf(routine);
