@@ -13,26 +13,14 @@ export class TitleAccordionComponent implements OnInit {
   
   @Output() openDetails = new EventEmitter();
   
-  routinesOpenDetail:Routine[]=[];
+  routinesOpenDetail:boolean=false;
 
   constructor() { }
 
   ngOnInit(): void { }
 
-  setOpenDetail(routine:Routine, status:boolean){
+  setOpenDetail(status:boolean){
     this.openDetails.emit(status);
-    if(status){
-      this.routinesOpenDetail.push(routine);
-    }else{
-      const index:number = this.routinesOpenDetail.indexOf(routine);
-
-      if (index !== -1) {
-          this.routinesOpenDetail.splice(index, 1);
-      }
-    }
-  }
-
-  getOpenDetail(){
-    return this.routinesOpenDetail.includes(this.routine);
+    this.routinesOpenDetail = status;
   }
 }
