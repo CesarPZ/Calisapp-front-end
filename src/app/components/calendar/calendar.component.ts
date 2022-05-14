@@ -96,4 +96,24 @@ export class CalendarComponent implements OnInit{
     }
   }
 
+  daysRoutine(rutina:Routine){
+    let dias = new Set<number>();
+    for(var exercise of rutina.exercises){
+      dias.add(exercise.dayExercise);
+    }
+    let myArray: number[] = Array.from(dias).sort((n1,n2) => n1 - n2);
+    
+    return myArray;
+  }
+  
+  exercisesRou(routine:Routine, day){
+    var exerciseDay:Exercise[] = [];
+    for(var ex of routine.exercises){
+      if(ex.dayExercise == day){
+        exerciseDay.push(ex);
+      }
+    }
+    return exerciseDay;
+  }
+
 }
