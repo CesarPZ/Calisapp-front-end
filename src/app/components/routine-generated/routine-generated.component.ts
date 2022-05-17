@@ -20,7 +20,8 @@ export class RoutineGeneratedComponent implements OnInit {
   weekdays: Map<any,any>= new Map();
   weeksRoutine:number;
   daySelectedInRoutine:string[] = [];
-
+  filterpost = "";
+  
   constructor(private router:Router, 
               private serviceExercise: ExerciseService,
               private serviceRoutine: RoutineService,

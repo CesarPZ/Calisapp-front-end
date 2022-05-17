@@ -1,56 +1,69 @@
 <main>
   <div class="position-relative">
-    <!-- shape Hero -->
     <section class="section section-lg section-shaped pb-250">
       <div class="shape shape-style-1 shape-primary">
-      </div>      
+      </div>
       <div style="position: relative">
         <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
-            <p style="font-size: 20px; color: white">Loading...</p>
+          <p style="font-size: 20px; color: white">Loading...</p>
         </ngx-spinner>
         <div class="col-sm-9"><br>
-          <h2 class="display-3 mb-0" style="color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder;">
+          <h2 class="display-3 mb-0"
+            style="color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder;">
             Selecciona ejercicios y crea tu rutina personalizada:
           </h2>
         </div><br>
         <div class="row">
           <div class="col" style="text-align:center">
             <div ngbDropdown class="d-inline-block">
+              <div style="color:rgb(255, 255, 255); text-transform:uppercase; height:4rem; text-align: center;"
+                *ngIf="!isVisible()">
+                <h3>Debe ingresar el nombre de la rutina, ingresar el dia de la semana, duracion y seleccionar al menos
+                  un ejercicio.</h3>
+              </div>
               <h2 class="display-3 " style="color:rgb(252, 252, 252); font-size:15px; text-align:center;">
                 Nombre de su nueva rutina:
                 <div class="form-group has-success mt-2" *ngIf="validationNameRoutine()">
-                  <input type="string" id="nameNewRoutine"  [(ngModel)]="nameNewRoutine" name="nameNewRoutine" class="form-control" />
+                  <input type="string" id="nameNewRoutine" [(ngModel)]="nameNewRoutine" name="nameNewRoutine"
+                    class="form-control" />
                 </div>
                 <div class="form-group has-danger" *ngIf="!validationNameRoutine()">
-                  <input type="string" placeholder="Ingrese el nombre de su nueva rutina" [(ngModel)]="nameNewRoutine" name="nameNewRoutine" class="form-control">
+                  <input type="string" placeholder="Ingrese el nombre de su nueva rutina" [(ngModel)]="nameNewRoutine"
+                    name="nameNewRoutine" class="form-control">
                 </div>
               </h2>
               <h2 class="display-3 " style="color:rgb(255, 255, 255); font-size:15px; text-align:center;">
                 Ingrese la cantidad de semanas que quiere realizar la rutina:
                 <div class="form-group has-success mt-2" *ngIf="validationValueWeeks()">
-                  <input type="number" id="validationValueWeeks"  [(ngModel)]="weeksRoutine" name="weeksRoutine" class="form-control" />
+                  <input type="number" id="validationValueWeeks" [(ngModel)]="weeksRoutine" name="weeksRoutine"
+                    class="form-control" />
                 </div>
                 <div class="form-group has-danger" *ngIf="!validationValueWeeks()">
-                  <input type="number" placeholder="Ingrese la cantidad de semanas entre 1 y 20" [(ngModel)]="weeksRoutine" name="weeksRoutine" class="form-control">
+                  <input type="number" placeholder="Ingrese la cantidad de semanas entre 1 y 20"
+                    [(ngModel)]="weeksRoutine" name="weeksRoutine" class="form-control">
                 </div>
-                Seleccione el día de la semana que quiere realizar esta rutina: 
+                Seleccione el día de la semana que quiere realizar esta rutina:
                 <mat-form-field appearance="outline">
-                  <mat-label style="color:rgb(255, 255, 255) !important;" >Dias seleccionados</mat-label>
+                  <mat-label style="color:rgb(255, 255, 255) !important;">Días seleccionados</mat-label>
                   <mat-select [(ngModel)]="daySelectedInRoutine" name="selectedDays" multiple>
-                    <mat-option *ngFor="let dia of getValues(weekdays)" [value]="dia" >{{dia}}</mat-option>
+                    <mat-option *ngFor="let dia of getValues(weekdays)" [value]="dia">{{ dia }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </h2>
+              <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="isVisible()">
+                <a href="javascript:void(0)" (click)="createRoutine(classic3)" class="btn btn-success mt-0">
+                  Iniciar Rutina
+                </a>
+              </div>
+              <h2 class="display-3 " style="color:rgb(252, 252, 252); font-size:15px;">
+                Filtrar ejercicios
+                <div class="form-group input-wrapper">
+                  <input type="text" class="form-control" placeholder="Buscar.." [(ngModel)]="filterpost"
+                    name="filterpost" />
+                </div>
+              </h2>
             </div>
           </div>
-        </div>
-        <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="isVisible()">
-          <a href="javascript:void(0)" (click)="createRoutine(classic3)" class="btn btn-success mt-0">
-            Iniciar Rutina
-          </a>
-        </div>
-        <div style="color:rgb(255, 255, 255); text-transform:uppercase; height:4rem; text-align: center;" *ngIf="!isVisible()">
-          Debe ingresar el nombre de la rutina, ingresar el dia de la semana, duracion y seleccionar al menos un ejercicio.
         </div>
         <ng-template #classic3 let-c="close" let-d="dismiss">
           <div class="modal-content bg-gradient-danger">
@@ -64,25 +77,27 @@
               <div class="py-3 text-center">
                 <i class="ni ni-like-2 ni-3x"></i>
                 <h4 class="heading mt-4">Su rutina se genero correctamente!</h4>
-                <p>Usted a iniciado la rutina: {{nameNewRoutine}}, puede acceder a ella desde Ver mis rutinas.</p>
+                <p>Usted a iniciado la rutina: {{ nameNewRoutine }}, puede acceder a ella desde Ver mis rutinas.</p>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-white" href="javascript:void(0)" (click)="c('Close click'); navigateMyRoutine()">Ver mis rutinas</button>
-              <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" (click)="c('Close click')">Cerrar</button>
+              <button type="button" class="btn btn-white" href="javascript:void(0)"
+                (click)="c('Close click'); navigateMyRoutine()">Ver mis rutinas</button>
+              <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal"
+                (click)="c('Close click')">Cerrar</button>
             </div>
           </div>
         </ng-template>
         <div class="row row-grid justify-content-center">
-          <ul class="code-editor-options-menu" *ngFor="let dat of allExercise">
+          <ul class="code-editor-options-menu" *ngFor="let dat of allExercise | filter: filterpost">
             <div class="card border-light mb-10" [ngClass]="exerciseIsSelected(dat)">
               <app-exercise-information-card [exercise]="dat">
               </app-exercise-information-card>
               <div class="card-footer bg-transparent border-0">
-                <div *ngIf="isSelected(dat)" >
-                  <a href="javascript:void(0)" (click)="addExerciseToRoutine(dat)"  class="btn btn-link btn-block">
+                <div *ngIf="isSelected(dat)">
+                  <a href="javascript:void(0)" (click)="addExerciseToRoutine(dat)" class="btn btn-link btn-block">
                     <div style="text-align: center; color:rgb(2, 0, 134);font-weight: bolder; font-size:18px;">
-                      <i >
+                      <i>
                         + Agregar
                       </i>
                     </div>
