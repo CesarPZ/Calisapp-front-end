@@ -3,7 +3,6 @@
       <p style="font-size: 20px; color: white">Loading...</p>
   </ngx-spinner>
   <div class="position-relative">
-    <!-- shape Hero -->
     <section class="section section-lg section-shaped pb-250">
       <div class="shape shape-style-1 shape-primary">
         <span></span>
@@ -114,7 +113,7 @@
                     </div>
                     Seleccione el día de la semana que quiere realizar esta rutina: 
                     <mat-form-field appearance="outline">
-                      <mat-label>Dias seleccionados</mat-label>
+                      <mat-label>Días seleccionados</mat-label>
                       <mat-select [(ngModel)]="selectedDays" (ngModelChange)="selectValue(selectedDays, rou)" name="selectedDays" multiple>
                         <mat-option *ngFor="let dia of getValues(weekdays)" [value]="dia" >{{dia}}</mat-option>
                       </mat-select>
