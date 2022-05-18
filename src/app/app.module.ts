@@ -29,6 +29,7 @@ import { LevelCardComponent } from './components/reusableComponent/level-card/le
 import { ExerciseInformationCardComponent } from './components/reusableComponent/exercise-information-card/exercise-information-card.component';
 import { TitleAccordionComponent } from './components/reusableComponent/title-accordion/title-accordion.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { SpinnerComponent } from './components/reusableComponent/spinner/spinner.component'
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     LevelCardComponent,
     ExerciseInformationCardComponent,
     TitleAccordionComponent,
-    FilterPipe
+    FilterPipe,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
