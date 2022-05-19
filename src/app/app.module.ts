@@ -30,6 +30,7 @@ import { ExerciseInformationCardComponent } from './components/reusableComponent
 import { TitleAccordionComponent } from './components/reusableComponent/title-accordion/title-accordion.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { SpinnerComponent } from './components/reusableComponent/spinner/spinner.component'
+import { YouTubePlayerModule } from "@angular/youtube-player";
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { SpinnerComponent } from './components/reusableComponent/spinner/spinner
     BrowserAnimationsModule,
     MaterialModule,
     CommonModule,
-    MatTabsModule
+    MatTabsModule,
+    YouTubePlayerModule
   ],
   providers: [RoutineService],
   bootstrap: [AppComponent],
