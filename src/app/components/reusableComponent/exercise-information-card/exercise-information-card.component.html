@@ -18,13 +18,38 @@
     <i class="bi bi-trophy"> 
     {{ exercise.processExercise.mainMuscle }}
     </i> <br>
-    <a href="https://www.youtube.com/watch?v=aKHar4U2Iys" target="_blank" style="color:rgb(0, 30, 128)"> 
+    <a href="javascript:void(0)" (click)="open(classic,'','')" style="color:rgb(0, 30, 128)"> 
       <i class="bi bi-youtube"> 
         Video explicativo
       </i>
     </a><br>
     <i class="bi bi-info-circle"> 
       {{ exercise.processExercise.description }}
-    </i> 
+    </i>
   </p>
 </div>
+<ng-template #classic let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h6 class="modal-title" id="modal-title-default">
+        <div style="text-transform:uppercase; font-weight:bold; font-size: 20px;">
+        {{ exercise.processExercise.nameExercise  }}
+        </div>
+      </h6>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="card-body">
+      <youtube-player 
+        videoId="aKHar4U2Iys" 
+        suggestedQuality="highres"
+        [height]="250" 
+        [width]="450" 
+        [startSeconds]="4"
+        [endSeconds]="8">
+      </youtube-player>
+      <script src="https://www.youtube.com/iframe_api"></script>
+    </div>
+  </div>
+</ng-template>
