@@ -28,7 +28,7 @@ export class ExerciseService {
     var series = ejercicio.series;
     var repetitions = ejercicio.repetitions;
     
-    return this.http.post<any>(this.staticData.getUrlBase()+
+    return this.http.put<any>(this.staticData.getUrlBase()+
                                     "api/editExercise/"+idExercises+"?"+
                                     "series="+series+
                                     "&repetitions="+repetitions, 
