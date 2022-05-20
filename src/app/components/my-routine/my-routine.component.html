@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <main>
   <div class="position-relative">
     <!-- shape Hero -->
@@ -53,7 +54,10 @@
                                       (openDetails)="setOpenDetail(rou, $event)">
                 </app-title-accordion>
                 <div *ngIf="getOpenDetail(rou)">
-                  <mat-tab-group dynamicHeight #tabGroup (selectedTabChange)="tabSelectedRoutine(rou,$event)">
+                  <app-opinion-routine  [routine]="rou"
+                                        [message]="'Ingrese su opinion sobre esta rutina:'">
+                  </app-opinion-routine><br><br>
+                  <mat-tab-group dynamicHeight #tabGroup>
                     <ul *ngFor="let day of daysRoutine(rou)">
                       <mat-tab label="Dia {{day}}"> <br>
                         <div class="row row-grid justify-content-center" >
@@ -125,11 +129,12 @@
                     <a href="javascript:void(0)" class="btn btn-primary mt-4" (click)="enableModification(rou)">
                       <i class="bi bi-pencil-square"></i> Modificar Ejercicios
                     </a>
+                    
                     <!-- Boton borrar rutina 
                     <a href="javascript:void(0)" class="btn btn-warning mt-4" (click)="deleteRoutine(classic2)">
                       Eliminar Rutina
                     </a>-->
-                  </div>
+                </div>
                   <ng-template #classic2 let-c="close" let-d="dismiss">
                     <div class="modal-content bg-gradient-danger">
                       <div class="modal-header">

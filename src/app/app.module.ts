@@ -31,6 +31,8 @@ import { TitleAccordionComponent } from './components/reusableComponent/title-ac
 import { FilterPipe } from './pipes/filter.pipe';
 import { SpinnerComponent } from './components/reusableComponent/spinner/spinner.component'
 import { YouTubePlayerModule } from "@angular/youtube-player";
+import { NgxStarRatingModule } from 'ngx-star-rating';
+import { OpinionRoutineComponent } from './components/reusableComponent/opinion-routine/opinion-routine.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { YouTubePlayerModule } from "@angular/youtube-player";
     ExerciseInformationCardComponent,
     TitleAccordionComponent,
     FilterPipe,
-    SpinnerComponent
+    SpinnerComponent,
+    OpinionRoutineComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,8 @@ import { YouTubePlayerModule } from "@angular/youtube-player";
     MaterialModule,
     CommonModule,
     MatTabsModule,
-    YouTubePlayerModule
+    YouTubePlayerModule,
+    NgxStarRatingModule
   ],
   providers: [RoutineService],
   bootstrap: [AppComponent],

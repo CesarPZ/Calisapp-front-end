@@ -6,7 +6,7 @@ import { StaticDataService } from './static-data.service';
   providedIn: 'root'
 })
 export class RoutineService {
-  
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -46,4 +46,13 @@ export class RoutineService {
                                 "&idUser="+userLogged, 
                                 this.httpOptions);
   }
+
+  setOpinionRoutine(idRoutine: number, opinonPoints: number) {
+    let userLogged = this.staticData.getUserLogged();
+    return this.http.post<any>(this.staticData.getUrlBase()+"api/generateOpinion/?"+
+                                "&routineId="+idRoutine +
+                                "&opinion="+opinonPoints,
+                                this.httpOptions);
+  }
+
 }

@@ -72,7 +72,6 @@ export class RoutineGeneratedComponent implements OnInit {
   }
 
   isVisible(){
-    console.log(this.daySelectedInRoutine);
     return this.nameNewRoutine!= null && 
             this.nameNewRoutine != '' && 
             this.daySelectedInRoutine.length != 0 &&

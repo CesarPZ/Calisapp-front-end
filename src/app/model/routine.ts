@@ -7,4 +7,5 @@ export class Routine {
     level:string;
     exercises:Array<Exercise>;
     daySelected:number;
+    opinion:number;
 }
