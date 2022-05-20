@@ -49,7 +49,7 @@ export class RoutineService {
 
   setOpinionRoutine(idRoutine: number, opinonPoints: number) {
     let userLogged = this.staticData.getUserLogged();
-    return this.http.post<any>(this.staticData.getUrlBase()+"api/generateOpinion/?"+
+    return this.http.put<any>(this.staticData.getUrlBase()+"api/generateOpinion/?"+
                                 "&routineId="+idRoutine +
                                 "&opinion="+opinonPoints,
                                 this.httpOptions);
