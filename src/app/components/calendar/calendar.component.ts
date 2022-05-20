@@ -17,7 +17,11 @@ export class CalendarComponent implements OnInit{
   routinesSelected:Routine[]=[];
   routineIsUpdate:number[]=[];
   routinesOpenDetail:Routine[]=[];
+  namesRoutines:Map<any,any>= new Map();
+  nameRoutineSelected:string = 'Todas';
   dateSelected:string='Rutinas programadas para hoy:';
+  calendarStyle:string = 'calendar-wrapper';
+  routineSelect:Routine;
 
   constructor( private calendarUserService: CalendarUserService) { }
 
@@ -25,25 +29,43 @@ export class CalendarComponent implements OnInit{
   public calendar: IgxCalendarComponent;
 
   public ngOnInit() {
-    let now = new Date();
-    var todayOrSelect = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
     this.calendarUserService.getAllCalendarToUser()
-    .subscribe(data => {
-      this.calendarUser = data;
-      this.calendar.specialDates = [];
-      for(var calendar of data){
+      .subscribe(data => {
+        this.calendarUser = data;
+        this.selectedRoutine(0);
+
+        this.namesRoutines.set(0,'Todas');
+        for(var calendar of data){
+          this.namesRoutines.set(calendar.routine.id,calendar.routine.nameRoutine);
+        }
+      })
+  }
+
+  selectedRoutine(routineId:number){
+    this.calendar.specialDates = [];
+    let routineSelected;
+    let now = new Date();
+    let todayOrSelect = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+    for(var calendar of this.calendarUser){
+      if(routineId == 0 || routineId == calendar.routine.id){
         let range = [
           new Date(calendar.dayRoutine),
           new Date(calendar.dayRoutine)
         ];
         this.calendar.specialDates.push({ 
           type: DateRangeType.Between, dateRange: range });
+        routineSelected = calendar.routine;
       }
-      this.onSelection(todayOrSelect);
-    })
+    }
+    if(routineId == 0){
+      this.routineSelect = null;
+    }else{
+      this.routineSelect = routineSelected;
+    }
+    this.onSelection(todayOrSelect);
   }
 
-  public onSelection(date: Date) {
+  onSelection(date: Date) {
     let now = new Date();
     var todayOrSelect = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
 
@@ -115,5 +137,4 @@ export class CalendarComponent implements OnInit{
     }
     return exerciseDay;
   }
-
 }

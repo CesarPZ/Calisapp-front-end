@@ -21,12 +21,30 @@
               <div class="col-md-8">
                 <div class="card" >
                   <div class="card-header">
-                    <h5 class="title" style="font-size:200%;">Calendario de rutinas:</h5>
+                    <div class="form-title">
+                      <div class="form-field">
+                        <a class="title" style="font-size:200%;">
+                          Calendario de rutinas &nbsp; &nbsp; &nbsp; &nbsp; 
+                        </a>
+                        <a>
+                          <mat-form-field appearance="fill">
+                              <mat-label>Seleccione una rutina</mat-label>
+                              <mat-select (selectionChange)="selectedRoutine($event.value)">
+                                <mat-option *ngFor="let name of namesRoutines | keyvalue" [value]="name.key">{{ name.value }}</mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                        </a>
+                      </div>
+                      <app-opinion-routine  [routine]="routineSelect"
+                                            [message]="'Su opinion sobre esta rutina:'"
+                                            [disabledStar]="true">
+                      </app-opinion-routine>
+                    </div>
                   </div>
                   <div class="card-body">
                     <form>
-                      <article class="sample-column calendar-wrapper">
-                        <igx-calendar #calendar locale="ES" weekstart="1" id="calendar" (selected)="onSelection($event)">
+                      <article class="sample-column  calendar-wrapper" [ngClass]="calendarStyle">
+                        <igx-calendar #calendar locale="ES" weekstart="1" id="calendar" (selected)="onSelection($event) ">
                         </igx-calendar>
                       </article>           
                     </form>

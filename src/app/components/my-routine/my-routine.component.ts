@@ -5,6 +5,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Exercise } from '../../model/exercise';
 import { ExerciseService } from '../../service/exercise.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-my-routine',
@@ -20,7 +21,7 @@ export class MyRoutineComponent implements OnInit {
   routinePermissionToModify:number[]=[];
   routineIsUpdate:number[]=[];
   routinesOpenDetail:number[]=[];
-
+  
   constructor(private serviceRoutine: RoutineService,
               private serviceExercise: ExerciseService,
               private modalService: NgbModal,

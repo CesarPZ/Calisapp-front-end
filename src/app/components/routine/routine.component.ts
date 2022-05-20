@@ -75,7 +75,6 @@ export class RoutineComponent implements OnInit {
   }
 
   validationDayAndNameWeeks(routine:Routine){
-    console.log(this.daySelectedInRoutine.get(routine.id) );
     return this.validationValueWeeks(routine) && 
             this.daySelectedInRoutine.get(routine.id) != null && 
             this.daySelectedInRoutine.get(routine.id).length != 0;
@@ -102,10 +101,7 @@ export class RoutineComponent implements OnInit {
   }
 
   tabSelectedRoutine(rutina:Routine, dia){
-    console.log("dia");
-    console.log(dia);
     this.tabSelected.set(rutina.id, dia);
-    console.log(this.tabSelected);
   }
 
   initRoutine(rutina:Routine, content){
