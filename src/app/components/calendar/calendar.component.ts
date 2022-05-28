@@ -22,6 +22,8 @@ export class CalendarComponent implements OnInit{
   dateSelected:string='Rutinas programadas para hoy:';
   calendarStyle:string = 'calendar-wrapper';
   routineSelect:Routine;
+  stateSelected:string = 'Todas';
+  daySelected:Date;
 
   constructor( private calendarUserService: CalendarUserService) { }
 
@@ -42,6 +44,7 @@ export class CalendarComponent implements OnInit{
   }
 
   selectedRoutine(routineId:number){
+    this.stateSelected = 'Todas';
     this.calendar.specialDates = [];
     let routineSelected;
     let now = new Date();
@@ -66,6 +69,7 @@ export class CalendarComponent implements OnInit{
   }
 
   onSelection(date: Date) {
+    this.daySelected= date;
     let now = new Date();
     var todayOrSelect = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
 
@@ -80,11 +84,14 @@ export class CalendarComponent implements OnInit{
 
     this.routinesSelected = [];
     for(var calendar of this.calendarUser){
-      if(new Date(calendar.dayRoutine).getTime() == date.getTime()){
+      if(new Date(calendar.dayRoutine).getTime() == date.getTime() && 
+        (this.stateSelected == 'Todas' || this.stateSelected == calendar.estadoDeAnimo) ){
         let routine = new Routine();
         routine.exercises = calendar.exercises;
         routine.nameRoutine = calendar.routineName;
         routine.daySelected = calendar.exerciseNumberDayRoutine;
+        routine.idCalendar = calendar.idCalendarUser;
+        routine.estadoDeAnimo = calendar.estadoDeAnimo;
         this.routinesSelected.push(routine);
       }
     }
@@ -136,5 +143,46 @@ export class CalendarComponent implements OnInit{
       }
     }
     return exerciseDay;
+  }
+
+  estadoDeAnimo(estado, routinesSelected){
+    let now = new Date();
+    let todayOrSelect = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+    if(this.daySelected == todayOrSelect){
+      this.calendarUserService.setOpinionDay(estado.opinion, routinesSelected.idCalendar)
+      .subscribe(data => {})
+    }
+    
+  }
+
+  calculateEstadoDeAnimoToday(rou: Routine){
+    return rou.estadoDeAnimo;
+  }
+
+  filterRoutinesEstado(estadoDeAnimo){
+    let estado = estadoDeAnimo.opinion;
+    this.calendar.specialDates = [];
+    let now = new Date();
+    let todayOrSelect = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+    for(var calendar of this.calendarUser){
+      console.log(calendar.estadoDeAnimo);
+      console.log(estado);
+      if(calendar.estadoDeAnimo == estado ||  estado == 'Todas'){
+        let range = [
+          new Date(calendar.dayRoutine),
+          new Date(calendar.dayRoutine)
+        ];
+        this.calendar.specialDates.push({ 
+          type: DateRangeType.Between, dateRange: range });
+      }
+    }
+    this.stateSelected = estado;
+    this.onSelection(todayOrSelect);
+  }
+
+  haveviewEstado(){
+    let now = new Date();
+    let todayOrSelect = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+    return todayOrSelect >= this.daySelected;
   }
 }

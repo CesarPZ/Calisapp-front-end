@@ -21,7 +21,9 @@ export class RoutineGeneratedComponent implements OnInit {
   weeksRoutine:number;
   daySelectedInRoutine:string[] = [];
   filterpost = "";
-  
+  diasEjercicios:number[] = [];
+  dayExercise: Map<any,any>= new Map();
+
   constructor(private router:Router, 
               private serviceExercise: ExerciseService,
               private serviceRoutine: RoutineService,
@@ -38,6 +40,14 @@ export class RoutineGeneratedComponent implements OnInit {
     this.weekdays.set(6, "Sabado");
     this.weekdays.set(7, "Domingo");
     
+    this.diasEjercicios.push(1);
+    this.diasEjercicios.push(2);
+    this.diasEjercicios.push(3);
+    this.diasEjercicios.push(4);
+    this.diasEjercicios.push(5);
+    this.diasEjercicios.push(6);
+    this.diasEjercicios.push(7);
+
     this.serviceExercise.getAllExercise()
       .subscribe(data => {
         this.allExercise = data;
@@ -49,6 +59,10 @@ export class RoutineGeneratedComponent implements OnInit {
     return Array.from(map.values());
   }
 
+  selectDayExercise(selected, exercise:Exercise){
+    this.dayExercise.set(exercise.id,selected.value);
+  }
+  
   addExerciseToRoutine(ejercicio:Exercise){
     this.exerciseSelected.push(ejercicio);
   }
@@ -93,8 +107,8 @@ export class RoutineGeneratedComponent implements OnInit {
       idExercises.push(e.id);
     }
 
-    let resp = this.serviceRoutine.addRoutine(this.nameNewRoutine, idExercises, 
-                                  dayNumberSelectedInRoutine, this.weeksRoutine, false);
+    let resp = this.serviceRoutine.createRouitneFromWithExercise(this.nameNewRoutine, 
+                              idExercises,dayNumberSelectedInRoutine, this.weeksRoutine, this.dayExercise);
     resp.subscribe((response) => {
       console.log(response);
       this.open(content, 'Notification', '');
@@ -102,6 +116,7 @@ export class RoutineGeneratedComponent implements OnInit {
       this.spinner.hide();
     });
   }
+
   getValuesdaySelectedInRoutine(){
     return (this.daySelectedInRoutine != null) ? 
             this.daySelectedInRoutine:

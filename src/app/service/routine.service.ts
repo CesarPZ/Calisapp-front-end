@@ -22,7 +22,7 @@ export class RoutineService {
     return this.http.get<any>(this.staticData.getUrlBase()+"api/routine/"+level);
   }
 
-  addRoutine(nameRoutine:string, exercises:number[], daysRoutine:number[], weeksRoutine:number, routineByLevel:Boolean) {
+  addRoutine(nameRoutine:string, exercises:number[], daysRoutine:number[], weeksRoutine:number) {
     let userLogged = this.staticData.getUserLogged();
 
     return this.http.post<any>(this.staticData.getUrlBase()+"api/createRoutine"+"?"+
@@ -30,10 +30,26 @@ export class RoutineService {
                                 "&nameRoutine="+nameRoutine+
                                 "&excersices="+exercises+
                                 "&daysRoutine="+daysRoutine+
-                                "&weeksRoutine="+weeksRoutine+
-                                "&routineByLevel="+routineByLevel, 
+                                "&weeksRoutine="+weeksRoutine, 
                                 this.httpOptions);
   }
+
+  createRouitneFromWithExercise(nameNewRoutine: string, idExercises: number[], dayNumberSelectedInRoutine: number[], weeksRoutine: number, dayExercise: Map<any,any>) {
+    let userLogged = this.staticData.getUserLogged();
+    let httpOptions2 = {};
+    dayExercise.forEach((val: string, key: string) => {
+      httpOptions2[key] = val;
+    });
+
+    return this.http.post<any>(this.staticData.getUrlBase()+"api/createRoutineExercise"+"?"+
+                                "userId="+userLogged+
+                                "&nameRoutine="+nameNewRoutine+
+                                "&excersices="+idExercises+
+                                "&daysRoutine="+dayNumberSelectedInRoutine+
+                                "&weeksRoutine="+weeksRoutine, 
+                                httpOptions2);
+  }
+
 
   getARoutineOfUser() {
     let userLogged = this.staticData.getUserLogged();

@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class StaticDataService {
 
-  url='https://calisapp-backend.herokuapp.com/';
-  //url='http://localhost:8080/';
+  //url='https://calisapp-backend.herokuapp.com/';
+  url='http://localhost:8080/';
   userLogged = localStorage.getItem("id");
 
   constructor() { }
