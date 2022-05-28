@@ -33,6 +33,7 @@ import { SpinnerComponent } from './components/reusableComponent/spinner/spinner
 import { YouTubePlayerModule } from "@angular/youtube-player";
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { OpinionRoutineComponent } from './components/reusableComponent/opinion-routine/opinion-routine.component';
+import { OpinionDayComponent } from './components/reusableComponent/opinion-day/opinion-day.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { OpinionRoutineComponent } from './components/reusableComponent/opinion-
     TitleAccordionComponent,
     FilterPipe,
     SpinnerComponent,
-    OpinionRoutineComponent
+    OpinionRoutineComponent,
+    OpinionDayComponent
   ],
   imports: [
     BrowserModule,

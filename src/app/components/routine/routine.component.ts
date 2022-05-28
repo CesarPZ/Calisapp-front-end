@@ -118,7 +118,7 @@ export class RoutineComponent implements OnInit {
     for(var e of rutina.exercises){
       idExercises.push(e.id);
     }
-    let resp = this.service.addRoutine(rutina.nameRoutine, idExercises, daysRoutine, weeksRoutine, true);
+    let resp = this.service.addRoutine(rutina.nameRoutine, idExercises, daysRoutine, weeksRoutine);
     resp.subscribe((response) => {
       this.routinesForLevel = [];
       this.spinner.hide();

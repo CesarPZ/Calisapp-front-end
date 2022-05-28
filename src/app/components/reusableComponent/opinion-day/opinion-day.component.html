@@ -1,0 +1,34 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<section>
+  <div class="button-row">
+    <div class="flex-container">
+      <div class="button-container">
+        <button mat-fab color="primary" title='Bien' (click)="estadoDeAnimo('Bien')" [disabled]="estadoSeleccionado('Bien')">
+          <mat-icon>sentiment_very_satisfied</mat-icon>
+        </button>
+      </div>
+      <div class="button-container">
+        <button mat-fab color="accent" title='Regular' (click)="estadoDeAnimo('Regular')" [disabled]="estadoSeleccionado('Regular')">
+          <mat-icon>sentiment_dissatisfied</mat-icon>
+        </button>
+      </div>
+      <div class="button-container">
+        <button mat-fab color="warn" title='Mal' (click)="estadoDeAnimo('Mal')" [disabled]="estadoSeleccionado('Mal')">
+          <mat-icon>sentiment_very_dissatisfied</mat-icon>
+        </button>
+      </div>
+      <div class="button-container">
+        <button mat-fab color="" title="No realizaste la rutina" (click)="estadoDeAnimo('No realizada')" [disabled]="estadoSeleccionado('No realizada')">
+          <mat-icon>highlight_off</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="!disable">
+        <div class="button-container">
+          <button mat-fab title='Ver todos' (click)="estadoDeAnimo('Todas')" [disabled]="estadoSeleccionado('Todas')" class="color-black">
+            <mat-icon>filter_none</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -8,4 +8,6 @@ export class Routine {
     exercises:Array<Exercise>;
     daySelected:number;
     opinion:number;
+    idCalendar:number;
+    estadoDeAnimo:string;
 }

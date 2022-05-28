@@ -18,4 +18,12 @@ export class CalendarUserService {
     let userLogged = this.staticData.getUserLogged();
     return this.http.get<any>(this.staticData.getUrlBase()+"api/calendarUser/"+userLogged);
   }
+
+  setOpinionDay(estado: string, idCalendar: any) {
+    let userLogged = this.staticData.getUserLogged();
+    return this.http.put<any>(this.staticData.getUrlBase()+
+                              "api/addOpinion/"+idCalendar+"?"+
+                              "opinon="+estado,
+                              this.httpOptions);
+  }
 }

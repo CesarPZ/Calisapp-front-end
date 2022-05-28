@@ -93,28 +93,36 @@
         </ng-template>
         <div class="row row-grid justify-content-center">
           <ul class="code-editor-options-menu" *ngFor="let dat of allExercise | filter: filterpost">
-            <div class="card border-light mb-10" [ngClass]="exerciseIsSelected(dat)">
+            <div class="card border-light mb-10" [ngClass]="exerciseIsSelected(dat)" style="height:20rem;">
               <app-exercise-information-card [exercise]="dat">
               </app-exercise-information-card>
-              <div class="card-footer bg-transparent border-0">
-                <div *ngIf="isSelected(dat)">
-                  <a href="javascript:void(0)" (click)="addExerciseToRoutine(dat)" class="btn btn-link btn-block">
-                    <div style="text-align: center; color:rgb(2, 0, 134);font-weight: bolder; font-size:18px;">
-                      <i>
-                        + Agregar
-                      </i>
-                    </div>
-                  </a>
-                </div>
-                <div *ngIf="!isSelected(dat)">
-                  <a href="javascript:void(0)" (click)="removeExerciseToRoutine(dat)" class="btn btn-link btn-block">
-                    <div style="text-align: center; color:rgb(53, 18, 18);font-weight: bolder; font-size:18px;">
-                      <i>
-                        - Quitar
-                      </i>
-                    </div>
-                  </a>
-                </div>
+                <mat-form-field appearance="outline">
+                  <mat-label style="color:rgb(255, 255, 255) !important;">
+                    Seleccione dia de ejercicio
+                  </mat-label>
+                  <mat-select (selectionChange)="selectDayExercise($event, dat)"  name="selectedDays">
+                    <mat-option *ngFor="let dia of diasEjercicios" [value]="dia"> Dia {{ dia }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="card-footer bg-transparent border-0" style="padding :0; margin :0;">
+              <div *ngIf="isSelected(dat)">
+                <a href="javascript:void(0)" (click)="addExerciseToRoutine(dat)" class="btn btn-link btn-block">
+                  <div style="text-align: center; color:rgb(2, 0, 134);font-weight: bolder; font-size:18px;">
+                    <i>
+                      + Agregar
+                    </i>
+                  </div>
+                </a>
+              </div>
+              <div *ngIf="!isSelected(dat)">
+                <a href="javascript:void(0)" (click)="removeExerciseToRoutine(dat)" class="btn btn-link btn-block">
+                  <div style="text-align: center; color:rgb(53, 18, 18);font-weight: bolder; font-size:18px;">
+                    <i>
+                      - Quitar
+                    </i>
+                  </div>
+                </a>
               </div>
             </div>
           </ul>

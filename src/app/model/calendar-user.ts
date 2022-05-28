@@ -7,4 +7,6 @@ export class CalendarUser {
     exerciseNumberDayRoutine:number;
     exercises:Exercise[];
     routine:Routine;
+    idCalendarUser:number;
+    estadoDeAnimo:string;
 }

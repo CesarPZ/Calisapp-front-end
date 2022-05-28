@@ -35,13 +35,15 @@
                           </mat-form-field>
                         </a>
                       </div>
-                      <app-opinion-routine  [routine]="routineSelect"
-                                            [message]="'Su opinion sobre esta rutina:'"
-                                            [disabledStar]="true">
-                      </app-opinion-routine>
                     </div>
                   </div>
                   <div class="card-body">
+                    Filtra segun tu opinion:
+                    <div class="opinion-day">
+                      <app-opinion-day [disable]="false"
+                                        (opinionSelected)="filterRoutinesEstado($event)">
+                      </app-opinion-day>
+                    </div>
                     <form>
                       <article class="sample-column  calendar-wrapper" [ngClass]="calendarStyle">
                         <igx-calendar #calendar locale="ES" weekstart="1" id="calendar" (selected)="onSelection($event) ">
@@ -49,6 +51,10 @@
                       </article>           
                     </form>
                   </div>
+                  <app-opinion-routine  [routine]="routineSelect"
+                                        [message]="'Su opinion sobre esta rutina:'"
+                                        [disabledStar]="true">
+                  </app-opinion-routine>
                 </div>
               </div>
             </div>
@@ -56,7 +62,7 @@
         </div><br>
       </div>
       <div *ngIf="routinesSelected.length >0">
-        <h2 class="display-3 mb-0"  style="color:rgb(255, 255, 255); font-size:20px; text-align:center; font-weight: bolder;">
+        <h2 class="display-3 mb-0" style="color:rgb(255, 255, 255); font-size:20px; text-align:center; font-weight: bolder;">
           {{ dateSelected }}
         </h2>
       </div>
@@ -90,6 +96,12 @@
                     </mat-tab>
                   </ul>
                 </mat-tab-group>
+                <div class="opinion-day" *ngIf="haveviewEstado()">
+                  Como te fue con la rutina?
+                  <app-opinion-day [opinonToday]="calculateEstadoDeAnimoToday(rou)" 
+                                  (opinionSelected)="estadoDeAnimo($event, rou)">
+                  </app-opinion-day>
+                </div>
               </div>
             </div>
           </div>
