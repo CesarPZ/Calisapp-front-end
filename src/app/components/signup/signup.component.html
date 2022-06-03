@@ -48,21 +48,21 @@
               <hr>
               <form [formGroup]="loginForm.baseForm" class="form">
                 <mat-form-field class="full-width-input">
-                  <input class="form-control" text="text" formControlName="mail" matInput placeholder="Email"
+                  <input class="form-control" text="text" name="mail" formControlName="mail" matInput placeholder="Email"
                     required />
                   <mat-error *ngIf="checkField('mail')">
                     {{ loginForm.errorMessageMail }}
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field class="full-width-input">
-                  <input class="form-control" text="text" formControlName="name" matInput placeholder="Nombre"
+                  <input class="form-control" text="text" name="name" formControlName="name" matInput placeholder="Nombre"
                     required />
                   <mat-error *ngIf="checkField('name')">
                     {{ loginForm.errorMessageName }}
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field class="full-width-input">
-                  <input class="form-control" [type]="hide ? 'password' : 'text'" formControlName="password" matInput
+                  <input class="form-control" [type]="hide ? 'password' : 'text'" name="password" formControlName="password" matInput
                     placeholder="Contraseña" required />
                   <button mat-icon-button matSuffix (click)="hide = !hide">
                     <mat-icon>

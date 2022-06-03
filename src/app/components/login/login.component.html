@@ -56,14 +56,14 @@
               <hr>
               <form [formGroup]="loginForm.baseForm" class="form">
                 <mat-form-field class="full-width-input">
-                  <input class="form-control" text="text" formControlName="mail" matInput placeholder="Email"
+                  <input class="form-control" text="text" name="mail" formControlName="mail" matInput placeholder="Email"
                     required />
                   <mat-error *ngIf="checkField('mail')">
                     {{ loginForm.errorMessageMail }}
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field class="full-width-input">
-                  <input class="form-control" [type]="hide ? 'password' : 'text'" formControlName="password" matInput
+                  <input class="form-control" [type]="hide ? 'password' : 'text'" name="password" formControlName="password" matInput
                     placeholder="Contraseña" required />
                   <button mat-icon-button matSuffix (click)="hide = !hide">
                     <mat-icon>
@@ -83,7 +83,7 @@
                 </div>
                 -->
                 <div class="text-center">
-                  <button [disabled]="loginForm.baseForm.invalid" type="button"
+                  <button [disabled]="loginForm.baseForm.invalid" type="button" name="submitLogin"
                     class="btn btn-primary my-4 form-control" (click)="onLogin()">Iniciar sesión</button>
                 </div>
               </form>

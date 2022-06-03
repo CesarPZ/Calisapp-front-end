@@ -126,7 +126,7 @@
               </div>
             </div> <br>
             <div style="text-transform:uppercase; height:5rem; text-align:center;">
-              <button type="button" class="btn btn-primary" href="javascript:void(0)" (click)="initRoutine(rou, classic2)" [disabled]="!validationDayAndNameWeeks(rou)">
+              <button type="button" id="startRoutine" class="btn btn-primary" href="javascript:void(0)" (click)="initRoutine(rou, classic2)" [disabled]="!validationDayAndNameWeeks(rou)">
                 Iniciar Rutina
               </button>
             </div>
@@ -141,7 +141,7 @@
                 <div class="modal-body">
                   <div class="py-3 text-center">
                     <i class="ni ni-like-2 ni-3x"></i>
-                    <h4 class="heading mt-4">Su rutina se genero correctamente!</h4>
+                    <h4 class="heading mt-4">Su rutina se generó correctamente!</h4>
                     <p>Usted a iniciado la rutina: {{rou.nameRoutine}}, puede acceder a ella desde Ver mis rutinas.</p>
                   </div>
                 </div>
