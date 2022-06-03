@@ -11,27 +11,27 @@
       <ul class="navbar-nav align-items-lg-center ml-lg-auto"></ul>
       <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
         <li class="nav-item dropdown" *ngIf="userLogued()">
-          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+          <a class="nav-link no-caret" id="activityUser" data-toggle="dropdown" role="button">
             <i class="ni ni-collection d-lg-none"></i>
             <span class="nav-link-inner--text">Actividades Usuario
             </span>
           </a>
           <div class="dropdown-menu">
-            <a [routerLink]="['/myRoutine']" class="dropdown-item">Mis Rutinas</a>
-            <a [routerLink]="['/routine']" class="dropdown-item">Generar rutina segun tu nivel</a>
-            <a [routerLink]="['/routineGenerated']" class="dropdown-item">Generar rutina personalizada</a>
-            <a [routerLink]="['/user-profile']" class="dropdown-item">Perfil</a>
-            <a [routerLink]="['/calendar']" class="dropdown-item">Calendario</a>
+            <a [routerLink]="['/myRoutine']" id="myRoutine" class="dropdown-item">Mis Rutinas</a>
+            <a [routerLink]="['/routine']" id="routineByLevel" class="dropdown-item">Generar rutina segun tu nivel</a>
+            <a [routerLink]="['/routineGenerated']" id="routinePersonalized" class="dropdown-item">Generar rutina personalizada</a>
+            <a [routerLink]="['/user-profile']" id="profile" class="dropdown-item">Perfil</a>
+            <a [routerLink]="['/calendar']" id="calendar" class="dropdown-item">Calendario</a>
           </div>
         </li>
         <li class="nav-item dropdown" *ngIf="!userLogued()">
-          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+          <a class="nav-link no-caret" id="getInTo" data-toggle="dropdown" role="button">
             <i class="ni ni-ui-04 d-lg-none"></i>
             <span class="nav-link-inner--text">Ingresar</span>
           </a>
           <div class="dropdown-menu-xl dropdown-menu">
             <div class="dropdown-menu-inner">
-              <a routerLinkActive="active" [routerLink]="['/login']" class="media d-flex align-items-center">
+              <a routerLinkActive="active" [routerLink]="['/login']" id="loginLink" class="media d-flex align-items-center">
                 <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
                   <i class="ni ni-lock-circle-open"></i>
                 </div>
@@ -40,7 +40,7 @@
                   
                 </div>
               </a>
-              <a routerLinkActive="active" [routerLink]="['/register']" class="media d-flex align-items-center">
+              <a routerLinkActive="active" [routerLink]="['/register']" id="registerLink" class="media d-flex align-items-center">
                 <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
                   <i class="ni ni-single-02"></i>
                 </div>
@@ -52,13 +52,13 @@
           </div>
         </li>
         <li class="nav-item dropdown" *ngIf="userLogued()">
-          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+          <a class="nav-link no-caret" data-toggle="dropdown" id="logout" role="button">
             <i class="ni ni-ui-04 d-lg-none"></i>
             <span class="nav-link-inner--text">Salir</span>
           </a>
           <div class="dropdown-menu-xl dropdown-menu">
             <div class="dropdown-menu-inner">
-              <a routerLinkActive="active" [routerLink]="['/login']" class="media d-flex align-items-center"
+              <a routerLinkActive="active" [routerLink]="['/login']" id="outButton" class="media d-flex align-items-center"
                 (click)="logout()">
                 <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
                   <i class="ni ni-lock-circle-open"></i>
