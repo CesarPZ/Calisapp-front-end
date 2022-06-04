@@ -165,8 +165,6 @@ export class CalendarComponent implements OnInit{
     let now = new Date();
     let todayOrSelect = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
     for(var calendar of this.calendarUser){
-      console.log(calendar.estadoDeAnimo);
-      console.log(estado);
       if(calendar.estadoDeAnimo == estado ||  estado == 'Todas'){
         let range = [
           new Date(calendar.dayRoutine),
