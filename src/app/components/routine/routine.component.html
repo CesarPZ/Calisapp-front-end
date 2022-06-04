@@ -88,7 +88,7 @@
           <div *ngIf="getOpenDetail(rou)">
             <mat-tab-group dynamicHeight #tabGroup (selectedTabChange)="tabSelectedRoutine(rou,$event)">
               <ul *ngFor="let day of daysRoutine(rou)">
-                <mat-tab label="Dia {{day}}"> <br>
+                <mat-tab label="Día {{day}}"> <br>
                   <div class="row row-grid justify-content-center">
                     <ul class="code-editor-options-menu" *ngFor="let dat of exercisesRou(rou,day)">
                       <div class="card border-light mb-10" [ngClass]="'card-transparent'">
