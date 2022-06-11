@@ -34,6 +34,7 @@ import { YouTubePlayerModule } from "@angular/youtube-player";
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { OpinionRoutineComponent } from './components/reusableComponent/opinion-routine/opinion-routine.component';
 import { OpinionDayComponent } from './components/reusableComponent/opinion-day/opinion-day.component';
+import { RoutineTodayComponent } from './components/routine-today/routine-today.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { OpinionDayComponent } from './components/reusableComponent/opinion-day/
     FilterPipe,
     SpinnerComponent,
     OpinionRoutineComponent,
-    OpinionDayComponent
+    OpinionDayComponent,
+    RoutineTodayComponent
   ],
   imports: [
     BrowserModule,
