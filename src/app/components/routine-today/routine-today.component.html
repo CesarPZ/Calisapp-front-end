@@ -1,0 +1,36 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<main>
+  <div class="position-relative">
+    <section class="section section-lg section-hero section-shaped">
+      <div class="shape shape-style-1 shape-primary"></div>
+      <ul class="code-editor-options-menu" *ngFor="let rou of routinesToday">
+        <div class="container container rounded">
+          <div [ngClass]="'content-transparent'">
+            <div class="content">
+              <app-title-accordion  [routine]="rou"
+                                    (openDetails)="setOpenDetail(rou, $event)">
+              </app-title-accordion>
+              <div *ngIf="getOpenDetail(rou)">
+                <mat-tab-group dynamicHeight #tabGroup (selectedTabChange)="tabSelectedRoutine(rou,$event)">
+                  <ul *ngFor="let day of daysRoutine(rou)">
+                    <mat-tab label="Dia {{day}}"> <br>
+                      <div class="row justify-content-center" >
+                        <ul class="code-editor-options-menu" *ngFor="let dat of exercisesRou(rou,day)">
+                          <div class="card border-light mb-10" [ngClass]="'card-transparent'">
+                            <app-exercise-information-card [exercise]="dat">
+                            </app-exercise-information-card>
+                          </div>
+                          <br>
+                        </ul>
+                      </div>
+                    </mat-tab>
+                  </ul>
+                </mat-tab-group>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ul>
+    </section>
+  </div>
+</main>

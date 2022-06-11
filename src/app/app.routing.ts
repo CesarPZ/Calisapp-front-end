@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { RoutineGeneratedComponent } from './components/routine-generated/routine-generated.component';
 import { MyRoutineComponent } from './components/my-routine/my-routine.component';
+import { RoutineTodayComponent } from './components/routine-today/routine-today.component';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
@@ -21,6 +22,7 @@ const routes: Routes =[
     { path: 'myRoutine',        component: MyRoutineComponent },
     { path: 'login',            component: LoginComponent },
     { path: 'calendar',         component: CalendarComponent },
+    { path: 'myRoutineToday',         component: RoutineTodayComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
