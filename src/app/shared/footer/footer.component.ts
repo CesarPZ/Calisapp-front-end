@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../service/user.service';
+import { StaticDataService } from 'src/app/service/static-data.service';
 
 @Component({
     selector: 'app-footer',
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
 export class FooterComponent implements OnInit {
     test : Date = new Date();
 
-    constructor(private router: Router ) {}
+    constructor(private router: Router, private user: UserService, private staticData: StaticDataService ) {}
 
     ngOnInit() {
 
@@ -17,4 +19,8 @@ export class FooterComponent implements OnInit {
     getPath(){
       return this.router.url;
     }
+
+    userLogued(){
+      return this.staticData.getUserLogged();   
+     }
 }

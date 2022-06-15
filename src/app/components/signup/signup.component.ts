@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit, OnDestroy {
           if (response) {
             localStorage.setItem("id", response.id.toString());
             this.service.show();
-            this.router.navigate(['home']);
+            this.router.navigate(['welcome']);
           }
         },
         (error: HttpErrorResponse) => {
