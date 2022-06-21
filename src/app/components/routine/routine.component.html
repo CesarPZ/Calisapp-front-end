@@ -1,9 +1,4 @@
 <main>
-  <!--
-  <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
-      <p style="font-size: 20px; color: white">Loading...</p>
-  </ngx-spinner>
-  -->
   <div class="position-relative">
     <app-spinner></app-spinner>
     <section class="section section-lg section-shaped pb-250">
@@ -18,9 +13,9 @@
         <span></span>
         <span></span>
       </div>
-      <div class="col-sm-9">
-        <h2 class="display-3 mb-0" style="color:rgb(255, 255, 255); font-size:25px; text-align:center; font-weight: bolder;">
-          Elige tu nivel, para ver las diferentes rutinas:
+      <div class="col-sm-12">
+        <h2 class="title display-3 mb-0">
+          Elige tu nivel, para ver las diferentes rutinas
         </h2>
       </div>
       <!-- SVG separator -->
@@ -31,7 +26,7 @@
       </div>
     </section>
   </div>
-  <section class="section section-lg pt-lg-0 mt--200">
+  <section class="section pt-lg-0 mt--200">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-12">
@@ -41,10 +36,11 @@
                               [description]="'Para personas que inician este sistema de 
                                 entrenamiento. Rutinas con ejercicios simples donde trabajaras 
                                 tus músculos principales.'"
-                              [icon]="'ni ni-user-run'"
+                              [icon]="'bi bi-award-fill'"  
                               [colorCard]="'primary'"
                               [level]="'1'"
-                              (levelSelected)="getRoutinesWithLevel('1','Rutinas de Nivel Principiante:')">
+                              (levelSelected)="getRoutinesWithLevel('1','Rutinas de Nivel Principiante:')"
+                              [colorBackground]="'beginner'">
               </app-level-card>
             </div>
             <div class="col-lg-4">
@@ -52,10 +48,11 @@
                               [description]="'Para personas con una experiencia en 
                                 entrenamiento de calistenia. Debes tener una base de fuerza 
                                 y control de peso corporal para este nivel.'"
-                              [icon]="'ni ni-diamond'"
+                              [icon]="'bi bi-trophy-fill'"
                               [colorCard]="'success'"
                               [level]="'2'"
-                              (levelSelected)="getRoutinesWithLevel('2','Rutinas de Nivel Intermedio:')">
+                              (levelSelected)="getRoutinesWithLevel('2','Rutinas de Nivel Intermedio:')"
+                              [colorBackground]="'intermediate'">
               </app-level-card>
             </div>
             <div class="col-lg-4">
@@ -63,10 +60,11 @@
                               [description]="'Rutinas con ejercicios complejos, donde 
                                 potenciaras tus grupos musculares. Para personas con gran 
                                 experiencia en calistenia, fuerza y control corporal.'"
-                              [icon]="'bi bi-award-fill'"
+                              [icon]="'ni ni-diamond'"
                               [colorCard]="'warning'"
                               [level]="'3'"
-                              (levelSelected)="getRoutinesWithLevel('3','Rutinas de Nivel Avanzado:')">
+                              (levelSelected)="getRoutinesWithLevel('3','Rutinas de Nivel Avanzado:')"
+                              [colorBackground]="'advanced'">
               </app-level-card>
             </div>
           </div>
@@ -75,10 +73,10 @@
     </div>
   </section>
   <section class="wrapper">
-    <div style="text-transform:uppercase; height:3.5rem; text-align: center; color:rgb(0, 4, 255);font-weight: bolder; font-size:30px;">
+    <div class="levelRoutines">
       {{levelRoutines}}
     </div>
-    <ul class="code-editor-options-menu" *ngFor="let rou of routinesForLevel">
+    <ul class="code-editor-options-menu accordion-padding" *ngFor="let rou of routinesForLevel">
       <div class="container container rounded">
         <div [ngClass]="'content-transparent-avanzado'"> <br>
           <app-title-accordion  [routine]="rou"
@@ -89,7 +87,7 @@
             <mat-tab-group dynamicHeight #tabGroup (selectedTabChange)="tabSelectedRoutine(rou,$event)">
               <ul *ngFor="let day of daysRoutine(rou)">
                 <mat-tab label="Día {{day}}"> <br>
-                  <div class="row row-grid justify-content-center">
+                  <div class="col-lg-12 row row-grid justify-content-center">
                     <ul class="code-editor-options-menu" *ngFor="let dat of exercisesRou(rou,day)">
                       <div class="card border-light mb-10" [ngClass]="'card-transparent'">
                         <div class="card-content">
@@ -104,28 +102,32 @@
               </ul>
             </mat-tab-group>
             <div class="row">
-              <div class="col" style="text-align:center">
+              <div class="col">
                 <div ngbDropdown class="d-inline-block">
-                  <h2 class="display-3 " style="color:rgb(9, 0, 104); font-size:15px; text-align:center;">
-                    Ingrese la cantidad de semanas que quiere realizar la rutina:
-                    <div class="form-group has-success mt-2" *ngIf="validationValueWeeks(rou)">
-                      <input type="number" id="validationValueWeeks" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control" />
+                  <h2 class="display-3 number-weeks">
+                    <div class="col-lg-12 form-group">
+                      Ingrese la cantidad de semanas que quiere realizar la rutina:
+                      <div class="has-success mt-2" *ngIf="validationValueWeeks(rou)">
+                        <input type="number" id="validationValueWeeks" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control" />
+                      </div>
+                      <div class="has-danger"  *ngIf="!validationValueWeeks(rou)">
+                        <input type="number" placeholder="Ingrese la cantidad de semanas entre 1 y 20" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control">
+                      </div>
                     </div>
-                    <div class="form-group has-danger"  *ngIf="!validationValueWeeks(rou)">
-                      <input type="number"  placeholder="Ingrese la cantidad de semanas entre 1 y 20" [ngModel]="weeksRoutine.get(rou.id)" (change)="existValueWeeksRoutine($event, rou)" name="weeksRoutine" class="form-control">
+                    <div class="col-lg-12 form-group">
+                      Seleccione los días de la semana que quiere realizar la rutina: 
+                      <mat-form-field appearance="outline">
+                        <mat-label>Días seleccionados</mat-label>
+                        <mat-select [(ngModel)]="selectedDays" (ngModelChange)="selectValue(selectedDays, rou)" name="selectedDays" multiple>
+                          <mat-option *ngFor="let dia of getValues(weekdays)" [value]="dia" >{{dia}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
                     </div>
-                    Seleccione el día de la semana que quiere realizar esta rutina: 
-                    <mat-form-field appearance="outline">
-                      <mat-label>Días seleccionados</mat-label>
-                      <mat-select [(ngModel)]="selectedDays" (ngModelChange)="selectValue(selectedDays, rou)" name="selectedDays" multiple>
-                        <mat-option *ngFor="let dia of getValues(weekdays)" [value]="dia" >{{dia}}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
                   </h2>
                 </div>
               </div>
-            </div> <br>
-            <div style="text-transform:uppercase; height:5rem; text-align:center;">
+            </div> 
+            <div class="startRoutine-button">
               <button type="button" id="startRoutine" class="btn btn-primary" href="javascript:void(0)" (click)="initRoutine(rou, classic2)" [disabled]="!validationDayAndNameWeeks(rou)">
                 Iniciar Rutina
               </button>
@@ -139,15 +141,15 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <div class="py-3 text-center">
+                  <div class="text-center">
                     <i class="ni ni-like-2 ni-3x"></i>
-                    <h4 class="heading mt-4">Su rutina se generó correctamente!</h4>
+                    <h2 class="heading mt-4">Su rutina se generó correctamente!</h2>
                     <p>Usted a iniciado la rutina: {{rou.nameRoutine}}, puede acceder a ella desde Ver mis rutinas.</p>
                   </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-white" href="javascript:void(0)" (click)="c('Close click'); navigateMyRoutine()">Ver mis rutinas</button>
-                  <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" (click)="c('Close click')">Cerrar</button>
+                  <button type="button" class="btn ml-auto" data-dismiss="modal" (click)="c('Close click')">Cerrar</button>
                 </div>
               </div>
             </ng-template>
@@ -156,5 +158,4 @@
       </div>
     </ul>
   </section>
-  <br><br><br><br><br><br><br><br><br>
 </main>

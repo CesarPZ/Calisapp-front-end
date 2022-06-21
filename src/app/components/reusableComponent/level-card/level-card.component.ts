@@ -7,12 +7,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class LevelCardComponent implements OnInit {
 
-  @Input() nivelName:   string  | undefined;
-  @Input() description: string  | undefined;
-  @Input() icon:        string  | undefined;
-  @Input() colorCard:   string  | undefined;
-  @Input() level:       string  | undefined;
-
+  @Input() nivelName:       string  | undefined;
+  @Input() description:     string  | undefined;
+  @Input() icon:            string  | undefined;
+  @Input() colorCard:       string  | undefined;
+  @Input() level:           string  | undefined;
+  @Input() colorBackground: string  | undefined;
   @Output() levelSelected = new EventEmitter();
   
   constructor() { }

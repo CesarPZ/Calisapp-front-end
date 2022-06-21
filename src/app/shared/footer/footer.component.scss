@@ -1,6 +1,9 @@
 footer {
     background-color: #413b3b !important;
     color: #fff;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .container {
@@ -11,13 +14,11 @@ footer {
 }
 
 ul {
-    position: relative;
     display: flex;
     z-index: 2;
 }
 
 ul li {
-    position: relative;
     list-style: none;
     margin: 10px;
 }
@@ -83,4 +84,10 @@ ul li a.twitter:hover {
 
 ul li a.instagram:hover {
     color: #9E37B8;
+}
+
+@media (max-width: 748px) {
+    .copyright {
+        margin-bottom: 20px;
+    }
 }
