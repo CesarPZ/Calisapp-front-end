@@ -32,10 +32,10 @@ export class RoutineComponent implements OnInit {
   ngOnInit():void { 
     this.weekdays.set(1, "Lunes");
     this.weekdays.set(2, "Martes");
-    this.weekdays.set(3, "Miercoles");
+    this.weekdays.set(3, "Miércoles");
     this.weekdays.set(4, "Jueves");
     this.weekdays.set(5, "Viernes");
-    this.weekdays.set(6, "Sabado");
+    this.weekdays.set(6, "Sábado");
     this.weekdays.set(7, "Domingo");
   }
 
