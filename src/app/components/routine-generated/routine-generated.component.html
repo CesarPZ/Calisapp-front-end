@@ -93,22 +93,23 @@
         </ng-template>
         <div class="row row-grid justify-content-center">
           <ul class="code-editor-options-menu" *ngFor="let dat of allExercise | filter: filterpost">
-            <div class="card border-light mb-10" [ngClass]="exerciseIsSelected(dat)" style="height:20rem;">
+            <div class="card border-light mb-10" [ngClass]="exerciseIsSelected(dat)">
               <app-exercise-information-card [exercise]="dat">
               </app-exercise-information-card>
                 <mat-form-field appearance="outline">
-                  <mat-label style="color:rgb(255, 255, 255) !important;">
+                  <mat-label>
                     Seleccione día de ejercicio
                   </mat-label>
                   <mat-select (selectionChange)="selectDayExercise($event, dat)"  name="selectedDays">
                     <mat-option *ngFor="let dia of diasEjercicios" [value]="dia"> Día {{ dia }}</mat-option>
                   </mat-select>
                 </mat-form-field>
-            </div>
+            <!--</div>-->
+            
             <div class="card-footer bg-transparent border-0" style="padding :0; margin :0;">
               <div *ngIf="isSelected(dat)">
-                <a href="javascript:void(0)" (click)="addExerciseToRoutine(dat)" class="btn btn-link btn-block">
-                  <div style="text-align: center; color:rgb(2, 0, 134);font-weight: bolder; font-size:18px;">
+                <a href="javascript:void(0)" (click)="addExerciseToRoutine(dat)">
+                  <div style="text-align: center; color:rgb(2, 0, 134);font-weight: 700; font-size:18px;">
                     <i>
                       + Agregar
                     </i>
@@ -116,8 +117,8 @@
                 </a>
               </div>
               <div *ngIf="!isSelected(dat)">
-                <a href="javascript:void(0)" (click)="removeExerciseToRoutine(dat)" class="btn btn-link btn-block">
-                  <div style="text-align: center; color:rgb(53, 18, 18);font-weight: bolder; font-size:18px;">
+                <a href="javascript:void(0)" (click)="removeExerciseToRoutine(dat)">
+                  <div style="text-align: center; color:red;font-weight: bolder; font-size:18px;">
                     <i>
                       - Quitar
                     </i>
@@ -125,6 +126,9 @@
                 </a>
               </div>
             </div>
+
+          </div>
+
           </ul>
         </div>
       </div>

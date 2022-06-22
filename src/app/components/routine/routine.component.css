@@ -2,7 +2,7 @@
 
 .card-transparent {
     background: transparent;
-    border: 3px solid rgb(23, 0, 107) !important;
+    border: 3px solid #555 !important;
     width: 15rem; 
     height: 15rem;
 }
