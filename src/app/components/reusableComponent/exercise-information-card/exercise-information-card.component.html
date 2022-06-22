@@ -1,39 +1,39 @@
-<div class="card-header bg-transparent justify-content-center border-0" 
-        style="text-transform:uppercase; text-align: center; 
-          font-weight:bolder; 
-          font-size:17px; height:3.5rem;"
-        [ngStyle]="{color: this.colorStyle}">
-    {{ exercise.processExercise.nameExercise }}
-</div>
-<div class="card-body text-white">
-  <p class="card-text" style="font-weight:bolder; text-shadow: 2px 2px 5px rgb(110, 109, 109); 
-                          height:6rem;"
-                        [ngStyle]="{color: this.colorStyle}">
-    <i class="ni ni-user-run"></i> <i> 
-      {{ exercise.repetitions }} repeticiones 
-    </i> <br>
-    <i class="bi bi-arrow-clockwise"> 
-      {{ exercise.series }} series 
-    </i> <br>
-    <i class="bi bi-trophy"> 
-    {{ exercise.processExercise.mainMuscle }}
-    </i> <br>
-    <a href="javascript:void(0)" (click)="open(classic,'','')" style="color:rgb(0, 30, 128)"> 
-      <i class="bi bi-youtube"> 
-        Video explicativo
-      </i>
-    </a><br>
-    <i class="bi bi-info-circle"> 
-      {{ exercise.processExercise.description }}
-    </i>
-  </p><br><br>
+<div class="card border-0">
+  <div class="background-header">
+    <div class="card-header bg-transparent justify-content-center border-0">
+        {{ exercise.processExercise.nameExercise }}
+    </div>
+  </div>
+  <div class="background-card">
+    <div class="card-body">    
+      <p class="card-text">
+        <i class="ni ni-user-run"></i> <i> 
+          {{ exercise.repetitions }} repeticiones 
+        </i> <br>
+        <i class="bi bi-arrow-clockwise"> 
+          {{ exercise.series }} series 
+        </i> <br>
+        <i class="bi bi-trophy"> 
+          {{ exercise.processExercise.mainMuscle }}
+        </i> <br>
+        <a href="javascript:void(0)" (click)="open(classic,'','')" class="youtube-link"> 
+          <i class="bi bi-youtube"> 
+            Video explicativo
+          </i>
+        </a><br>
+        <i class="bi bi-info-circle"> 
+          {{ exercise.processExercise.description }}
+        </i>
+      </p><br><br>
+    </div>
+  </div>
 </div>
 <ng-template #classic let-c="close" let-d="dismiss">
   <div class="modal-content">
     <div class="modal-header">
       <h6 class="modal-title" id="modal-title-default">
-        <div style="text-transform:uppercase; font-weight:bold; font-size: 20px;">
-        {{ exercise.processExercise.nameExercise  }}
+        <div class="title-video">
+          {{ exercise.processExercise.nameExercise  }}
         </div>
       </h6>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
