@@ -2,7 +2,7 @@
 
 .card-transparent{
     background:transparent;
-    border:3px solid #555 !important;
+    border:3px solid black !important;
     width:15rem; 
     height:15rem;
 }
@@ -11,10 +11,56 @@
     background:transparent;
     background-color: rgba(255,255,255,0.2);
     font-weight: bolder;
+    margin-top: 20px;
+    border-radius: 10px;
 }
 
 .terms {
     display: flex !important;
     margin: 0 !important;
 }
+
+.title {
+    color: #fff; 
+    margin-top: 20px; 
+    font-size: 25px; 
+    text-align: center; 
+    font-weight: bolder;
+}
   
+.stars {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    display: inline-block;
+    text-align: left;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    line-height: 5px
+}
+
+.modifyExercise-button {
+    text-transform: uppercase; 
+    height: 5rem; 
+    text-align: center;
+}
+
+.margin-button {
+    margin-right: 20px;
+}
+
+.title-exercise{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+}
+/*
+.align-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 40px;
+    margin-bottom: 40px;
+}*/

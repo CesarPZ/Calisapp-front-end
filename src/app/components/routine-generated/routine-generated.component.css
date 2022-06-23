@@ -77,14 +77,24 @@
     align-items: center;
 }
 
-/* Border */
-.mat-form-field-appearance-outline .mat-form-field-outline {
-    color: white !important;
-  }
-  /* Font color */
-  input.mat-input-element {
-    color: white !important;
-  } 
+.card-footer {
+    padding :0; 
+    margin :0;
+}
+
+.addExerciseText {
+    text-align: center; 
+    color:rgb(2, 0, 134);
+    font-weight: 700; 
+    font-size:18px;
+}
+
+.removeExerciseText {
+    text-align: center; 
+    color:rgb(252, 9, 9);
+    font-weight: bolder; 
+    font-size:18px;
+}
 
 @media (min-width: 1024px) {
     .marginpage {
