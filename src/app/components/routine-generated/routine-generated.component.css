@@ -2,7 +2,7 @@
 
 .card-transparent{
     background:transparent;
-    border:4px solid #555 !important;
+    border:4px solid black !important;
     width:14rem; 
     height:18rem;
 }
@@ -17,4 +17,80 @@
 .card {
     background-color: rgb(243, 247, 250) !important;
     height:22rem;
+}
+
+.title {
+    color: #fff; 
+    margin-top: 20px; 
+    font-size: 25px; 
+    text-align: center; 
+    font-weight: bolder;
+}
+
+.subtitle {
+    color:rgb(243, 247, 250); 
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-weight: 500; 
+}
+
+.col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.instruction {
+    color: #fff; 
+    font-size: 15px; 
+    text-align: left !important;
+    margin-bottom: 20px;
+}
+
+.input-margin {
+    margin-bottom: 40px;
+}
+
+.formSelectDay {
+    width: 100%;
+}
+
+.colorLabelText {
+    color: #fff;
+    font-weight: 500; 
+}
+
+.startRoutine-button {
+    text-transform: uppercase; 
+    height: 5rem; 
+    text-align: center;
+}
+
+.margin-button {
+    margin-top: 30px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Border */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white !important;
+  }
+  /* Font color */
+  input.mat-input-element {
+    color: white !important;
+  } 
+
+@media (min-width: 1024px) {
+    .marginpage {
+        margin-bottom: -100px;
+    }
+    .margin-button {
+        margin-bottom: -50px;
+    }
 }
