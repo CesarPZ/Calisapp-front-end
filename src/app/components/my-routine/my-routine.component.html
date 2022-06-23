@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <main>
   <div class="position-relative">
-    <!-- shape Hero -->
+    <app-spinner></app-spinner>
     <section class="section section-lg section-shaped pb-250">
       <div class="shape shape-style-1 shape-primary">
         <span></span>
@@ -13,34 +13,22 @@
         <span></span>
         <span></span>
         <span></span>
+        <span></span>
+        <span></span>
       </div>
-      <div style="position: relative">
-        <app-spinner></app-spinner>
-        <!-- 
-        <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
-            <p style="font-size: 20px; color: white">Loading...</p>
-        </ngx-spinner>
-        -->
-        <div class="col-sm-9" *ngIf="haveRoutine()">
-          <h2 class="display-3 mb-0"  style="color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder;">
+      <!--<div style="position: relative">-->
+        <div class="col-sm-12" *ngIf="haveRoutine()">
+          <h2 class="title display-3 mb-0">
             Tus rutinas:
           </h2>
-          <br>
         </div>
-        <div class="col-sm-9" *ngIf="!haveRoutine()">
-          <h2 class="display-3 mb-0"  style="color:rgb(255, 255, 255); font-size:30px; text-align:center; font-weight: bolder;">
-            <br>
-            Actualmente no tienes ninguna rutina generada.
+        <div class="col-sm-12" *ngIf="!haveRoutine()">
+          <h2 class="title display-3 mb-0">
+            Actualmente no tienes ninguna rutina generada
           </h2>
-          <br>
         </div>
         <ul class="code-editor-options-menu" *ngFor="let rou of routinesUser">
-          <div class="text-center">
-            <div class="spinner-border" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div>
-          <div class="container container rounded">
+          <div class="col-lg-12 container container rounded">
             <div [ngClass]="'content-transparent'">
               <div class="content">
                 <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="currentRoutineIsUpdate(rou)">
@@ -53,20 +41,24 @@
                 <app-title-accordion  [routine]="rou"
                                       (openDetails)="setOpenDetail(rou, $event)">
                 </app-title-accordion>
-                <div *ngIf="getOpenDetail(rou)">
+                <div class="col-lg-12" *ngIf="getOpenDetail(rou)">
+                  <div class="stars">
                   <app-opinion-routine  [routine]="rou"
-                                        [message]="'Ingrese su opinion sobre esta rutina:'">
-                  </app-opinion-routine><br><br>
+                                        [message]="'Ingrese su opinión sobre esta rutina:'">
+                  </app-opinion-routine>
+                  </div>
                   <mat-tab-group dynamicHeight #tabGroup>
                     <ul *ngFor="let day of daysRoutine(rou)">
-                      <mat-tab label="Dia {{day}}"> <br>
-                        <div class="row row-grid justify-content-center" >
+                      <mat-tab label="Día {{day}}"> <br>
+                        <div class="col-lg-12 row row-grid justify-content-center" >
                           <ul class="code-editor-options-menu" *ngFor="let dat of exercisesRou(rou,day)">
                             <div class="card border-light mb-10" [ngClass]="'card-transparent'">
-                              <app-exercise-information-card [exercise]="dat">
-                              </app-exercise-information-card>
+                              <div class="card-content">
+                                <app-exercise-information-card [exercise]="dat">
+                                </app-exercise-information-card>
+                              </div> 
                             </div>
-                            <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="getPermissionToModify(rou)">
+                            <div class="modifyExercise-button" *ngIf="getPermissionToModify(rou)">
                               <a href="javascript:void(0)" class="btn btn-primary mt-4" (click)="modifiedExercise(classic, dat)">
                                 <i class="bi bi-pencil"></i> Modificar Ejercicio
                               </a>
@@ -75,7 +67,7 @@
                               <div class="modal-content">
                                 <div class="modal-header">
                                   <h6 class="modal-title" id="modal-title-default">
-                                    <div style="text-transform:uppercase; font-weight: bold;">
+                                    <div class="title-exercise">
                                     {{dat.processExercise.nameExercise}}
                                     </div>
                                   </h6>
@@ -104,10 +96,10 @@
                                   </div>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-primary" href="javascript:void(0)" (click)="saveChangesExercise(dat); c('Close click')" [disabled]="enabledChangesExercise()">
-                                    Guardar Cambios
+                                  <button type="button" class="btn btn-success" href="javascript:void(0)" (click)="saveChangesExercise(dat); c('Close click')" [disabled]="enabledChangesExercise()">
+                                    <i class="bi bi-save"></i>Guardar Cambios
                                   </button>
-                                  <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" (click)="c('Close click')">Cancelar</button>
+                                  <button type="button" class="btn ml-auto" data-dismiss="modal" (click)="c('Close click')">Cancelar</button>
                                 </div>
                               </div>
                             </ng-template>
@@ -117,24 +109,24 @@
                       </mat-tab>
                     </ul>
                   </mat-tab-group>
-                  <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="getPermissionToModify(rou)">
-                    <a href="javascript:void(0)" class="btn btn-warning mt-4" (click)="discardChanges(rou)">
+                  <div class="modifyExercise-button" *ngIf="getPermissionToModify(rou)">
+                    <a href="javascript:void(0)" class="btn btn-success margin-button" (click)="saveRoutine(rou)">
+                      <i class="bi bi-save"></i> Guardar todos los cambios  
+                    </a>
+                    <a href="javascript:void(0)" class="btn btn-warning" (click)="discardChanges(rou)">
                       <i class="bi bi-trash3"></i> Descartar todos los cambios
-                      </a>
-                    <a href="javascript:void(0)" class="btn btn-success mt-4" (click)="saveRoutine(rou)">
-                      Guardar todos los cambios <i class="bi bi-save"></i> 
                     </a>
                   </div>
-                  <div style="text-transform:uppercase; height:5rem; text-align: center;" *ngIf="!getPermissionToModify(rou)">
-                    <a href="javascript:void(0)" class="btn btn-primary mt-4" (click)="enableModification(rou)">
+                  <div class="modifyExercise-button" *ngIf="!getPermissionToModify(rou)">
+                    <a href="javascript:void(0)" class="btn btn-primary margin-button" (click)="enableModification(rou)">
                       <i class="bi bi-pencil-square"></i> Modificar Ejercicios
                     </a>
                     
                     <!-- Boton borrar rutina 
-                    <a href="javascript:void(0)" class="btn btn-warning mt-4" (click)="deleteRoutine(classic2)">
-                      Eliminar Rutina
+                    <a href="javascript:void(0)" class="btn btn-warning" (click)="deleteRoutine(classic2)">
+                      <i class="bi bi-trash3"></i> Eliminar Rutina
                     </a>-->
-                </div>
+                  </div>
                   <ng-template #classic2 let-c="close" let-d="dismiss">
                     <div class="modal-content bg-gradient-danger">
                       <div class="modal-header">
@@ -151,7 +143,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-white" href="javascript:void(0)" (click)="c('Close click'); deleteRoutineSelect(rou)">Eliminar Rutina</button>
-                        <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" (click)="c('Close click')">Cancelar</button>
+                        <button type="button" class="btn ml-auto" data-dismiss="modal" (click)="c('Close click')">Cancelar</button>
                       </div>
                     </div>
                   </ng-template> 
@@ -160,7 +152,7 @@
             </div>
           </div>
         </ul>
-      </div>
+      <!--</div>-->
     </section>
   </div>
 </main>
