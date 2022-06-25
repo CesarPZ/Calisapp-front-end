@@ -14,7 +14,9 @@ export class RoutineTodayComponent implements OnInit {
   calendatToday:CalendarUser= new CalendarUser();
   routinesToday:Routine[]=[];
   routinesOpenDetail:Routine[]=[];
-
+  exerciseSelect:Exercise;
+  exercisePosition:number = 0;
+  
   constructor(private userService:UserService) { }
 
 
@@ -31,7 +33,13 @@ export class RoutineTodayComponent implements OnInit {
           routine.estadoDeAnimo = calendar.estadoDeAnimo;
           this.routinesToday.push(routine);
         }
+        console.log(this.routinesToday);
+        console.log(this.routinesToday[0]);
+        console.log(this.routinesToday[0].exercises[0]);
+        this.exerciseSelect = this.routinesToday[0].exercises[this.exercisePosition];
       })
+
+      
   }
 
   setOpenDetail(routine:Routine, status:boolean){
@@ -68,5 +76,17 @@ export class RoutineTodayComponent implements OnInit {
       }
     }
     return exerciseDay;
+  }
+
+  nextExercise(){
+    var ejercicios = this.routinesToday[0].exercises;
+    this.exercisePosition = this.exercisePosition +1;
+    if(ejercicios.length > this.exercisePosition){
+      this.exerciseSelect = this.routinesToday[0].exercises[this.exercisePosition];
+    }
+  }
+  nextRoutine(){
+    var ejercicios = this.routinesToday[0].exercises;
+    return ejercicios.length > this.exercisePosition;
   }
 }
