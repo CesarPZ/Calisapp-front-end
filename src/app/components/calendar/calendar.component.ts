@@ -152,7 +152,6 @@ export class CalendarComponent implements OnInit{
       this.calendarUserService.setOpinionDay(estado.opinion, routinesSelected.idCalendar)
       .subscribe(data => {})
     }
-    
   }
 
   calculateEstadoDeAnimoToday(rou: Routine){
