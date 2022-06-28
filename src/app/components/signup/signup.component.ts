@@ -25,6 +25,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   errorMessage = "";
 
   ngOnInit() {
+    this.loginForm.baseForm.get('mobileNumber').setValidators(null);
     this.service.hide();
   }
 

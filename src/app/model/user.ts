@@ -3,4 +3,5 @@ export class User{
     name:String;
     mail:String;
     password:String;
+    mobileNumber:String;
 }

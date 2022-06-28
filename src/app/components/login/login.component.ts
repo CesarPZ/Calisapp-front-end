@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(){
     this.loginForm.baseForm.get('name').setValidators(null);
+    this.loginForm.baseForm.get('mobileNumber').setValidators(null);
     this.service.hide();
   }
 
