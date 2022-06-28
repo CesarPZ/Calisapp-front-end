@@ -4,9 +4,11 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class BaseFormUser {
   private isValidEmail = /\S+@\S+\.\S+/;
+  private isValidMobileNumber = "^[0-9]+$";
   errorMessage = null;
   errorMessageMail = null;
   errorMessageName = null;
+  errorMessageMobileNumber = null;
 
   constructor(private fb: FormBuilder) {}
 
@@ -14,6 +16,8 @@ export class BaseFormUser {
     name: ['', [Validators.required, Validators.minLength(4)]],
     mail: ['',[Validators.required, Validators.pattern(this.isValidEmail)],],
     password: ['', [Validators.required, Validators.minLength(4)]],
+    mobileNumber: ['', [Validators.pattern(this.isValidMobileNumber),
+                        Validators.minLength(10), Validators.maxLength(10)]],
   });
 
   isValidField(field: string): boolean {
@@ -39,6 +43,7 @@ export class BaseFormUser {
       this.errorMessage = messages[errorKey];
       this.errorMessageMail = 'No es un email valido';
       this.errorMessageName = 'Debe ingresar un valor de al menos 4 caracteres';
+      this.errorMessageMobileNumber = 'Debe ingresar un valor numérico de 10 caracteres';
     }
   }
 }
