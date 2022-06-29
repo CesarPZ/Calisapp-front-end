@@ -54,9 +54,8 @@ export class UserService {
   }
   getRoutinesToday() {
     let userLogged = this.staticData.getUserLogged();
-    return this.http.get<any>(this.staticData.getUrlBase()+'api/routinesToday/'+1);
+    return this.http.get<any>(this.staticData.getUrlBase()+'api/routinesToday/'+userLogged);
   }
-
 
   visible: boolean = true;
   hide() { this.visible = false }
