@@ -3,6 +3,7 @@ import { User } from '../../model/user';
 import { UserService } from '../../service/user.service';
 import { BaseFormUser } from '../../utils/base-form-user';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-profile',
@@ -10,7 +11,8 @@ import { HttpErrorResponse } from '@angular/common/http';
     styleUrls: ['./profile.component.scss']
 })
 
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
+  private subscription: Subscription = new Subscription();
 
   constructor(private service: UserService,
               public updateForm: BaseFormUser
@@ -27,21 +29,25 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  update (user:User){
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.updateForm.baseForm.reset();
+  }
+
+  update(): void {
     if (this.updateForm.baseForm.invalid) {
       return;
     }
-      //const formValue = this.updateForm.baseForm.value;
-      this.service.updateUser(user)
-      .subscribe(data=>{
-        this.user=data;
-        this.messageAlert = " El usuario ha sido actualizado de manera correcta!"
-      },
-      (error: HttpErrorResponse) => {
-        this.errorMessage = "Ingresó mal los datos"
-      }
-    );
-    this.errorMessage = "";
+      const formValue = this.updateForm.baseForm.value;
+      this.subscription.add(this.service.updateUser(formValue).subscribe(
+        (data) => {
+          this.user=data;
+          this.messageAlert = " El usuario ha sido actualizado de manera correcta!"
+        },
+        (error: HttpErrorResponse) => {
+          this.errorMessage = "Ingresó mal los datos"
+        }
+      ));
   }
 
   checkField(field: string): boolean {

@@ -61,4 +61,11 @@ export class NavbarComponent implements OnInit {
     userLogued(){
      return this.staticData.getUserLogged();   
     }
+
+    userProfile(){
+        this.router.navigate(['/user-profile'])
+            .then(() => {
+                window.location.reload();
+        });
+    } 
 }

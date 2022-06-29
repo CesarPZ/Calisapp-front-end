@@ -33,7 +33,8 @@
               </li>
               <li>
                 <i class="fa fa-user" aria-hidden="true"></i>
-                <a [routerLink]="['/user-profile']" id="profile" class="dropdown-item">Perfil</a>
+                <a (click)="userProfile()" id="profile" class="dropdown-item">Perfil</a>
+                <!--<a [routerLink]="['/user-profile']" id="profile" class="dropdown-item">Perfil</a>-->
               </li>
               <li>
                 <i class="fa fa-calendar" aria-hidden="true"></i>
