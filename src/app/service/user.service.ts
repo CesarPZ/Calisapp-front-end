@@ -43,7 +43,8 @@ export class UserService {
   updateUser(user:User){
     return this.http.put<User>(this.staticData.getUrlBase()+'api/users/'+user.id+
                                                           '?name='+user.name+
-                                                          '&password='+user.password
+                                                          '&password='+user.password+
+                                                          '&mobileNumber='+user.mobileNumber
                                                           ,user);
     }
 
