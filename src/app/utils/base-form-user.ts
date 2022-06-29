@@ -16,8 +16,8 @@ export class BaseFormUser {
     name: ['', [Validators.required, Validators.minLength(4)]],
     mail: ['',[Validators.required, Validators.pattern(this.isValidEmail)],],
     password: ['', [Validators.required, Validators.minLength(4)]],
-    mobileNumber: ['', [Validators.pattern(this.isValidMobileNumber),
-                        Validators.minLength(10), Validators.maxLength(10)]],
+    mobileNumber: ['', [Validators.compose([Validators.pattern(this.isValidMobileNumber),
+                        Validators.minLength(10), Validators.maxLength(10)])]],
   });
 
   isValidField(field: string): boolean {

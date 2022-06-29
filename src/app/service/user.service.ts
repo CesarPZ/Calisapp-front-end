@@ -40,19 +40,21 @@ export class UserService {
     return this.http.get<User>(this.staticData.getUrlBase()+'api/users/'+userLogged);
   }
 
-  updateUser(user:User){
-    return this.http.put<User>(this.staticData.getUrlBase()+'api/users/'+user.id+
+  updateUser(user){
+    let userLogged = this.staticData.getUserLogged();
+    return this.http.put<User>(this.staticData.getUrlBase()+'api/users/'+userLogged+
                                                           '?name='+user.name+
                                                           '&password='+user.password+
                                                           '&mobileNumber='+user.mobileNumber
-                                                          ,user);
-    }
+                                                          ,this.httpOptions);
+  }
 
   deleteUser(user:User){
     return this.http.delete<User>(this.staticData.getUrlBase()+
                                       'api/users/'+user.id, 
                                       this.httpOptions);
   }
+  
   getRoutinesToday() {
     let userLogged = this.staticData.getUserLogged();
     return this.http.get<any>(this.staticData.getUrlBase()+'api/routinesToday/'+userLogged);
