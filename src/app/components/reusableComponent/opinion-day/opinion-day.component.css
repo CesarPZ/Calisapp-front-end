@@ -33,3 +33,13 @@
 .color-black {
    background-color:rgb(0, 0, 0) !important;
 }
+
+@media (max-width: 768px) {
+    .button-container {
+        margin-right: 30px;
+        width: 30px;
+    }
+    .button-row {
+        margin-right: -100px !important;
+    } 
+}

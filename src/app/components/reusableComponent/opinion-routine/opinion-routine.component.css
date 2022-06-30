@@ -1,4 +1,6 @@
 .messageOpinion {
-    text-align: right;
-    font-weight: 300;
+    text-align: left;
+    font-weight: 400;
+    margin-left: 18px;
+    margin-top: -18px;
 }

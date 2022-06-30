@@ -47,4 +47,66 @@ $custom-calendar-theme: calendar-theme(
     justify-content: center;
 }
 
+.title {
+    color: #fff; 
+    margin-top: 20px; 
+    margin-bottom: 20px !important;
+    font-size: 25px; 
+    text-align: center; 
+    font-weight: bolder;
+}
 
+.subTitle {
+    color: #fff; 
+    font-size:20px; 
+    text-align:center; 
+    font-weight: bolder;
+}
+
+.card {
+    border: none;
+}
+
+.card-header {
+    height: 90px;
+    background: linear-gradient(315deg, #fbff00, #ffbc00) !important;
+}
+
+.stars {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    text-align: left;
+    color: black;
+    font-weight: 500;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    line-height: 5px
+}
+
+h4 {
+    margin-left: 12px;
+    margin-bottom: -0.5px;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .mat-form-field {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+    }
+
+    .stars {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: black;
+        font-weight: 500;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        margin-left: 10px;
+        line-height: 0.5px
+    }
+}
