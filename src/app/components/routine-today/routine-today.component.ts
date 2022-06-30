@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarUser } from 'src/app/model/calendar-user';
+import { DayAndOpinion } from 'src/app/model/day-and-opinion';
 import { Exercise } from 'src/app/model/exercise';
 import { Routine } from 'src/app/model/routine';
 import { UserService } from 'src/app/service/user.service';
@@ -19,27 +20,70 @@ export class RoutineTodayComponent implements OnInit {
   
   constructor(private userService:UserService) { }
 
-
   public ngOnInit() {
     this.userService.getRoutinesToday()
       .subscribe(data => {
         this.calendatToday = data;
-        for(var calendar of data){        
+        for(var calendar of data){
+          let diaDeRutina = this.calculateDate(calendar.dayAndOpinion);
           let routine = new Routine();
-          routine.exercises = calendar.exercises;
-          routine.nameRoutine = calendar.routineName;
-          routine.daySelected = calendar.exerciseNumberDayRoutine;
-          routine.idCalendar = calendar.idCalendarUser;
-          routine.estadoDeAnimo = calendar.estadoDeAnimo;
+          routine.exercises = this.calculateDayExercise(calendar.routine, diaDeRutina);
+          console.log(routine.exercises);  
+          routine.nameRoutine = calendar.routine.nameRoutine;
           this.routinesToday.push(routine);
         }
-        console.log(this.routinesToday);
-        console.log(this.routinesToday[0]);
-        console.log(this.routinesToday[0].exercises[0]);
         this.exerciseSelect = this.routinesToday[0].exercises[this.exercisePosition];
       })
+  }
 
-      
+  calculateDayExercise(routine:Routine, diaDeRutina: any){
+    let diasRoutine = new Array();
+    for(var exercise of routine.exercises){
+      if(!diasRoutine.includes(exercise.dayExercise)){
+        diasRoutine.push(exercise.dayExercise);
+      }
+    }
+
+    return this.calculateExercises(routine, diasRoutine.sort(), diaDeRutina);
+  }
+
+
+  calculateExercises(routine: Routine, diasRoutine: any[], dayNumberRoutine: any){
+    let resp = 1;
+    let exercises = new Array();
+    
+    if(diasRoutine.length == 1) {
+			resp = diasRoutine[0];
+		}else{
+      let dayPosition = dayNumberRoutine;
+      while(dayPosition > 0) {
+        if(dayPosition <= diasRoutine.length) {
+          resp = diasRoutine[dayPosition-1];
+          break;
+        }else {
+          dayPosition = dayPosition - diasRoutine.length;
+        }
+      }
+    }
+
+    for(var exercise of routine.exercises){
+      if(exercise.dayExercise == resp){
+        exercises.push(exercise);
+      }
+    }
+    return exercises;
+  }
+
+  calculateDate(dayAndOpinions: DayAndOpinion[]){
+    let diaDeRutina;
+    let now = new Date();
+    var todayOrSelect = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+    for(var dayAndOpinion of dayAndOpinions){
+      if(todayOrSelect.getTime() == new Date(dayAndOpinion.dayOpinon).getTime()){
+        diaDeRutina = dayAndOpinion.dayNumberRoutine;
+      }
+    }
+    return diaDeRutina;
   }
 
   setOpenDetail(routine:Routine, status:boolean){
