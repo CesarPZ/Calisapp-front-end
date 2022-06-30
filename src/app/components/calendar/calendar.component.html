@@ -15,17 +15,19 @@
         <span class="span-100"></span>
       </div>
       <div class="container container rounded">
+        <div class="col-sm-12">
+          <h2 class="title display-3 mb-0">
+            Calendario de rutinas
+          </h2>
+        </div>
         <div class="px-20">
           <div class="main-content">
             <div class="row justify-content-center">
               <div class="col-md-8">
-                <div class="card" >
-                  <div class="card-header">
+                <div class="card">
+                  <div class="card-header"> 
                     <div class="form-title">
                       <div class="form-field">
-                        <a class="title" style="font-size:200%;">
-                          Calendario de rutinas &nbsp; &nbsp; &nbsp; &nbsp; 
-                        </a>
                         <a>
                           <mat-form-field appearance="fill">
                               <mat-label>Seleccione una rutina</mat-label>
@@ -37,24 +39,29 @@
                       </div>
                     </div>
                   </div>
-                  <div class="card-body">
-                    Filtra segun tu opinion:
+                  <div class="card-body table-responsive">
+                    <h4>Filtra según tu opinión:</h4>
                     <div class="opinion-day">
                       <app-opinion-day [disable]="false"
                                         (opinionSelected)="filterRoutinesEstado($event)">
                       </app-opinion-day>
                     </div>
                     <form>
-                      <article class="sample-column  calendar-wrapper" [ngClass]="calendarStyle">
+                      <article class="sample-column calendar-wrapper" [ngClass]="calendarStyle">
                         <igx-calendar #calendar locale="ES" weekstart="1" id="calendar" (selected)="onSelection($event) ">
                         </igx-calendar>
                       </article>           
                     </form>
+                  </div>              
+                  <div>
+                    <div class="stars">
+                      <app-opinion-routine  [routine]="routineSelect"
+                                            [message]="'Su opinión sobre esta rutina:'"
+                                            [disabledStar]="true">
+                      </app-opinion-routine>
+                    </div>
                   </div>
-                  <app-opinion-routine  [routine]="routineSelect"
-                                        [message]="'Su opinion sobre esta rutina:'"
-                                        [disabledStar]="true">
-                  </app-opinion-routine>
+
                 </div>
               </div>
             </div>
@@ -62,7 +69,7 @@
         </div><br>
       </div>
       <div *ngIf="routinesSelected.length >0">
-        <h2 class="display-3 mb-0" style="color:rgb(255, 255, 255); font-size:20px; text-align:center; font-weight: bolder;">
+        <h2 class="display-3 mb-0 subTitle">
           {{ dateSelected }}
         </h2>
       </div>
@@ -97,7 +104,7 @@
                   </ul>
                 </mat-tab-group>
                 <div class="opinion-day" *ngIf="haveviewEstado()">
-                  Como te fue con la rutina?
+                  Cómo te fue con la rutina?
                   <app-opinion-day [opinonToday]="calculateEstadoDeAnimoToday(rou)" 
                                   (opinionSelected)="estadoDeAnimo($event, rou)">
                   </app-opinion-day>
