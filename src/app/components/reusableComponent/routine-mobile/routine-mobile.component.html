@@ -1,0 +1,41 @@
+<div class="container container rounded">
+  <div [ngClass]="'content-transparent'">
+    <div class="content">
+      <app-title-mobile  [routine]="routine"
+                        (openDetails)="setOpenDetail($event)">
+      </app-title-mobile>
+
+      <div class="col-lg-12" *ngIf="getOpenDetail()">
+        <div *ngIf="nextRoutine()">
+          <mat-tab-group dynamicHeight #tabGroup (selectedTabChange)="tabSelectedRoutine(routine,$event)">
+            <ul *ngFor="let day of daysRoutine(routine)">
+              <mat-tab label="Dia {{day}} - Ejercicio: {{exercisePosition+1}} "> <br>
+                <div class="row justify-content-center" >
+                  <div class="card border-light mb-10" [ngClass]="'card-transparent'">
+                    <app-exercise-information-mobile [exercise]="exerciseSelect">
+                    </app-exercise-information-mobile>
+                  </div>
+                  <div class="btn-style"><br>
+                    <button type="button" class="btn btn-white"  href="javascript:void(0)" (click)="nextExercise()">
+                      {{ nextRoutineOrFinish }}
+                    </button>
+                  </div>
+                </div>
+              </mat-tab>
+            </ul>
+          </mat-tab-group>
+          <br>
+        </div>
+        <div *ngIf="!nextRoutine()">
+          <div class="title">
+            <h4>Como te fue con la rutina:</h4>
+            <div class="opinion-day">
+              <app-opinion-mobile [routine]="routine">
+              </app-opinion-mobile>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

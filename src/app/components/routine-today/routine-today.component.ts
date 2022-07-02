@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CalendarUser } from 'src/app/model/calendar-user';
 import { DayAndOpinion } from 'src/app/model/day-and-opinion';
 import { Exercise } from 'src/app/model/exercise';
 import { Routine } from 'src/app/model/routine';
+import { StaticDataService } from 'src/app/service/static-data.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -17,19 +19,32 @@ export class RoutineTodayComponent implements OnInit {
   routinesOpenDetail:Routine[]=[];
   exerciseSelect:Exercise;
   exercisePosition:number = 0;
+  nextRoutineOrFinish:string = "Siguiente Ejercicio";
   
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService,
+              private staticData: StaticDataService,
+              private router:Router) { }
 
   public ngOnInit() {
+    console.log(localStorage.getItem("id") );
+    console.log(localStorage);
+    if(localStorage.getItem("id") == null){
+
+      localStorage.setItem("navegateTo","routineToday");
+      this.router.navigate(["login"]);
+    }
+
     this.userService.getRoutinesToday()
       .subscribe(data => {
         this.calendatToday = data;
         for(var calendar of data){
           let diaDeRutina = this.calculateDate(calendar.dayAndOpinion);
+          let opinionDeRutina = this.calculateOpinion(calendar.dayAndOpinion);
           let routine = new Routine();
           routine.exercises = this.calculateDayExercise(calendar.routine, diaDeRutina);
-          console.log(routine.exercises);  
           routine.nameRoutine = calendar.routine.nameRoutine;
+          routine.estadoDeAnimo = opinionDeRutina;
+          routine.idCalendar = calendar.id;
           this.routinesToday.push(routine);
         }
         this.exerciseSelect = this.routinesToday[0].exercises[this.exercisePosition];
@@ -86,6 +101,19 @@ export class RoutineTodayComponent implements OnInit {
     return diaDeRutina;
   }
 
+  calculateOpinion(dayAndOpinions: DayAndOpinion[]){
+    let opinionDay;
+    let now = new Date();
+    var todayOrSelect = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+    for(var dayAndOpinion of dayAndOpinions){
+      if(todayOrSelect.getTime() == new Date(dayAndOpinion.dayOpinon).getTime()){
+        opinionDay = dayAndOpinion.opinion;
+      }
+    }
+    return opinionDay;
+  }
+
+
   setOpenDetail(routine:Routine, status:boolean){
     if(status){
       this.routinesOpenDetail.push(routine);
@@ -125,6 +153,12 @@ export class RoutineTodayComponent implements OnInit {
   nextExercise(){
     var ejercicios = this.routinesToday[0].exercises;
     this.exercisePosition = this.exercisePosition +1;
+    console.log(this.exercisePosition);
+    console.log(ejercicios.length);
+
+    if(ejercicios.length + 1 > this.exercisePosition){
+      this.nextRoutineOrFinish = "Finalizar Rutina";
+    }
     if(ejercicios.length > this.exercisePosition){
       this.exerciseSelect = this.routinesToday[0].exercises[this.exercisePosition];
     }
@@ -133,4 +167,5 @@ export class RoutineTodayComponent implements OnInit {
     var ejercicios = this.routinesToday[0].exercises;
     return ejercicios.length > this.exercisePosition;
   }
+  
 }

@@ -35,6 +35,10 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
 import { OpinionRoutineComponent } from './components/reusableComponent/opinion-routine/opinion-routine.component';
 import { OpinionDayComponent } from './components/reusableComponent/opinion-day/opinion-day.component';
 import { RoutineTodayComponent } from './components/routine-today/routine-today.component';
+import { ExerciseInformationMobileComponent } from './components/reusableComponent/exercise-information-mobile/exercise-information-mobile.component';
+import { TitleMobileComponent } from './components/reusableComponent/title-mobile/title-mobile.component';
+import { RoutineMobileComponent } from './components/reusableComponent/routine-mobile/routine-mobile.component';
+import { OpinionMobileComponent } from './components/reusableComponent/opinion-mobile/opinion-mobile.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,11 @@ import { RoutineTodayComponent } from './components/routine-today/routine-today.
     SpinnerComponent,
     OpinionRoutineComponent,
     OpinionDayComponent,
-    RoutineTodayComponent
+    RoutineTodayComponent,
+    ExerciseInformationMobileComponent,
+    TitleMobileComponent,
+    RoutineMobileComponent,
+    OpinionMobileComponent
   ],
   imports: [
     BrowserModule,

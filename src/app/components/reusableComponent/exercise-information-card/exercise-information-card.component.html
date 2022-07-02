@@ -42,12 +42,12 @@
     </div>
     <div class="card-body">
       <youtube-player 
-        videoId="aKHar4U2Iys" 
+        [videoId]= "exercise.processExercise.urlVideo"
         suggestedQuality="highres"
         [height]="250" 
-        [width]="450" 
-        [startSeconds]="4"
-        [endSeconds]="8">
+        [width]="450">
+        <!-- [startSeconds]="4"
+        [endSeconds]="8"-->
       </youtube-player>
       <script src="https://www.youtube.com/iframe_api"></script>
     </div>

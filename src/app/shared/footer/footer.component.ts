@@ -11,7 +11,8 @@ import { StaticDataService } from 'src/app/service/static-data.service';
 export class FooterComponent implements OnInit {
     test : Date = new Date();
 
-    constructor(private router: Router, private user: UserService, private staticData: StaticDataService ) {}
+    constructor(private router: Router,
+                private staticData: StaticDataService ) {}
 
     ngOnInit() {
 
@@ -21,6 +22,7 @@ export class FooterComponent implements OnInit {
     }
 
     userLogued(){
-      return this.staticData.getUserLogged();   
+      let isMyRoutineToday = this.router.url == "/myRoutineToday";
+      return this.staticData.getUserLogged() && !isMyRoutineToday;   
      }
 }

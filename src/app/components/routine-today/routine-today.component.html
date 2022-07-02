@@ -1,41 +1,14 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <main>
-  <div class="position-relative">
     <section class="section section-lg section-hero section-shaped">
       <div class="shape shape-style-1 shape-primary"></div>
       <ul class="code-editor-options-menu" *ngFor="let rou of routinesToday">
-        <div class="container container rounded">
-          <div [ngClass]="'content-transparent'">
-            <div class="content">
-              <app-title-accordion  [routine]="rou"
-                                    (openDetails)="setOpenDetail(rou, $event)">
-              </app-title-accordion>
-
-              <div *ngIf="nextRoutine()">
-                <mat-tab-group dynamicHeight #tabGroup (selectedTabChange)="tabSelectedRoutine(rou,$event)">
-                  <ul *ngFor="let day of daysRoutine(rou)">
-                    <mat-tab label="Dia {{day}}"> <br>
-                      <div class="row justify-content-center" >
-                          <div class="card border-light mb-10" [ngClass]="'card-transparent'">
-                            <app-exercise-information-card [exercise]="exerciseSelect">
-                            </app-exercise-information-card>
-                          </div>
-                          <br>
-                      </div>
-                    </mat-tab>
-                  </ul>
-                </mat-tab-group>
-                <br>
-                  <button type="button" class="btn btn-white"  href="javascript:void(0)" (click)="nextExercise()">Siguiente</button>
-                </div>
-                <div *ngIf="!nextRoutine()">
-                  <app-opinion-day [disable]="false">
-                  </app-opinion-day>
-                </div>
-            </div>
-          </div>
-        </div>
+        <app-routine-mobile [routine]="rou">
+        </app-routine-mobile>
+        
       </ul>
+      <br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br>
     </section>
-  </div>
+  
 </main>

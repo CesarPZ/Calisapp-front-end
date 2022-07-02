@@ -48,7 +48,12 @@ export class LoginComponent implements OnInit, OnDestroy {
           console.log(response);
           localStorage.setItem("id",response.id.toString());
           this.service.show();
-          this.router.navigate(['welcome']);
+          if(localStorage.getItem("navegateTo") == "routineToday"){
+            localStorage.setItem("navegateTo",null);
+            this.router.navigate(['myRoutineToday']);
+          }else{
+            this.router.navigate(['welcome']);
+          }
         }
       },
       (error: HttpErrorResponse) => {
