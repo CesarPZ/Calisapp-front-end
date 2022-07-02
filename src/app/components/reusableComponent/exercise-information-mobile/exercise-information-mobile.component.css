@@ -1,0 +1,53 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.card-header {
+    text-transform: uppercase; 
+    text-align: center; 
+    font-weight: bolder; 
+    font-size:17px; 
+    height:3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.card-body {
+    padding-right: 20px;
+    padding-left: 24px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+} 
+
+.background-header {
+    background: linear-gradient(315deg, #fbff00, #ffbc00) !important;
+}
+
+.card-text {
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    height: 4.85rem;
+    color: black;
+}
+
+.card-text a {
+    text-decoration: none !important;
+    color: #d95652;
+}
+
+.card-text a:hover {
+    text-decoration: none !important;
+    color: #b53e3a;
+}
+
+.background-card {
+    background-color: rgb(243, 247, 250);
+    height: 100%;
+}
+
+.title-video {
+    text-transform:uppercase; 
+    font-weight: bold; 
+    font-size: 20px;
+}
