@@ -1,6 +1,4 @@
-<div style="text-align:center; 
-            text-transform:uppercase;font-size:170%;" 
-            [ngStyle]="{color: this.colorText}">
+<div class="title" [ngStyle]="{color: this.colorText}">
   <a id="button1" (click)="setOpenDetail(true)" class="bdropdown-item" *ngIf="!routinesOpenDetail">
     {{ routine.nameRoutine }} <i class="bi bi-caret-down-fill"> </i>
   </a>

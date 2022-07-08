@@ -13,6 +13,7 @@
     font-weight: bolder;
     margin-top: 20px;
     border-radius: 10px;
+    margin-left: -40px;
 }
 
 .terms {
@@ -55,4 +56,51 @@
     text-transform: uppercase;
     font-weight: bold;
     font-size: 20px;
+}
+
+.modal-footer {
+    align-items: center;
+    text-align: center;
+    display: inline-block;
+}
+
+.aling-buttons {
+    align-items: center;
+    text-align: center;
+    display: inline-block;
+    display: flex;
+    margin-top: -20px;
+}
+
+@media (max-width: 768px) {
+    .stars {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: black;
+        font-weight: 500;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 10px;
+        line-height: 0.5px;
+        margin-left: -20px;
+    }
+    .margin-button {
+        margin-bottom: 20px;
+    }
+    .margin-save-button {
+        margin-bottom: 20px;
+        margin-left: 10px;
+    }
+    .font-button {
+        font-size: 95%;
+    }
+    .card-transparent{
+        margin-left: -10px;
+    }
+    .aling-buttons {
+        margin-top: 20px;
+        margin-left: -20px;
+        margin-bottom: 20px;
+    }
 }
