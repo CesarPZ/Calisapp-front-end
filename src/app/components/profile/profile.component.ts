@@ -4,6 +4,7 @@ import { UserService } from '../../service/user.service';
 import { BaseFormUser } from '../../utils/base-form-user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
     selector: 'app-profile',
@@ -15,17 +16,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
 
   constructor(private service: UserService,
-              public updateForm: BaseFormUser
-              ) { }
+              public updateForm: BaseFormUser,
+              private spinner: NgxSpinnerService) { }
 
   user: User=new User();
   messageAlert = "";
   errorMessage = "";
 
   ngOnInit() {
+    this.spinner.show();
     this.service.getUserId()
       .subscribe(data => {
         this.user = data;
+        this.spinner.hide();
       });
   }
 

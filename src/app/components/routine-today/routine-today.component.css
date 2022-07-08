@@ -1,4 +1,3 @@
-@use '../../../calendar/variables' as *;
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
 .calendar-wrapper {
@@ -65,4 +64,5 @@
     font-weight: bolder;
     margin-top: 20px;
     border-radius: 10px;
+    margin-left: -40px;
 }

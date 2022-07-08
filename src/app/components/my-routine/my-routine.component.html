@@ -95,7 +95,7 @@
                                   </div>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-success" href="javascript:void(0)" (click)="saveChangesExercise(dat); c('Close click')" [disabled]="enabledChangesExercise()">
+                                  <button type="button" class="btn btn-success margin-save-button" href="javascript:void(0)" (click)="saveChangesExercise(dat); c('Close click')" [disabled]="enabledChangesExercise()">
                                     <i class="bi bi-save"></i>Guardar Cambios
                                   </button>
                                   <button type="button" class="btn ml-auto" data-dismiss="modal" (click)="c('Close click')">Cancelar</button>
@@ -108,16 +108,18 @@
                       </mat-tab>
                     </ul>
                   </mat-tab-group>
-                  <div class="modifyExercise-button" *ngIf="getPermissionToModify(rou)">
+                  <div class="modifyExercise-button aling-buttons" *ngIf="getPermissionToModify(rou)">
+                    <div class="col-lg-12">
                     <a href="javascript:void(0)" class="btn btn-success margin-button" (click)="saveRoutine(rou)">
                       <i class="bi bi-save"></i> Guardar todos los cambios  
                     </a>
-                    <a href="javascript:void(0)" class="btn btn-warning" (click)="discardChanges(rou)">
+                    <a href="javascript:void(0)" class="btn btn-warning font-button" (click)="discardChanges(rou)">
                       <i class="bi bi-trash3"></i> Descartar todos los cambios
                     </a>
+                    </div>
                   </div>
                   <div class="modifyExercise-button" *ngIf="!getPermissionToModify(rou)">
-                    <a href="javascript:void(0)" class="btn btn-primary margin-button" (click)="enableModification(rou)">
+                    <a href="javascript:void(0)" class="btn btn-primary" (click)="enableModification(rou)">
                       <i class="bi bi-pencil-square"></i> Modificar Ejercicios
                     </a>
                     
