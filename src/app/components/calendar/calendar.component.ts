@@ -89,7 +89,8 @@ export class CalendarComponent implements OnInit{
     for(var calendar of this.calendarUser){
       for(var dateOpinion of calendar.dayAndOpinion){
         if(new Date(dateOpinion.dayOpinon).getTime() == date.getTime() && 
-          (this.stateSelected == 'Todas' || this.stateSelected == dateOpinion.opinion) ){
+          (this.stateSelected == 'Todas' || this.stateSelected == dateOpinion.opinion) &&
+          (this.routineSelect == null || this.routineSelect.id == calendar.routine.id) ){
           this.routinesSelected.push(this.calculateDayRoutine(calendar.routine, dateOpinion, calendar.id ));
         }
       }
@@ -104,6 +105,7 @@ export class CalendarComponent implements OnInit{
       }
     }
     let newRoutine = new Routine();
+    newRoutine.id = routine.id;
     newRoutine.nameRoutine = routine.nameRoutine;
     newRoutine.idCalendar = idCalendar;
     newRoutine.exercises = this.calculateExercises(routine, diasRoutine.sort(), dayNumberRoutine.dayNumberRoutine);
@@ -186,6 +188,18 @@ export class CalendarComponent implements OnInit{
   }
 
   estadoDeAnimo(estado, routinesSelected){
+    let now = new Date();
+    let today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+    routinesSelected.estadoDeAnimo = estado.opinion;
+    for(var calendar of this.calendarUser){
+      if(calendar.routine.id  == routinesSelected.id){
+        for(var day of calendar.dayAndOpinion){
+          if(new Date(day.dayOpinon).getTime() == today.getTime()){
+            day.opinion = estado.opinion;
+          }
+        }
+      }
+    }
     this.calendarUserService.setOpinionDay(estado.opinion, routinesSelected.idCalendar)
     .subscribe(data => {})
   }
