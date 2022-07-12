@@ -38,7 +38,8 @@ export class RoutineMobileComponent implements OnInit {
 
     if(ejercicios.length <= this.exercisePosition+1){
       this.nextRoutineOrFinish = "Finalizar Rutina";
-    }else{
+    }
+    if(ejercicios.length >= this.exercisePosition+1){
       this.exerciseSelect = this.routine.exercises[this.exercisePosition];
     }
   }
