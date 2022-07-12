@@ -18,6 +18,9 @@ export class RoutineMobileComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if(this.routine.exercises.length == this.exercisePosition+1){
+      this.nextRoutineOrFinish = "Finalizar Rutina";
+    }
     this.exerciseSelect = this.routine.exercises[this.exercisePosition];
   }
 
@@ -33,13 +36,13 @@ export class RoutineMobileComponent implements OnInit {
     var ejercicios = this.routine.exercises;
     this.exercisePosition = this.exercisePosition +1;
 
-    if(ejercicios.length + 1 > this.exercisePosition){
+    if(ejercicios.length <= this.exercisePosition+1){
       this.nextRoutineOrFinish = "Finalizar Rutina";
-    }
-    if(ejercicios.length > this.exercisePosition){
+    }else{
       this.exerciseSelect = this.routine.exercises[this.exercisePosition];
     }
   }
+  
   nextRoutine(){
     var ejercicios = this.routine.exercises;
     return ejercicios.length > this.exercisePosition;

@@ -71,4 +71,9 @@ export class RoutineService {
                                 this.httpOptions);
   }
 
+  getRoutine(idRoutine: number) {
+    let userLogged = this.staticData.getUserLogged();
+    return this.http.get<any>(this.staticData.getUrlBase()+"api/routineId/"+idRoutine);
+  }
+
 }

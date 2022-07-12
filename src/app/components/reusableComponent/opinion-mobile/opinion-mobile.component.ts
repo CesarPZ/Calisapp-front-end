@@ -23,15 +23,13 @@ export class OpinionMobileComponent implements OnInit {
   }
 
   estadoDeAnimo(opinion: string){
-    console.log(opinion);
-    console.log(this.routine.idCalendar);
+    this.routine.estadoDeAnimo = opinion;
     this.estadoDeAnimoDia = opinion;
     this.calendarUserService.setOpinionDay(opinion, this.routine.idCalendar)
     .subscribe(data => {})
   }
 
   estadoSeleccionado(estado){
-    //this.estadoDeAnimoDia = this.routine.estadoDeAnimo;
     return this.disable && 
       (this.estadoDeAnimoDia != null && 
         this.estadoDeAnimoDia != '' && 

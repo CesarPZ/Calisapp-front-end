@@ -21,6 +21,7 @@ export class MyRoutineComponent implements OnInit {
   routinePermissionToModify:number[]=[];
   routineIsUpdate:number[]=[];
   routinesOpenDetail:number[]=[];
+  menssageRoutineExisting: string;
   
   constructor(private serviceRoutine: RoutineService,
               private serviceExercise: ExerciseService,
@@ -34,6 +35,11 @@ export class MyRoutineComponent implements OnInit {
       .subscribe(data => {
         this.routinesUser = data;
         this.spinner.hide();
+        if(this.routinesUser.length > 0){
+          this.menssageRoutineExisting = 'Tus rutinas:';
+        }else{
+          this.menssageRoutineExisting = ' Actualmente no tienes ninguna rutina generada';
+        }
       });
   }
   
@@ -75,9 +81,10 @@ export class MyRoutineComponent implements OnInit {
   }
   
   discardChanges(routine:Routine){
-    this.serviceExercise.getAllExerciseToRoutine(routine.id)
+    this.serviceRoutine.getRoutine(routine.id)
     .subscribe(data => {
-      routine.exercises = data;
+      console.log(data);
+      routine.exercises = data.exercises;
     });
     
     this.closeEdition(routine);
@@ -90,7 +97,9 @@ export class MyRoutineComponent implements OnInit {
       this.serviceExercise.editExercise(routineCurrent.exercises[i])
       .subscribe(data => {
         routineCurrent.exercises[i] = data;
-        this.routineIsUpdate.push(routineCurrent.id);
+        if(!this.routineIsUpdate.includes(routineCurrent.id)){
+          this.routineIsUpdate.push(routineCurrent.id);
+        }
       });
     }
   }
@@ -108,6 +117,8 @@ export class MyRoutineComponent implements OnInit {
   }
 
   closeAlertIsUpdated(routine:Routine){
+    console.log(routine);
+    console.log(this.routineIsUpdate);
     const index: number = this.routineIsUpdate.indexOf(routine.id);
 
     if (index !== -1) {

@@ -16,143 +16,141 @@
         <span></span>
         <span></span>
       </div>
-        <div class="col-sm-12" *ngIf="haveRoutine()">
-          <h2 class="title display-3 mb-0">
-            Tus rutinas:
-          </h2>
-        </div>
-        <div class="col-sm-12" *ngIf="!haveRoutine()">
-          <h2 class="title display-3 mb-0">
-            Actualmente no tienes ninguna rutina generada
-          </h2>
-        </div>
-        <ul class="code-editor-options-menu" *ngFor="let rou of routinesUser">
-          <div class="col-lg-12 container container rounded">
-            <div [ngClass]="'content-transparent'">
-              <div class="content">
-                <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="currentRoutineIsUpdate(rou)">
-                  <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
-                  <span class="alert-inner--text"><strong>Actualizado correctamente!</strong> Los ejercicios han sido actualizados de manera correcta!</span>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertIsUpdated(rou)">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div><br>
-                <app-title-accordion  [routine]="rou"
-                                      (openDetails)="setOpenDetail(rou, $event)">
-                </app-title-accordion>
-                <div class="col-lg-12" *ngIf="getOpenDetail(rou)">
-                  <div class="stars">
-                  <app-opinion-routine  [routine]="rou"
-                                        [message]="'Ingrese su opinión sobre esta rutina:'">
-                  </app-opinion-routine>
-                  </div>
-                  <mat-tab-group dynamicHeight #tabGroup>
-                    <ul *ngFor="let day of daysRoutine(rou)">
-                      <mat-tab label="Día {{day}}"> <br>
-                        <div class="col-lg-12 row row-grid justify-content-center" >
-                          <ul class="code-editor-options-menu" *ngFor="let dat of exercisesRou(rou,day)">
-                            <div class="card border-light mb-10" [ngClass]="'card-transparent'">
-                              <div class="card-content">
-                                <app-exercise-information-card [exercise]="dat">
-                                </app-exercise-information-card>
-                              </div> 
-                            </div>
-                            <div class="modifyExercise-button" *ngIf="getPermissionToModify(rou)">
-                              <a href="javascript:void(0)" class="btn btn-primary mt-4" (click)="modifiedExercise(classic, dat)">
-                                <i class="bi bi-pencil"></i> Modificar Ejercicio
-                              </a>
-                            </div>
-                            <ng-template #classic let-c="close" let-d="dismiss">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h6 class="modal-title" id="modal-title-default">
-                                    <div class="title-exercise">
-                                    {{dat.processExercise.nameExercise}}
-                                    </div>
-                                  </h6>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
-                                    <span aria-hidden="true">×</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <div>
-                                    Repeticiones:
-                                    <div class="form-group has-success" *ngIf="validationValueRepetitions()">
-                                      <input type="text" [(ngModel)]="repetitionsExercise" name="repetitionsExercise" class="form-control" />
-                                    </div>
-                                    <div class="form-group has-danger" *ngIf="!validationValueRepetitions()">
-                                      <input type="text" placeholder="Ingrese un valor mayor a 0 para las repeticiones" [(ngModel)]="repetitionsExercise" name="repetitionsExercise" class="form-control is-invalid"/>
-                                    </div>
+      <div class="col-sm-12">
+        <h2 class="title display-3 mb-0">
+          {{ menssageRoutineExisting }}
+        </h2>
+      </div>
+      <div class="col-sm-12" *ngIf="!haveRoutine()">
+        <br><br><br><br><br>
+      </div>
+      <ul class="code-editor-options-menu" *ngFor="let rou of routinesUser">
+        <div class="col-lg-12 container container rounded">
+          <div [ngClass]="'content-transparent'">
+            <div class="content">
+              <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="currentRoutineIsUpdate(rou)">
+                <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-inner--text"><strong>Actualizado correctamente!</strong> Los ejercicios han sido actualizados de manera correcta!</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertIsUpdated(rou)">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div><br>
+              <app-title-accordion  [routine]="rou"
+                                    (openDetails)="setOpenDetail(rou, $event)">
+              </app-title-accordion>
+              <div class="col-lg-12" *ngIf="getOpenDetail(rou)">
+                <div class="stars">
+                <app-opinion-routine  [routine]="rou"
+                                      [message]="'Ingrese su opinión sobre esta rutina:'">
+                </app-opinion-routine>
+                </div>
+                <mat-tab-group dynamicHeight #tabGroup>
+                  <ul *ngFor="let day of daysRoutine(rou)">
+                    <mat-tab label="Día {{day}}"> <br>
+                      <div class="col-lg-12 row row-grid justify-content-center" >
+                        <ul class="code-editor-options-menu" *ngFor="let dat of exercisesRou(rou,day)">
+                          <div class="card border-light mb-10" [ngClass]="'card-transparent'">
+                            <div class="card-content">
+                              <app-exercise-information-card [exercise]="dat">
+                              </app-exercise-information-card>
+                            </div> 
+                          </div>
+                          <div class="modifyExercise-button" *ngIf="getPermissionToModify(rou)">
+                            <a href="javascript:void(0)" class="btn btn-primary mt-4" (click)="modifiedExercise(classic, dat)">
+                              <i class="bi bi-pencil"></i> Modificar Ejercicio
+                            </a>
+                          </div>
+                          <ng-template #classic let-c="close" let-d="dismiss">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h6 class="modal-title" id="modal-title-default">
+                                  <div class="title-exercise">
+                                  {{dat.processExercise.nameExercise}}
                                   </div>
-                                  <div>
-                                    Series:
-                                    <div class="form-group has-success" *ngIf="validationValueSeries()">
-                                      <input type="text" [(ngModel)]="seriesExercise" name="seriesExercise" class="form-control" />
-                                    </div>
-                                    <div class="form-group has-danger" *ngIf="!validationValueSeries()">
-                                      <input type="text" placeholder="Ingrese un valor mayor a 0 para las series" [(ngModel)]="seriesExercise" name="seriesExercise" class="form-control is-invalid" />
-                                    </div>
+                                </h6>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                                  <span aria-hidden="true">×</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div>
+                                  Repeticiones:
+                                  <div class="form-group has-success" *ngIf="validationValueRepetitions()">
+                                    <input type="text" [(ngModel)]="repetitionsExercise" name="repetitionsExercise" class="form-control" />
+                                  </div>
+                                  <div class="form-group has-danger" *ngIf="!validationValueRepetitions()">
+                                    <input type="text" placeholder="Ingrese un valor mayor a 0 para las repeticiones" [(ngModel)]="repetitionsExercise" name="repetitionsExercise" class="form-control is-invalid"/>
                                   </div>
                                 </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-success margin-save-button" href="javascript:void(0)" (click)="saveChangesExercise(dat); c('Close click')" [disabled]="enabledChangesExercise()">
-                                    <i class="bi bi-save"></i>Guardar Cambios
-                                  </button>
-                                  <button type="button" class="btn ml-auto" data-dismiss="modal" (click)="c('Close click')">Cancelar</button>
+                                <div>
+                                  Series:
+                                  <div class="form-group has-success" *ngIf="validationValueSeries()">
+                                    <input type="text" [(ngModel)]="seriesExercise" name="seriesExercise" class="form-control" />
+                                  </div>
+                                  <div class="form-group has-danger" *ngIf="!validationValueSeries()">
+                                    <input type="text" placeholder="Ingrese un valor mayor a 0 para las series" [(ngModel)]="seriesExercise" name="seriesExercise" class="form-control is-invalid" />
+                                  </div>
                                 </div>
                               </div>
-                            </ng-template>
-                            <br>
-                          </ul>
-                        </div>
-                      </mat-tab>
-                    </ul>
-                  </mat-tab-group>
-                  <div class="modifyExercise-button aling-buttons" *ngIf="getPermissionToModify(rou)">
-                    <div class="col-lg-12">
-                    <a href="javascript:void(0)" class="btn btn-success margin-button" (click)="saveRoutine(rou)">
-                      <i class="bi bi-save"></i> Guardar todos los cambios  
-                    </a>
-                    <a href="javascript:void(0)" class="btn btn-warning font-button" (click)="discardChanges(rou)">
-                      <i class="bi bi-trash3"></i> Descartar todos los cambios
-                    </a>
-                    </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-success margin-save-button" href="javascript:void(0)" (click)="saveChangesExercise(dat); c('Close click')" [disabled]="enabledChangesExercise()">
+                                  <i class="bi bi-save"></i>Guardar Cambios
+                                </button>
+                                <button type="button" class="btn ml-auto" data-dismiss="modal" (click)="c('Close click')">Cancelar</button>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <br>
+                        </ul>
+                      </div>
+                    </mat-tab>
+                  </ul>
+                </mat-tab-group>
+                <div class="modifyExercise-button aling-buttons" *ngIf="getPermissionToModify(rou)">
+                  <div class="col-lg-12">
+                  <a href="javascript:void(0)" class="btn btn-success margin-button" (click)="saveRoutine(rou)">
+                    <i class="bi bi-save"></i> Guardar todos los cambios  
+                  </a>
+                  <a href="javascript:void(0)" class="btn btn-warning font-button" (click)="discardChanges(rou)">
+                    <i class="bi bi-trash3"></i> Descartar todos los cambios
+                  </a>
                   </div>
-                  <div class="modifyExercise-button" *ngIf="!getPermissionToModify(rou)">
-                    <a href="javascript:void(0)" class="btn btn-primary" (click)="enableModification(rou)">
-                      <i class="bi bi-pencil-square"></i> Modificar Ejercicios
-                    </a>
-                    
-                    <!-- Boton borrar rutina 
-                    <a href="javascript:void(0)" class="btn btn-warning" (click)="deleteRoutine(classic2)">
-                      <i class="bi bi-trash3"></i> Eliminar Rutina
-                    </a>-->
-                  </div>
-                  <ng-template #classic2 let-c="close" let-d="dismiss">
-                    <div class="modal-content bg-gradient-danger">
-                      <div class="modal-header">
-                        <h6 class="modal-title" id="modal-title-notification"></h6>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
-                          <span aria-hidden="true">×</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="py-3 text-center">
-                          <i class="ni ni-bell-55 ni-3x"></i>
-                          <p>Esta seguro que quiere eliminar la rutina: {{rou.nameRoutine}}.</p>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-white" href="javascript:void(0)" (click)="c('Close click'); deleteRoutineSelect(rou)">Eliminar Rutina</button>
-                        <button type="button" class="btn ml-auto" data-dismiss="modal" (click)="c('Close click')">Cancelar</button>
-                      </div>
-                    </div>
-                  </ng-template> 
                 </div>
+                <div class="modifyExercise-button" *ngIf="!getPermissionToModify(rou)">
+                  <a href="javascript:void(0)" class="btn btn-primary" (click)="enableModification(rou)">
+                    <i class="bi bi-pencil-square"></i> Modificar Ejercicios
+                  </a>
+                  
+                  <!-- Boton borrar rutina 
+                  <a href="javascript:void(0)" class="btn btn-warning" (click)="deleteRoutine(classic2)">
+                    <i class="bi bi-trash3"></i> Eliminar Rutina
+                  </a>-->
+                </div>
+                <ng-template #classic2 let-c="close" let-d="dismiss">
+                  <div class="modal-content bg-gradient-danger">
+                    <div class="modal-header">
+                      <h6 class="modal-title" id="modal-title-notification"></h6>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="py-3 text-center">
+                        <i class="ni ni-bell-55 ni-3x"></i>
+                        <p>Esta seguro que quiere eliminar la rutina: {{rou.nameRoutine}}.</p>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-white" href="javascript:void(0)" (click)="c('Close click'); deleteRoutineSelect(rou)">Eliminar Rutina</button>
+                      <button type="button" class="btn ml-auto" data-dismiss="modal" (click)="c('Close click')">Cancelar</button>
+                    </div>
+                  </div>
+                </ng-template> 
               </div>
             </div>
           </div>
-        </ul>
+        </div>
+      </ul>
       <br><br><br><br><br><br>
     </section>
   </div>
