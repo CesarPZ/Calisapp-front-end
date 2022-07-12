@@ -3,6 +3,7 @@ import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Location, PopStateEvent } from '@angular/common';
 import { UserService } from '../../service/user.service'
 import { StaticDataService } from 'src/app/service/static-data.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
     selector: 'app-navbar',
@@ -17,7 +18,8 @@ export class NavbarComponent implements OnInit {
     constructor(public user: UserService,
                 public location: Location,
                 private router: Router,
-                private staticData: StaticDataService,) {
+                private staticData: StaticDataService,
+                private deviceService: DeviceDetectorService) {
     }
 
     ngOnInit() {
@@ -67,5 +69,14 @@ export class NavbarComponent implements OnInit {
             .then(() => {
                 window.location.reload();
         });
-    } 
+    }
+
+    navbarClass(){
+        const isMobile = this.deviceService.isMobile();
+        var navbar =  'navbar-collapse collapse';
+        if(isMobile){
+            navbar = 'collapse'
+        }
+        return navbar;
+    }
 }
