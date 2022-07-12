@@ -79,4 +79,9 @@ export class NavbarComponent implements OnInit {
         }
         return navbar;
     }
+
+    isMobile(){
+        return this.deviceService.isMobile();
+    }
+
 }

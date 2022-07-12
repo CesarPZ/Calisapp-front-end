@@ -40,6 +40,12 @@
                 <i class="fa fa-calendar" aria-hidden="true"></i>
                 <a [routerLink]="['/calendar']" id="calendar" class="dropdown-item">Calendario</a>
               </li>
+              <div  *ngIf="isMobile()">
+                <li>
+                  <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                  <a [routerLink]="['/myRoutineToday']" id="myRoutineToday" class="dropdown-item">Mis Rutinas de Hoy</a>
+                </li>
+              </div>
               <li>
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                 <a [routerLink]="['/login']" id="logout" class="dropdown-item" (click)="logout()" *ngIf="userLogued()">Cerrar sesión</a>
