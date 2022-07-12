@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Routine } from 'src/app/model/routine';
 import { RoutineService } from 'src/app/service/routine.service';
@@ -13,6 +13,7 @@ export class OpinionRoutineComponent implements OnChanges {
   @Input() routine:       Routine | undefined;
   @Input() message:       string  | undefined;
   @Input() disabledStar:  boolean = false;
+  @Output() opinionRating = new EventEmitter<{opinion:number}>();
   
   form: FormGroup;
 
@@ -35,6 +36,8 @@ export class OpinionRoutineComponent implements OnChanges {
     var opinonPoints = this.form.get('rating').value;
     this.serviceRoutine.setOpinionRoutine(this.routine.id, opinonPoints)
       .subscribe(data => {});
+
+    this.opinionRating.emit({opinion:opinonPoints});
   }
 
   existRoutinesSelected(){

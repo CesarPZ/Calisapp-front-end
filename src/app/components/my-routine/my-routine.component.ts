@@ -172,6 +172,13 @@ export class MyRoutineComponent implements OnInit {
   deleteRoutine(content){
     this.open(content, 'Notification', '');
   }
+  
+  setopinionRating(routine:Routine, event){
+    console.log(event.opinion);
+    console.log(routine);
+    routine.opinion = event.opinion;
+    
+  }
 
   open(content, type, modalDimension) {
     if (modalDimension === 'sm' && type === 'modal_mini') {
