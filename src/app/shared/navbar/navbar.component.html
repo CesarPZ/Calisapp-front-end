@@ -9,7 +9,7 @@
       [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="navbar-collapse collapse" id="navbar_global" [ngbCollapse]="isCollapsed">
+    <div [ngClass]="navbarClass()" id="navbar_global" [ngbCollapse]="isCollapsed">
       <ul class="navbar-nav align-items-lg-center ml-lg-auto"></ul>
       <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
         <li class="nav-item dropdown" *ngIf="userLogued()">
@@ -50,7 +50,7 @@
         <li class="nav-item dropdown" *ngIf="!userLogued()">
           <a class="nav-link no-caret" id="getInTo" data-toggle="dropdown" role="button">
             <i class="ni ni-ui-04 d-lg-none"></i>
-            <span class="nav-link-inner--text">Ingresar</span>
+            <span class="nav-link-inner--text">Ingresa o genera tu Cuenta</span>
           </a>
           <div class="dropdown-menu-xl dropdown-menu">
             <div class="dropdown-menu-inner">
