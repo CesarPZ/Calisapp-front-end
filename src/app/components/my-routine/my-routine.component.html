@@ -41,7 +41,8 @@
               <div class="col-lg-12" *ngIf="getOpenDetail(rou)">
                 <div class="stars">
                 <app-opinion-routine  [routine]="rou"
-                                      [message]="'Ingrese su opinión sobre esta rutina:'">
+                                      [message]="'Ingrese su opinión sobre esta rutina:'"
+                                      (opinionRating)="setopinionRating(rou, $event)">
                 </app-opinion-routine>
                 </div>
                 <mat-tab-group dynamicHeight #tabGroup>
